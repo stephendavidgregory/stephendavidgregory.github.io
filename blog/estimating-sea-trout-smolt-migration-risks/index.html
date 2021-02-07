@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Estimating sea trout smolt migration risks - Stephen D. Gregory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1">
+  <link rel="manifest" href="/favicon/site.webmanifest?v=1">
+  
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=1" color="#ffffff">
+    <link rel="shortcut icon" href="/favicon/favicon.ico?v=1">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1">
+  
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="Stephen D. Gregory">
+  <meta property="og:title" content="Estimating sea trout smolt migration risks">
+  <meta property="og:description" content="Analysis code for a simple state-space model to estimate acoustically tagged sea trout migration risks">
+  <meta property="description" content="Analysis code for a simple state-space model to estimate acoustically tagged sea trout migration risks">
+  <meta property="og:url" content="https://stephendavidgregory.github.io/blog/estimating-sea-trout-smolt-migration-risks/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://stephendavidgregory.github.io/img/main/avatar.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/themes/" class="nav link"><i class='fas fa-tasks'></i> Themes</a>
+        
+      
+        
+          
+          <a href="/publications/" class="nav link"><i class='far fa-edit'></i> Publications</a>
+        
+      
+        
+          
+          <a href="/talks/" class="nav link"><i class='fas fa-bullhorn'></i> Talks</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+        
+          
+          <a href="/index.xml" class="nav link"><i class='fas fa-rss'></i> Subscribe</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Estimating%20sea%20trout%20smolt%20migration%20risks&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;title=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;title=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;description=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://stephendavidgregory.github.io/img/main/avatar.png" class="circle" width="100" alt="Test" /></a>
+  <header>
+    <h1>Stephen D. Gregory</h1>
+  </header>
+  <main>
+    <p>Conservation Biologist - Statistician - Fisheries Scientist</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/estimating-sea-trout-smolt-migration-risks/">Estimating sea trout smolt migration risks</a></h2>
+    
+    
+      <p>Analysis code for a simple state-space model to estimate acoustically tagged sea trout migration risks</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2016-01-28 00:00:00 &#43;0000 UTC">January 28, 2016</time>
+    <p>Stephen D. Gregory</p>
+    <p>7-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Estimating%20sea%20trout%20smolt%20migration%20risks&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;title=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;title=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f&amp;description=Estimating%20sea%20trout%20smolt%20migration%20risks" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2festimating-sea-trout-smolt-migration-risks%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p><a href="/blog/2016-01-28-holbrook/" class="image" style="--bg-image: url('/blog/2016-01-28-Holbrook_files/tracking_sea_trout.jpg');"><img class="stretchV" src="/blog/2016-01-28-Holbrook_files/tracking_sea_trout.jpg" alt="Sea trout with tags"></a></p>
+<p>I’m involved with a project aiming to understand brown trout (<em>Salmo trutta</em> L.) movements in freshwater and estuarine environments.</p>
+<p>Here, I want to share the methods we used to estimate the risks to brown trout when they migrate as sea trout smolts.</p>
+<p>But first a little background.</p>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>Brown trout are funny fish.</p>
+<p>Some spend their entire lives in freshwater, e.g., a river, and are known as <em>brown trout</em>. Others migrate to marine waters, e.g., an estuary or sea, and are known as <em>sea trout</em>.</p>
+<p>Sea trout return to freshwater a lot larger than brown trout, after feasting on the abundant food available in marine waters, and are able to produce more eggs. Brown trout might be smaller but they don’t run the risk of being eaten by any of the abundant marine predators.</p>
+<p>Clearly, there is a fitness trade-off between getting big &amp; producing more eggs (maximise your potential reproduction) and avoiding being eaten by any one of the abundant marine predators (maximise your potential survival to reproduction).</p>
+<p>The decision to migrate is not, however, black and white. <em>Finnock</em> are brown trout that use estuaries and transitional waters for only short periods, e.g., a couple of months, presumably to feed.</p>
+<p>So which strategy is best: brown trout, finnock or sea trout?</p>
+<p>To study this question, we estimated the risk to sea trout of migrating through fresh, transitional and estuarine waters.</p>
+<p>To estimate these risks, we acoustically tagged a sample of migrating sea trout smolts who’s migration pathways were recorded at listening receivers located in the different zones (Figure 1).</p>
+<p>{{&lt; figure src=“<a href="http://www.gwct.org.uk/media/394651/map1.png" class="uri">http://www.gwct.org.uk/media/394651/map1.png</a>” title=“Location of listening receivers in Poole Harbour. Red dots represent approximate detection range of the receivers.” numbered=“true” lightbox=“true” &gt;}}</p>
+<p><br/></p>
+</div>
+<div id="analysis-methods" class="section level1">
+<h1>Analysis methods</h1>
+<p>Acoustic tracking data has the problem that <em>detection is imperfect</em>; we do not always detect a passing tag and so we don’t know if (i) the tag didn’t pass or (ii) whether it passed but was not detected.</p>
+<p>This problem can and <em>should</em> be addressed statistically.</p>
+<p>To estimate the risks to sea trout smolt of migrating through different zones, we used Bayesian State Space models (<a href="https://en.wikipedia.org/wiki/State-space_representation">wikipedia: State-space representation</a>).</p>
+<p>I was reassured that others have used BSSMs in this context: Oliviez Gimenez’s <a href="http://dx.doi.org/10.1016/j.ecolmodel.2007.03.040">paper</a> explains clearly the theory of BSSMs for marked individuals and Chris Holbrook’s <a href="http://dx.doi.org/10.1139/cjfas-2013-0581">paper</a> was an illustrative example of BSSM implementation for acoustically tagged lamprey.</p>
+<p>In essence, BSSM estimates jointly the probability that a tag is detected at a particular location and the probability that it made the transition to that location successfully.</p>
+<p>In our study, we assumed that all individuals shared the same detection and transition probabilities, i.e., that physical or behavioural differences between individuals were unimportant, and that individuals travelled independently.</p>
+<p>We could therefore use the simple Cormack, Jolly &amp; Seber (CJS) model given by:</p>
+<p><span class="math display">\[
+Y_t|X_t \sim Binomial(X_t − u_t, p_t)
+\]</span></p>
+<p><span class="math display">\[
+X_{t+1}|X_t \sim Binomial(X_t, \phi_t) + u_{t+1}
+\]</span></p>
+<p>where <span class="math inline">\(X_t\)</span> is the total number of survivors from time <span class="math inline">\(t\)</span>, which includes <span class="math inline">\(u_t\)</span> that is the number of newly marked individuals at time <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is the total number of previously marked individuals encountered at time <span class="math inline">\(t\)</span>, <span class="math inline">\(p_t\)</span> is the probability of detecting a tagged individual at time <span class="math inline">\(t\)</span> (<span class="math inline">\(t = 2, ..., T\)</span>) and <span class="math inline">\(\phi_t\)</span> is the probability that a tagged individual transitions to time <span class="math inline">\(t + 1\)</span> given that it is alive at time <span class="math inline">\(t\)</span> (<span class="math inline">\(t = 1, ..., T − 1\)</span>).</p>
+<p>This formulation separates the nuisance parameters (the detection probabilities, <span class="math inline">\(p_t\)</span>) from the parameters of interest (the transition probabilities, <span class="math inline">\(\phi_t\)</span>) because the latter are found only in the second or “state” equation.</p>
+<p>Using this model, we estimated values of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> using the Monte Carlo Markov Chain (MCMC) method in <a href="http://mcmc-jags.sourceforge.net">JAGS</a>. <a href="http://mcmc-jags.sourceforge.net">JAGS</a> uses Gibbs sampling to explore the joint probability distribution of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span>. Through an iterative process, weakly informative <span class="math inline">\(Beta(1, 1)\)</span> prior distributions on <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> were updated with increasingly credible values until, after sufficient iterations, the best estimated values of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> were taken to be the median of their posterior distributions.</p>
+<p>We ran <a href="http://mcmc-jags.sourceforge.net">JAGS</a> from within <a href="http://www.r-project.org">R</a> using functions from package <a href="https://cran.r-project.org/package=dclone">dclone</a>. We ran three MCMC chains for 30,000 iterations, of which we discarded the first 10,000 as burnin.</p>
+<p><a href="http://r-project.org">R</a> code to run an example BSSM is as follows:</p>
+<p>The <a href="http://mcmc-jags.sourceforge.net">JAGS</a> model file for the example might be <code>BSSM.jags</code>:</p>
+<pre class="r"><code># simulate data
+receivor_efficiencies &lt;- c(&#39;r1&#39; = 0.8, &#39;r2&#39; = 0.9, &#39;r3&#39; = 0.6, &#39;r4&#39; = 0.7, &#39;r5&#39; = 0.7, &#39;r6&#39; = 0.7)
+n_fish &lt;- 77
+ch_m &lt;- matrix(NA, ncol = length(receivor_efficiencies), nrow = n_fish)
+for(i in 1:length(receivor_efficiencies)){
+    ch_m[, i] &lt;- sample(c(0, 1), n_fish, TRUE, c((1 - receivor_efficiencies[i]), receivor_efficiencies[i]))
+}
+ch_m &lt;- data.frame(&#39;release&#39; = 1, ch_m)
+colnames(ch_m)[-1] &lt;- names(receivor_efficiencies)
+
+# create state and observation matrices
+sm &lt;- ch_m
+sm[sm == &#39;0&#39;] &lt;- NA
+om &lt;- ch_m
+
+# prep data
+d &lt;- list(&#39;sm&#39; = sm,
+          &#39;om&#39; = om,
+          &#39;N&#39; = n_fish,
+          &#39;T&#39; = ncol(ch_m))
+
+# load libraries
+library(dclone)
+library(rjags)
+
+# name of model file
+mf &lt;- function() {
+
+  # define likelihoods
+  for(i in 1:N){
+    for(t in 2:T){
+
+      # state model
+      sm[i, t] ~ dcat(phi[t - 1, sm[i, t - 1], ])
+
+      # observation model
+      om[i, t] ~ dbern(p[t, sm[i, t]])
+
+    }
+  }
+
+  # detection probability priors and constraints
+
+  # release
+  p[1, 1] &lt;- 1 # always observed at release
+  p[1, 2] &lt;- 0
+
+  # r1
+  p[2, 1] ~ dbeta(1, 1) # flat prior
+  p[2, 2] &lt;- 0
+
+  # r2
+  p[3, 1] ~ dbeta(1, 1) # flat prior
+  p[3, 2] &lt;- 0
+
+  # r3
+  p[4, 1] ~ dbeta(1, 1) # flat prior
+  p[4, 2] &lt;- 0
+
+  # r4
+  p[5, 1] ~ dbeta(1, 1) # flat prior
+  p[5, 2] &lt;- 0
+
+  # r5
+  p[6, 1] ~ dbeta(1, 1) # flat prior
+  p[6, 2] &lt;- 0
+
+  # r6
+  p[7, 1] ~ dbeta(1, 1) # flat prior
+  p[7, 2] &lt;- 0
+
+  # transition probability priors and constraints
+
+  # 1st transition
+  phi[1, 1, 1] ~ dbeta(1, 1)
+  phi[1, 1, 2] &lt;- 1 - phi[1, 1, 1]
+  phi[1, 2, 1] &lt;- 0
+  phi[1, 2, 2] &lt;- 1
+
+  # 2nd transition
+  phi[2, 1, 1] ~ dbeta(1, 1)
+  phi[2, 1, 2] &lt;- 1 - phi[2, 1, 1]
+  phi[2, 2, 1] &lt;- 0
+  phi[2, 2, 2] &lt;- 1
+
+  # 3rd transition
+  phi[3, 1, 1] ~ dbeta(1, 1)
+  phi[3, 1, 2] &lt;- 1 - phi[3, 1, 1]
+  phi[3, 2, 1] &lt;- 0
+  phi[3, 2, 2] &lt;- 1
+
+  # 4th transition
+  phi[4, 1, 1] ~ dbeta(1, 1)
+  phi[4, 1, 2] &lt;- 1 - phi[4, 1, 1]
+  phi[4, 2, 1] &lt;- 0
+  phi[4, 2, 2] &lt;- 1
+
+  # 5th transition
+  phi[5, 1, 1] ~ dbeta(1, 1)
+  phi[5, 1, 2] &lt;- 1 - phi[5, 1, 1]
+  phi[5, 2, 1] &lt;- 0
+  phi[5, 2, 2] &lt;- 1
+
+  # 6th transition
+  phi[6, 1, 1] ~ dbeta(1, 1)
+  phi[6, 1, 2] &lt;- 1 - phi[6, 1, 1]
+  phi[6, 2, 1] &lt;- 0
+  phi[6, 2, 2] &lt;- 1
+
+}
+
+# parameters to monitor
+p &lt;- c(&#39;p&#39;, &#39;phi&#39;)
+
+# initialise model
+m &lt;- jagsModel(mf, data = d, n.chains = 1, n.adapt = 1000, quiet = FALSE)
+update(m, n.iter = 10000)
+
+# coda samples
+s &lt;- codaSamples(m, p, n.iter = 20000)
+
+# plot traces
+plot(s, trace = TRUE, density = FALSE)
+
+# plot densities
+plot(s, trace = FALSE, density = TRUE)
+
+# summary
+s.tab &lt;- summary(s)
+print(s.tab$statistics, digits = 3)</code></pre>
+<p>where <code>d</code> is a list of data passed to <a href="http://mcmc-jags.sourceforge.net">JAGS</a> that includes:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> = number of individuals</li>
+<li><span class="math inline">\(T\)</span> = number of occasions</li>
+<li><span class="math inline">\(sm[i, t]\)</span> = true state matrix</li>
+<li><span class="math inline">\(om[i, t]\)</span> = observation matrix</li>
+</ul>
+<p>where <span class="math inline">\(i\)</span> is individual and <span class="math inline">\(t\)</span> is occasion.</p>
+<p>Our model ran without problems and the results were intuitive and as expected. We feel that this procedure worked well for us.</p>
+<p>You will be able to read about the results in a future post.</p>
+<p>In the meantime, use the code above to run an example BSSM and contact me if you have any problems.</p>
+</div>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/tagging-and-telemetry/">tagging-and-telemetry</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/bayesian/">Bayesian</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/bayesian-state-space/">Bayesian State Space</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/imperfect-detection/">Imperfect detection</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/probability/">Probability</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/sea-trout/">Sea trout</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/statistics/">Statistics</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/transition-probability/">Transition probability</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stephendavidgregory" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/2014-05-15-first-commit/" class="button right"><span>First commit</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/estimating-sea-trout-smolt-migration-risks/">Estimating sea trout smolt migration risks</a></h2>
+          <time class="published" datetime="2016-01-28 00:00:00 &#43;0000 UTC">January 28, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2014-05-15-first-commit/">First commit</a></h2>
+          <time class="published" datetime="2014-05-15 00:00:00 &#43;0000 UTC">May 15, 2014</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/blog/">blog<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemetry/">tagging-and-telemetry<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/test/">test<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>This is my personal website and dumping ground for my learnings.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2016 Stephen D. Gregory
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.79.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/r.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/stan.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/julia.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b4e669fa428a81defb8af0916c53f39cd1b8e0bbab22199c06f0b182907ba474.js" integrity="sha256-tOZp&#43;kKKgd77ivCRbFPznNG44LurIhmcBvCxgpB7pHQ="></script>
+    <script src="/js/add-on.js"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90881803-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stephen D. Gregory</title>
+    <link>https://stephendavidgregory.github.io/</link>
+    <description>Recent content on Stephen D. Gregory</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 28 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Estimating sea trout smolt migration risks</title>
+      <link>https://stephendavidgregory.github.io/blog/estimating-sea-trout-smolt-migration-risks/</link>
+      <pubDate>Thu, 28 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/estimating-sea-trout-smolt-migration-risks/</guid>
+      <description>I’m involved with a project aiming to understand brown trout (Salmo trutta L.) movements in freshwater and estuarine environments.
+Here, I want to share the methods we used to estimate the risks to brown trout when they migrate as sea trout smolts.
+But first a little background.
+BackgroundBrown trout are funny fish.
+Some spend their entire lives in freshwater, e.g., a river, and are known as brown trout.</description>
+    </item>
+    
+    <item>
+      <title>First commit</title>
+      <link>https://stephendavidgregory.github.io/blog/2014-05-15-first-commit/</link>
+      <pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2014-05-15-first-commit/</guid>
+      <description>Coming soon…</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://stephendavidgregory.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/about/</guid>
+      <description>My ProfileI am a conservation biologist and I use population modelling to better understand and propose management actions for a variety of animal populations, from native Galapagos rodents to Malaysian orangutans.
+Currently, my research focuses on the effects of environmental drivers of salmonid vital rates and consequences for their population dynamics.
+My skills  
+My professional membershipsMember of the ICES Working Group on North Atlantic Salmon (2019-ongoing)Member of the ICES Workshop for North Atlantic Salmon At-Sea Mortality (2019-ongoing)Member of the National Centre for Statistical Ecology (2017-ongoing)Review Editor for Endangered Species ResearchMy profile elsewhereResearcherIDORCIDResearchGateGoogle scholarPublonsCenter for Open Science (OSF)My CV</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://stephendavidgregory.github.io/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/contact/</guid>
+      <description>stephendavidgregory@gmail.com
+ +00 44 (0) 1929 401 882
+ Salmon &amp;amp; Trout Research Centre, The River Laboratory, Wareham, Dorset, BH20 6BB
+ 08h00 - 17h00 on Mon, Weds Thurs and 07h00 - 14h00 on Tues &amp;amp; Fri</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>https://stephendavidgregory.github.io/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/publications/</guid>
+      <description>{&#34;x&#34;:{&#34;url&#34;:&#34;/publications/index_files/figure-html//widgets/widget_unnamed-chunk-1.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>https://stephendavidgregory.github.io/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/talks/</guid>
+      <description>{&#34;x&#34;:{&#34;url&#34;:&#34;/talks/index_files/figure-html//widgets/widget_unnamed-chunk-1.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}</description>
+    </item>
+    
+    <item>
+      <title>Themes</title>
+      <link>https://stephendavidgregory.github.io/themes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/themes/</guid>
+      <description>My research can be classified into the following themes:
+Environmental changeI believe that environmental change is among the greatest threats to the persistence of wild animal and plant populations. As a conservation biologist, environmental change, including climate and land-use change and their interaction, is a theme that runs through much of my work, from Malaysian orangutan to Atlantic salmon. Of particular note, is the role of environmental change on different life-stages of individuals from the same population(s), which can be seen in my work on Atlantic salmon smolt sizes and the River Wylye Grayling population dynamics.</description>
+    </item>
+    
+  </channel>
+</rss>
