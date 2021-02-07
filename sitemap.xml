@@ -3,22 +3,87 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://stephendavidgregory.github.io/tags/atlantic-salmon/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/environmental-change/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/mixed-effect-models/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2016-09-01-elinor/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/</loc>
+    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/floods/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/grayling/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/review/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/salmon/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/salmonids-in-the-floods/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/trout/</loc>
+    <lastmod>2016-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://stephendavidgregory.github.io/tags/bayesian/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/tags/bayesian-state-space/</loc>
-    <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/blog/</loc>
-    <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -43,48 +108,13 @@
   </url>
   
   <url>
-    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
-    <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/</loc>
-    <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemetry/</loc>
-    <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/tags/transition-probability/</loc>
     <lastmod>2016-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/blog/</loc>
-    <lastmod>2014-05-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/blog/2014-05-15-first-commit/</loc>
-    <lastmod>2014-05-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/hugo/</loc>
-    <lastmod>2014-05-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/test/</loc>
-    <lastmod>2014-05-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
