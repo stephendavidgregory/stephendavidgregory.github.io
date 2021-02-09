@@ -291,10 +291,12 @@
 <p>So which strategy is best: brown trout, finnock or sea trout?</p>
 <p>To study this question, we estimated the risk to sea trout of migrating through fresh, transitional and estuarine waters.</p>
 <p>To estimate these risks, we acoustically tagged a sample of migrating sea trout smolts who’s migration pathways were recorded at listening receivers located in the different zones (Figure 1).</p>
-<!-- Figure 1 -->
-<p>–&gt;
-<img src="/blog/2016-01-28-holbrook_files/map1.png" />
-Figure 1. Location of listening receivers in Poole Harbour. Red dots represent approximate detection range of the receivers.</p>
+<figure>
+<img src="/blog/2016-01-28-holbrook_files/map1.png" alt="Poole harbour acoustic receivers" style="width:100%">
+<figcaption>
+Figure 1. Location of listening receivers in Poole Harbour. Red dots represent approximate detection range of the receivers.
+</figcaption>
+</figure>
 </div>
 <div id="analysis-methods" class="section level1">
 <h1>Analysis methods</h1>
@@ -339,16 +341,10 @@ d &lt;- list(&#39;sm&#39; = sm,
           &#39;T&#39; = ncol(ch_m))
 
 # load libraries
-library(dclone)</code></pre>
-<pre><code>## Loading required package: coda</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## Warning: package &#39;Matrix&#39; was built under R version 4.0.3</code></pre>
-<pre><code>## dclone 2.3-0      2019-03-21</code></pre>
-<pre class="r"><code>library(rjags)</code></pre>
-<pre><code>## Linked to JAGS 4.3.0</code></pre>
-<pre><code>## Loaded modules: basemod,bugs</code></pre>
-<pre class="r"><code># name of model file
+library(dclone)
+library(rjags)
+
+# name of model file
 mf &lt;- function() {
 
   # define likelihoods
@@ -446,9 +442,9 @@ m &lt;- jagsModel(mf, data = d, n.chains = 1, n.adapt = 1000, quiet = FALSE)</co
 ##    Resolving undeclared variables
 ##    Allocating nodes
 ## Graph information:
-##    Observed stochastic nodes: 812
-##    Unobserved stochastic nodes: 124
-##    Total graph size: 1311
+##    Observed stochastic nodes: 811
+##    Unobserved stochastic nodes: 125
+##    Total graph size: 1323
 ## 
 ## Initializing model</code></pre>
 <pre class="r"><code>update(m, n.iter = 10000)
@@ -467,12 +463,12 @@ s.tab &lt;- summary(s)
 print(s.tab$statistics, digits = 3)</code></pre>
 <pre><code>##              Mean     SD Naive SE Time-series SE
 ## p[1,1]     1.0000 0.0000 0.00e+00       0.000000
-## p[2,1]     0.7972 0.0452 3.19e-04       0.000314
-## p[3,1]     0.9368 0.0273 1.93e-04       0.000193
-## p[4,1]     0.6454 0.0533 3.77e-04       0.000377
-## p[5,1]     0.7625 0.0476 3.36e-04       0.000347
-## p[6,1]     0.7081 0.0545 3.85e-04       0.000522
-## p[7,1]     0.8373 0.0925 6.54e-04       0.002921
+## p[2,1]     0.7715 0.0470 3.32e-04       0.000329
+## p[3,1]     0.8697 0.0378 2.67e-04       0.000267
+## p[4,1]     0.5894 0.0555 3.93e-04       0.000393
+## p[5,1]     0.8125 0.0444 3.14e-04       0.000338
+## p[6,1]     0.6865 0.0525 3.71e-04       0.000398
+## p[7,1]     0.9060 0.0593 4.19e-04       0.001457
 ## p[1,2]     0.0000 0.0000 0.00e+00       0.000000
 ## p[2,2]     0.0000 0.0000 0.00e+00       0.000000
 ## p[3,2]     0.0000 0.0000 0.00e+00       0.000000
@@ -480,24 +476,24 @@ print(s.tab$statistics, digits = 3)</code></pre>
 ## p[5,2]     0.0000 0.0000 0.00e+00       0.000000
 ## p[6,2]     0.0000 0.0000 0.00e+00       0.000000
 ## p[7,2]     0.0000 0.0000 0.00e+00       0.000000
-## phi[1,1,1] 0.9872 0.0130 9.18e-05       0.000227
-## phi[2,1,1] 0.9877 0.0118 8.36e-05       0.000183
-## phi[3,1,1] 0.9871 0.0127 8.97e-05       0.000204
-## phi[4,1,1] 0.9836 0.0152 1.07e-04       0.000237
-## phi[5,1,1] 0.9566 0.0326 2.30e-04       0.000621
-## phi[6,1,1] 0.8417 0.0926 6.55e-04       0.003142
+## phi[1,1,1] 0.9872 0.0128 9.06e-05       0.000221
+## phi[2,1,1] 0.9771 0.0175 1.24e-04       0.000238
+## phi[3,1,1] 0.9860 0.0139 9.83e-05       0.000229
+## phi[4,1,1] 0.9804 0.0172 1.22e-04       0.000280
+## phi[5,1,1] 0.9825 0.0167 1.18e-04       0.000284
+## phi[6,1,1] 0.9039 0.0598 4.23e-04       0.001631
 ## phi[1,2,1] 0.0000 0.0000 0.00e+00       0.000000
 ## phi[2,2,1] 0.0000 0.0000 0.00e+00       0.000000
 ## phi[3,2,1] 0.0000 0.0000 0.00e+00       0.000000
 ## phi[4,2,1] 0.0000 0.0000 0.00e+00       0.000000
 ## phi[5,2,1] 0.0000 0.0000 0.00e+00       0.000000
 ## phi[6,2,1] 0.0000 0.0000 0.00e+00       0.000000
-## phi[1,1,2] 0.0128 0.0130 9.18e-05       0.000227
-## phi[2,1,2] 0.0123 0.0118 8.36e-05       0.000183
-## phi[3,1,2] 0.0129 0.0127 8.97e-05       0.000204
-## phi[4,1,2] 0.0164 0.0152 1.07e-04       0.000237
-## phi[5,1,2] 0.0434 0.0326 2.30e-04       0.000621
-## phi[6,1,2] 0.1583 0.0926 6.55e-04       0.003142
+## phi[1,1,2] 0.0128 0.0128 9.06e-05       0.000221
+## phi[2,1,2] 0.0229 0.0175 1.24e-04       0.000238
+## phi[3,1,2] 0.0140 0.0139 9.83e-05       0.000229
+## phi[4,1,2] 0.0196 0.0172 1.22e-04       0.000280
+## phi[5,1,2] 0.0175 0.0167 1.18e-04       0.000284
+## phi[6,1,2] 0.0961 0.0598 4.23e-04       0.001631
 ## phi[1,2,2] 1.0000 0.0000 0.00e+00       0.000000
 ## phi[2,2,2] 1.0000 0.0000 0.00e+00       0.000000
 ## phi[3,2,2] 1.0000 0.0000 0.00e+00       0.000000
