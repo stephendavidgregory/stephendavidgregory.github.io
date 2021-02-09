@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tamar on Stephen D. Gregory</title>
+    <link>https://stephendavidgregory.github.io/tags/tamar/</link>
+    <description>Recent content in Tamar on Stephen D. Gregory</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 22 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/tags/tamar/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tamar visit</title>
+      <link>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</guid>
+      <description>I, together with my GWCT colleagues, was lucky enough to visit the river Tamar, on the Devon / Cornwall border in Southwest England.
+The Tamar is an Atlantic salmon (Salmo salar) “Index River”, i.e., a river on which the salmon population is monitored and used as an indication of the health of the total Atlantic salmon population in Europe. As part of the monitoring programme, the Environment Agency (EA) run a adult and juvenile salmon traps each year and used the records to estimate the adult and juvenile population size (using Capture-Mark-Recapture estimates).</description>
+    </item>
+    
+  </channel>
+</rss>

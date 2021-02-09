@@ -5,7 +5,38 @@
     <link>https://stephendavidgregory.github.io/categories/tagging-and-telemetry/</link>
     <description>Recent content in tagging-and-telemetry on Stephen D. Gregory</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 28 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/categories/tagging-and-telemetry/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/categories/tagging-and-telemetry/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tamar visit</title>
+      <link>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</guid>
+      <description>I, together with my GWCT colleagues, was lucky enough to visit the river Tamar, on the Devon / Cornwall border in Southwest England.
+The Tamar is an Atlantic salmon (Salmo salar) “Index River”, i.e., a river on which the salmon population is monitored and used as an indication of the health of the total Atlantic salmon population in Europe. As part of the monitoring programme, the Environment Agency (EA) run a adult and juvenile salmon traps each year and used the records to estimate the adult and juvenile population size (using Capture-Mark-Recapture estimates).</description>
+    </item>
+    
+    <item>
+      <title>Estimating sea trout smolt migration risks: talk</title>
+      <link>https://stephendavidgregory.github.io/blog/2016-10-14-holbrookiii/</link>
+      <pubDate>Fri, 14 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2016-10-14-holbrookiii/</guid>
+      <description>I gave a talk recently at the Second IFM Tagging and Telemetry Workshop, held in Edinburgh in June 2016.
+See the slides link.</description>
+    </item>
+    
+    <item>
+      <title>Estimating sea trout smolt migration risks: update</title>
+      <link>https://stephendavidgregory.github.io/blog/2016-10-14_holbrookii/</link>
+      <pubDate>Fri, 14 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2016-10-14_holbrookii/</guid>
+      <description>I recently posted about [analysis of acoustic tracking data using Bayesian State Space models]({{&amp;lt; ref “/post/2016-01-28-Holbrook/index.md” &amp;gt;}}).
+We wrote a chapter for the 2\(^{nd}\) International Sea Trout Symposium proceedings.
+AbstractMigration between freshwater nursery grounds and saltwater feeding areas is a critical event in sea trout life history. During their seaward migration, smolts encounter both natural and man-made obstructions as well as increased exposure to predators. This is particularly true in the transition zone between freshwater and saltwater where smolts enter a new environment, change their behaviour and encounter new predators.</description>
+    </item>
+    
     <item>
       <title>Estimating sea trout smolt migration risks</title>
       <link>https://stephendavidgregory.github.io/blog/2016-01-28-holbrook/</link>
