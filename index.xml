@@ -5,7 +5,28 @@
     <link>https://stephendavidgregory.github.io/</link>
     <description>Recent content on Stephen D. Gregory</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 22 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coordinate conversions in R</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/</guid>
+      <description>Here, I present a short procedure for converting British National Grid coordinates into latitude and longitude coordinates.
+BackgroundMany times, I have received data using the British National Grid coordinate system (OSGB36 datum, EPSG code: 27700; also known as the Ordnance Survey National Grid). It is excellent that these spatial data are collected and I implore people to continue to record where observations are collected.
+Most spatial analyses are, however, written with more generic coordinate systems in mind.</description>
+    </item>
+    
+    <item>
+      <title>Quadratic interaction terms fitted by Bayesian Variable Selection</title>
+      <link>https://stephendavidgregory.github.io/blog/2016-12-21-quadratic-interaction-jags/</link>
+      <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2016-12-21-quadratic-interaction-jags/</guid>
+      <description>I was recently faced with the challenge of testing the importance of non-linear effects in a linear mixed model with fixed effect interaction terms. This was an extension of previous work in which I fitted a linear mixed model and tested the importance of interacion terms using Bayesian Variable Selection.
+Bayesian Variable SelectionHere, I present a short and non-technical summary of Bayesian Variable Selection (BVS) as I am using it, and direct the interested reader to the excellent review by Hooten &amp;amp; Hobbs (2015), featuring the method attributed to Kuo &amp;amp; Mallick (1998) and extended by Ntzoufras (2002).</description>
+    </item>
+    
     <item>
       <title>Tamar visit</title>
       <link>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</link>

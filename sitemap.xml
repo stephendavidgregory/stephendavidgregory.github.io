@@ -3,13 +3,78 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://stephendavidgregory.github.io/categories/allee-effects/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://stephendavidgregory.github.io/blog/</loc>
-    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/categories/</loc>
-    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/environmental-change/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/invasive-species/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/r/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/spatial/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemtry/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/</loc>
+    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/bayesian/</loc>
+    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/non-linear/</loc>
+    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2016-12-21-quadratic-interaction-jags/</loc>
+    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
+    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -38,17 +103,7 @@
   </url>
   
   <url>
-    <loc>https://stephendavidgregory.github.io/</loc>
-    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemetry/</loc>
-    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/</loc>
     <lastmod>2016-11-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -60,11 +115,6 @@
   <url>
     <loc>https://stephendavidgregory.github.io/blog/2016-11-22-tamar-visit/</loc>
     <lastmod>2016-11-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/environmental-change/</loc>
-    <lastmod>2016-11-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -85,11 +135,6 @@
   <url>
     <loc>https://stephendavidgregory.github.io/tags/wylye-grayling-and-trout-study/</loc>
     <lastmod>2016-11-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/bayesian/</loc>
-    <lastmod>2016-10-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -119,11 +164,6 @@
   
   <url>
     <loc>https://stephendavidgregory.github.io/tags/sea-trout/</loc>
-    <lastmod>2016-10-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
     <lastmod>2016-10-14T00:00:00+00:00</lastmod>
   </url>
   
