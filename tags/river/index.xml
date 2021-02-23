@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>River on Stephen D. Gregory</title>
+    <link>https://stephendavidgregory.github.io/tags/river/</link>
+    <description>Recent content in River on Stephen D. Gregory</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 31 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/tags/river/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Calculate distances along a river in R and GRASS</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</link>
+      <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</guid>
+      <description>Recently, I have been helping https://www.gwct.org.uk/research/staff/fisheries/jmarsh/ to develop a method of calculating distances along linear features. Specifically, we were measuring the distances between salmonid redd locations and juvenile survey locations on the river Frome, Dorset, UK.
+Together, we devise a generalisable method to calculate the least cost distance between points located on a complex river network.
+Our method includes the following steps:
+convert the river polygon dataset to a high resolution raster;thin that high resolution raster to represent the river as a network of single pixel width linear features;shift the sample site coordinates to the closest river pixel in the thinned raster; andcalculate the least cost distance between a set of coordinates.</description>
+    </item>
+    
+  </channel>
+</rss>

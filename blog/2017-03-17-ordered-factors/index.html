@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Ordered factors and their analysis - Stephen D. Gregory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="Stephen D. Gregory">
+  <meta property="og:title" content="Ordered factors and their analysis">
+  <meta property="og:description" content="Understanding an ordered factor and implications for their use in statistical analysis">
+  <meta property="description" content="Understanding an ordered factor and implications for their use in statistical analysis">
+  <meta property="og:url" content="https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://stephendavidgregory.github.io/img/main/avatar.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/themes/" class="nav link"><i class='fas fa-tasks'></i> Themes</a>
+        
+      
+        
+          
+          <a href="/publications/" class="nav link"><i class='far fa-edit'></i> Publications</a>
+        
+      
+        
+          
+          <a href="/talks/" class="nav link"><i class='fas fa-bullhorn'></i> Talks</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+        
+          
+          <a href="/index.xml" class="nav link"><i class='fas fa-rss'></i> Subscribe</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Ordered%20factors%20and%20their%20analysis&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;title=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;title=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;description=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://stephendavidgregory.github.io/img/main/avatar.png" class="circle" width="100" alt="Test" /></a>
+  <header>
+    <h1>Stephen D. Gregory</h1>
+  </header>
+  <main>
+    <p>Conservation Biologist - Statistician - Fisheries Scientist</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2017-03-17-ordered-factors/">Ordered factors and their analysis</a></h2>
+    
+    
+      <p>Understanding an ordered factor and implications for their use in statistical analysis</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2017-03-17 00:00:00 &#43;0000 UTC">March 17, 2017</time>
+    <p>Stephen D. Gregory</p>
+    <p>12-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Ordered%20factors%20and%20their%20analysis&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;title=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;title=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f&amp;description=Ordered%20factors%20and%20their%20analysis" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-03-17-ordered-factors%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p><a href="/blog/2017-03-17-ordered-factor/" class="image" style="--bg-image: url('/blog/2017-03-17-ordered-factors_files/ordered-factor.jpg');"><img class="stretchV" src="/blog/2017-03-17-ordered-factors_files/ordered-factor.jpg" alt="Ordered factors - they're everywhere!"></a></p>
+<blockquote>
+<p>What is an ordered factor?</p>
+</blockquote>
+<blockquote>
+<p>Why might we use them?</p>
+</blockquote>
+<blockquote>
+<p>And what are the implications of using ordered factors in statistical analysis?</p>
+</blockquote>
+<p>If you’d like my views on these questions, then read on…</p>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<blockquote>
+<p>What is an ordered factor?</p>
+</blockquote>
+<p>An <code>ordered factor</code> is a categorical variable whose <code>levels</code> have a meaningful order. In the oven knob picture above, there are 4 levels: ‘OFF’, ‘LOW’, ‘MED’ and ‘HIGH’ and these <em>should</em> be ordered as ‘OFF &lt; LOW &lt; MED &lt; HIGH’.</p>
+<blockquote>
+<p>Why might we use them?</p>
+</blockquote>
+<p>We often choose to use an ordered factor when it is difficult to put our variable on a meaningful continuous scale, i.e., from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(+\infty\)</span> where all numbers are <code>real</code>, e.g., not an integer or a qualitative representation of a real number, which would be a category.</p>
+<p>Sometimes, we choose to use an ordered factor because we don’t have the equipment required to measure a variable on a continuous scale, e.g., river flow might be classified on a ordinal scale of ‘1 &lt; 2 &lt; 3 &lt; 4 &lt; 5’, which has 5 <code>levels</code>. This is not, however, a continuous variable.</p>
+<blockquote>
+<p>And what are the implications of using ordered factors in statistical analysis?</p>
+</blockquote>
+<p>When we choose to classify a continuous variable on an ordinal scale, i.e., treat the variable as a ordered factor, then we should be aware of the statistical implications for doing so. In the situation that we have a small sample size, i.e., a small number of <code>cases</code>, then we will likely have only few residual degrees of freedom to assess the ‘statistical significance’ of our statistical model. This is because we can only assess the ‘statistical significance’ of an ordered factor by fitting it as a polynomial term with the degree equal to the number of levels - 1. In our river flow example, the effect of river flow <code>x</code> on our response variable <code>y</code> is assessed by fitting the polynomial contrasts <code>x^1</code>, <code>x^2</code>, <code>x^3</code> and <code>x^4</code> (but not <code>x^5</code> because one level has to be retained as the <code>contrast level</code>, hence the polynomial term has number of levels - 1 degrees).</p>
+<p>In what follows, I will try to illustrate these points using simulated data in <a href="http://r-project.org">R</a>. I present all the code so that the interested reader can run the analyses for themselves.</p>
+</div>
+<div id="statistical-analysis-of-an-ordered-factor" class="section level1">
+<h1>Statistical analysis of an ordered factor</h1>
+<p>Let’s begin by simulating some data for the multiple regression</p>
+<p><span class="math display">\[y \sim \alpha + \beta_1 x_1 + \beta_2 x_2\]</span></p>
+<p>In this example, <span class="math inline">\(x_1\)</span> might be water temperature and <span class="math inline">\(x_2\)</span> might be river flow, both recorded on their (theoretically) continuous scale <span class="math inline">\(-\infty &lt; 0 &lt; +\infty\)</span>. (In actual fact, river flow would be a Gamma variate because it can not be less than zero.)</p>
+<p>Once we have simulated the data, let us fit the generating model back to the simulated data to show that we have done it correctly, and then plot the partial (or marginal) effects of each explanatory variable (Figure 1).</p>
+<pre class="r"><code># load libraries
+require(effects)
+
+# simulate data; generating values
+N &lt;- 1000
+a &lt;- 5
+b1 &lt;- 5
+b2 &lt;- 3
+x1 &lt;- rnorm(N)
+x2 &lt;- rnorm(N)
+sigma &lt;- 1
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- a + (b1 * x1) + (b2 * x2) + epsilon
+
+# fit lm()
+lm_fit &lt;- summary(lm(y ~ x1 + x2))
+
+# print coefs; note they are similar to the generating values
+round(lm_fit$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    5.031      0.031 163.066        0
+## x1             5.023      0.031 161.188        0
+## x2             3.052      0.031 100.010        0</code></pre>
+<pre class="r"><code># print sigma; note it is similar to its generating value
+round(lm_fit$sigma, 3)</code></pre>
+<pre class="r"><code>## [1] 0.975</code></pre>
+<pre class="r"><code># plot
+foo &lt;- lm(y ~ x1 + x2)
+fii &lt;- allEffects(mod = foo, default.levels = 50)
+plot(fii)</code></pre>
+<figure>
+<img src="/blog/2017-03-17-ordered-factors_files/unnamed-chunk-2-1.png" alt="A good fit" style="width:100%">
+<figcaption>
+Figure 1. Fitting the generating model to the simulated data - success!
+</figcaption>
+</figure>
+<p>Now, what would happen if <span class="math inline">\(x_2\)</span> had been recorded on the ordinal scale <span class="math inline">\(1 &lt; 2 &lt; 3 &lt; 4 &lt; 5\)</span>?</p>
+<pre class="r"><code># discretize x2
+nLevels &lt;- 5
+x2d &lt;- cut(x = x2, breaks = nLevels, labels = 1:5, ordered_result = TRUE)
+str(x2d) # ordered factor with nLevels = 5 recorded levels</code></pre>
+<pre class="r"><code>##  Ord.factor w/ 5 levels &quot;1&quot;&lt;&quot;2&quot;&lt;&quot;3&quot;&lt;&quot;4&quot;&lt;..: 3 3 2 3 3 3 3 3 4 4 ...</code></pre>
+<pre class="r"><code># fit discretized lm() with linear effect of x2d (coef name is x2d.L)
+lm_fit_d &lt;- summary(lm(y ~ x1 + x2d))
+
+# &quot;x2d.L&quot; is significant linear effect
+# note that lm() estimates nLevels - 1 (in this case, 5 - 1 = 4) coefs for the effect of x2d
+round(lm_fit_d$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    5.491      0.111  49.650    0.000
+## x1             4.978      0.049 101.562    0.000
+## x2d.L         11.975      0.338  35.457    0.000
+## x2d.Q          0.436      0.288   1.516    0.130
+## x2d.C          0.020      0.191   0.105    0.916
+## x2d^4          0.011      0.106   0.101    0.919</code></pre>
+<pre class="r"><code>round(lm_fit_d$sigma, 3)</code></pre>
+<pre class="r"><code>## [1] 1.531</code></pre>
+<pre class="r"><code># plot
+foo &lt;- lm(y ~ x1 + x2d)
+fii &lt;- allEffects(mod = foo, default.levels = 50)
+plot(fii)</code></pre>
+<figure>
+<img src="/blog/2017-03-17-ordered-factors_files/unnamed-chunk-3-1.png" alt="Is this correct?" style="width:100%">
+<figcaption>
+Figure 2. When treating the continuous variable as an ordered factor.
+</figcaption>
+</figure>
+<p>From the partial effect plots, we see that the influence of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span> are very similar whether <span class="math inline">\(x_2\)</span> is treated as a continuous variable or an ordered factor.</p>
+<p>Note, however, that the statistical model in which <span class="math inline">\(x_2\)</span> is treated as an ordered factor has three additional coefficient estimates, representing the polynomial contrasts <span class="math inline">\(x_2^2\)</span>, <span class="math inline">\(x_2^3\)</span> and <span class="math inline">\(x_2^4\)</span>. And the partial effect plot of <span class="math inline">\(x_2\)</span> (<code>x2d</code>) on <span class="math inline">\(y\)</span> is represented as a set of contrasts.</p>
+<p>Note also, however, that our estimate of <code>x2d.L</code> (11.975 rather than 3) and <code>sigma</code> (1.531 rather than 1) is poor, reflecting the fact that we have not captured the true effect of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span> by treating the continuous variable <span class="math inline">\(x_2\)</span> as an ordered factor.</p>
+</div>
+<div id="a-more-correct-and-flexible-illustration" class="section level1">
+<h1>A more correct and flexible illustration</h1>
+<p>To overcome the problem of treating the continuous variable <span class="math inline">\(x_2\)</span> as an ordered factor, let us generate data for an example in which <span class="math inline">\(x_2\)</span> is actually measured as an ordered factor.</p>
+<p>Also, let us define <code>sigLevel</code> as the level of the ordered factor <span class="math inline">\(x_2\)</span> that statistically influences <span class="math inline">\(y\)</span>.</p>
+<pre class="r"><code># set the level at which x2 has a significant effect on y
+sigLevel &lt;- 1 # a linear effect of x_2 on y, i.e., the significant polynomial contrast is x^1
+
+# simulate data
+N &lt;- 1000
+nLevels &lt;- 5
+a &lt;- 5
+b1 &lt;- 5
+b2 &lt;- rep(0, nLevels - 1) # nLevels - 1 contrasts; level nLevel set as contrast
+b2[sigLevel] &lt;- 3
+x1 &lt;- rnorm(N)
+x2 &lt;- gl(n = nLevels, k = N / nLevels, ordered = TRUE)
+Xmat &lt;- model.matrix(~ x1 + x2)
+bvec &lt;- c(a, b1, b2)
+lp &lt;- Xmat %*% bvec
+sigma &lt;- 1
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- as.numeric(lp + epsilon)
+
+# fit lm()
+lm_fit_d &lt;- summary(lm(y ~ x1 + x2))
+round(lm_fit_d$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    5.006      0.032 157.573    0.000
+## x1             5.000      0.031 161.650    0.000
+## x2.L           3.040      0.071  42.901    0.000
+## x2.Q          -0.039      0.071  -0.546    0.585
+## x2.C           0.048      0.071   0.673    0.501
+## x2^4          -0.049      0.071  -0.696    0.487</code></pre>
+<pre class="r"><code>round(lm_fit_d$sigma, 3)</code></pre>
+<pre class="r"><code>## [1] 1.002</code></pre>
+<pre class="r"><code># plot
+foo &lt;- lm(y ~ x1 + x2)
+fii &lt;- allEffects(mod = foo, default.levels = 50)
+plot(fii)</code></pre>
+<figure>
+<img src="/blog/2017-03-17-ordered-factors_files/unnamed-chunk-4-1.png" alt="What about this?" style="width:100%">
+<figcaption>
+Figure 3. When treating the continuous variable as an ordered factor.
+</figcaption>
+</figure>
+<p>That is better: the estimated coefficients for <code>a</code>, <code>b1</code> and <code>b2[sigLevel]</code> and <code>sigma</code> are close to their generating values, and the plot shows a linear effect of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span>.</p>
+<p>We can change <code>sigLevel</code> so that the effect of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span> takes a different shape, e.g., a quadratic effect represented by the statistically significant polynomial contrast x^2, as follows:</p>
+<pre class="r"><code># what about a quadratic effect of x2 on y
+sigLevel &lt;- 2 # a quadratic effect of x_2 on y, i.e., the significant polynomial contrast is x^2
+
+# simulate data
+N &lt;- 1000
+nLevels &lt;- 5
+a &lt;- 5
+b1 &lt;- 5
+b2 &lt;- rep(0, nLevels - 1) # nLevels - 1 contrasts; level nLevel set as contrast
+b2[sigLevel] &lt;- 3
+x1 &lt;- rnorm(N)
+x2 &lt;- gl(n = nLevels, k = N / nLevels, ordered = TRUE)
+Xmat &lt;- model.matrix(~ x1 + x2)
+bvec &lt;- c(a, b1, b2)
+lp &lt;- Xmat %*% bvec
+sigma &lt;- 1
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- as.numeric(lp + epsilon)
+
+# fit lm()
+lm_fit_d &lt;- summary(lm(y ~ x1 + x2))
+round(lm_fit_d$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    5.003      0.031 163.497    0.000
+## x1             5.007      0.029 170.784    0.000
+## x2.L          -0.148      0.068  -2.161    0.031
+## x2.Q           2.974      0.068  43.470    0.000
+## x2.C           0.002      0.068   0.031    0.975
+## x2^4          -0.057      0.068  -0.831    0.406</code></pre>
+<pre class="r"><code>round(lm_fit_d$sigma, 3)</code></pre>
+<pre class="r"><code>## [1] 0.967</code></pre>
+<pre class="r"><code># plot
+foo &lt;- lm(y ~ x1 + x2)
+fii &lt;- allEffects(mod = foo, default.levels = 50)
+plot(fii)</code></pre>
+<figure>
+<img src="/blog/2017-03-17-ordered-factors_files/unnamed-chunk-5-1.png" alt="Better?" style="width:100%">
+<figcaption>
+Figure 4. When treating the continuous variable as an ordered factor.
+</figcaption>
+</figure>
+<p>Again, note that the coefficient and sigma estimates are close to their generating values: success!</p>
+</div>
+<div id="the-problem-of-sample-size" class="section level1">
+<h1>The problem of sample size…</h1>
+<blockquote>
+<p>And what are the implications of using ordered factors in statistical analysis?</p>
+</blockquote>
+<p>In the background, I mentioned that the implications for choosing to use an ordered factor in place of a continuous variable will be particularly important when the sample size (or number of cases) is low.</p>
+<p>This is because any statistical analysis of an ordered factor will require several contrasts (specifically, number of levels - 1 contrasts) and that those degrees of freedom are no longer “free” to assess the statistical significance of the model. This becomes particularly problematic when the number of cases is low, as illustrated for the simple linear effect of ordered factor <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span> simulated here…</p>
+<pre class="r"><code># what about a quadratic effect of x2 on y
+sigLevel &lt;- 1 # a linear effect of x_2 on y, i.e., the significant polynomial contrast is x^1
+
+# common generating values
+N &lt;- 7
+nLevels &lt;- 5
+a &lt;- 5
+b1 &lt;- 5
+x1 &lt;- rnorm(N)
+sigma &lt;- 0.25 # reduced to facilitate illustration
+
+# simulate data for continous variable
+b2 &lt;- 3
+x2c &lt;- rnorm(N)
+Xmat &lt;- model.matrix(~ x1 + x2c)
+bvec &lt;- c(a, b1, b2)
+lp &lt;- Xmat %*% bvec
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- as.numeric(lp + epsilon)
+
+# fit lm() and print model performance measures
+lm_fit_c &lt;- summary(lm(y ~ x1 + x2c))
+lm_fit_c</code></pre>
+<pre class="r"><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2c)
+## 
+## Residuals:
+##        1        2        3        4        5        6        7 
+## -0.04064 -0.04331 -0.06432 -0.03548 -0.04572  0.02031  0.20916 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.08128    0.04750  106.98 4.58e-08 ***
+## x1           4.81239    0.09851   48.85 1.05e-06 ***
+## x2c          2.91798    0.09785   29.82 7.53e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1174 on 4 degrees of freedom
+## Multiple R-squared:  0.9986, Adjusted R-squared:  0.9978 
+## F-statistic:  1386 on 2 and 4 DF,  p-value: 2.076e-06</code></pre>
+<pre class="r"><code># simulate data for ordered factor
+b2 &lt;- rep(0, nLevels - 1) # nLevels - 1 contrasts; level nLevel set as contrast
+b2[sigLevel] &lt;- 3
+x2d &lt;- gl(n = nLevels, k = N / nLevels, ordered = TRUE)
+Xmat &lt;- model.matrix(~ x1 + x2d)
+bvec &lt;- c(a, b1, b2)
+lp &lt;- Xmat %*% bvec
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- as.numeric(lp + epsilon)
+
+# fit lm() and print model performance measures
+lm_fit_d &lt;- summary(lm(y ~ x1 + x2d))
+lm_fit_d</code></pre>
+<pre class="r"><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2d)
+## 
+## Residuals:
+##          1          2          3          4          5          6 
+## -3.388e-02  6.715e-02  1.214e-17  3.469e-18  1.908e-17  3.388e-02 
+##          7 
+## -6.715e-02 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  4.98801    0.04368 114.183  0.00558 **
+## x1           4.76806    0.16777  28.420  0.02239 * 
+## x2d.L        2.96444    0.15136  19.586  0.03248 * 
+## x2d.Q       -0.44414    0.09805  -4.530  0.13832   
+## x2d.C       -0.19028    0.10317  -1.844  0.31628   
+## x2d^4        0.02820    0.12754   0.221  0.86148   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.1064 on 1 degrees of freedom
+## Multiple R-squared:  0.9999, Adjusted R-squared:  0.9991 
+## F-statistic:  1355 on 5 and 1 DF,  p-value: 0.02062</code></pre>
+<p>The <code>Multiple R-squared</code> and <code>Adjusted R-squared</code> measures are very similar for both models but the statistical significance of the models are very different (continuous <span class="math inline">\(\approx\)</span> 0; ordered factor = 0.021).</p>
+<p>Note also that the coefficients estimates for the different explanatory variables have also dropped in “statistical significance” and the effect of <span class="math inline">\(x_2\)</span> is now negligible.</p>
+</div>
+<div id="dont-treat-an-ordered-factor-as-continuous" class="section level1">
+<h1>Don’t treat an ordered factor as continuous!</h1>
+<p>It has been suggested that one can treat an ordered factor as a continuous variable to avoid this problem. Here is how that might work:</p>
+<pre class="r"><code># what about a quadratic effect of x2 on y
+sigLevel &lt;- 1 # a linear effect of x_2 on y, i.e., the significant polynomial contrast is x^1
+
+# common generating values
+N &lt;- 1000
+nLevels &lt;- 5
+a &lt;- 5
+b1 &lt;- 5
+x1 &lt;- rnorm(N)
+b2 &lt;- rep(0, nLevels - 1) # nLevels - 1 contrasts; level nLevel set as contrast
+b2[sigLevel] &lt;- 3
+x2d &lt;- gl(n = nLevels, k = N / nLevels, ordered = TRUE)
+Xmat &lt;- model.matrix(~ x1 + x2d)
+bvec &lt;- c(a, b1, b2)
+lp &lt;- Xmat %*% bvec
+sigma &lt;- 0.25 # reduced to facilitate illustration
+epsilon &lt;- rnorm(N, 0, sigma)
+y &lt;- as.numeric(lp + epsilon)
+
+# fit lm() and print model performance measures
+lm_fit_d &lt;- summary(lm(y ~ x1 + x2d))
+round(lm_fit_d$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    4.985      0.008 628.050    0.000
+## x1             5.016      0.008 634.895    0.000
+## x2d.L          3.004      0.018 169.452    0.000
+## x2d.Q         -0.013      0.018  -0.733    0.464
+## x2d.C         -0.003      0.018  -0.190    0.849
+## x2d^4          0.004      0.018   0.251    0.802</code></pre>
+<pre class="r"><code># note that this can be fitted as a poly() and treating x2 as continuous
+x2c &lt;- as.numeric(as.character(x2d))
+lm_fit_dc &lt;- summary(lm(y ~ x1 + x2c))
+round(lm_fit_dc$coef, 3)</code></pre>
+<pre class="r"><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    2.135      0.019 114.950        0
+## x1             5.015      0.008 636.054        0
+## x2c            0.950      0.006 169.653        0</code></pre>
+<p>In this case, however, the estimated effect of <span class="math inline">\(x_2\)</span> on <span class="math inline">\(y\)</span> is meaningless; it is estimated as 0.95 rather than the real value of 3. In other words, it might be “statistically significant” but no-one has any idea what the effect size is!</p>
+<p>Moreover, it changes the coefficient estimates of other estimated parameters, in this case <code>a</code>.</p>
+</div>
+<div id="my-views" class="section level1">
+<h1>My views</h1>
+<p>Recording a continous variable as an ordered factor might seem like an easy solution when faced with limited resources, such as time or money.</p>
+<p>I warn, however, that before taking that decision, consider the following issues carefully:</p>
+<ol style="list-style-type: decimal">
+<li><strong>What will be my sample size or number of cases?</strong> If the number of cases is low, particularly if the number of cases per explanatory variable is fewer than 5, then one really should quantify the variable on its true continuous scale, irrespective of the resources available.</li>
+<li><strong>If using an ordinal scale, how does it relate to the continuous scale?</strong> Perhaps one can get away with using an ordinal scale if it is very carefully designed to capture the range of values (and therefore effect sizes) of the continuous variable on the response variable.</li>
+<li><strong>Can one use a different variable</strong> Perhaps there is a better explanatory variable to use?</li>
+<li><strong>Think carefully!</strong></li>
+</ol>
+<p>I hope this is useful to someone.</p>
+</div>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/environmental-change/">environmental-change</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/tagging-and-telemetry/">tagging-and-telemetry</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/allee-effects/">allee-effects</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/invasive-species/">invasive-species</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/statistics/">Statistics</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/education/">Education</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/notes/">Notes</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stephendavidgregory" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/2017-04-01-smolt-run-2017/" class="button left"><span>Get ready... set... go! Frome salmon smolt run 2017</span></a>
+    
+    
+      <a href="/blog/2017-01-31-least-cost-dist-along-river/" class="button right"><span>Calculate distances along a river in R and GRASS</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-05-16-mixed-logistic-regression/">(Mixed) Logistic regression in JAGS</a></h2>
+          <time class="published" datetime="2017-05-16 00:00:00 &#43;0000 UTC">May 16, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-04-17-parr-lengths-paper-published/">New paper: scale-dependent drivers of Atlantic salmon parr lengths</a></h2>
+          <time class="published" datetime="2017-04-17 00:00:00 &#43;0000 UTC">April 17, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-04-16-jags-in-parallel/">Running JAGS in parallel</a></h2>
+          <time class="published" datetime="2017-04-16 00:00:00 &#43;0000 UTC">April 16, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-04-01-smolt-run-2017/">Get ready... set... go! Frome salmon smolt run 2017</a></h2>
+          <time class="published" datetime="2017-04-01 00:00:00 &#43;0000 UTC">April 1, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-03-17-ordered-factors/">Ordered factors and their analysis</a></h2>
+          <time class="published" datetime="2017-03-17 00:00:00 &#43;0000 UTC">March 17, 2017</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/environmental-change/">environmental-change<span class="count">13</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemetry/">tagging-and-telemetry<span class="count">12</span></a>
+          
+          <li>
+              <a href="/categories/allee-effects/">allee-effects<span class="count">6</span></a>
+          
+          <li>
+              <a href="/categories/invasive-species/">invasive-species<span class="count">6</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>This is my personal website and dumping ground for my learnings.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2017 Stephen D. Gregory
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.79.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/r.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/stan.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/julia.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b4e669fa428a81defb8af0916c53f39cd1b8e0bbab22199c06f0b182907ba474.js" integrity="sha256-tOZp&#43;kKKgd77ivCRbFPznNG44LurIhmcBvCxgpB7pHQ="></script>
+    <script src="/js/add-on.js"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90881803-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    </div>
+  </body>
+</html>

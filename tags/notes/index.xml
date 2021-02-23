@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on Stephen D. Gregory</title>
+    <link>https://stephendavidgregory.github.io/tags/notes/</link>
+    <description>Recent content in Notes on Stephen D. Gregory</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 17 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ordered factors and their analysis</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/</link>
+      <pubDate>Fri, 17 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/</guid>
+      <description>What is an ordered factor?
+Why might we use them?
+And what are the implications of using ordered factors in statistical analysis?
+If you’d like my views on these questions, then read on…
+BackgroundWhat is an ordered factor?
+An ordered factor is a categorical variable whose levels have a meaningful order. In the oven knob picture above, there are 4 levels: ‘OFF’, ‘LOW’, ‘MED’ and ‘HIGH’ and these should be ordered as ‘OFF &amp;lt; LOW &amp;lt; MED &amp;lt; HIGH’.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,7 +5,97 @@
     <link>https://stephendavidgregory.github.io/</link>
     <description>Recent content on Stephen D. Gregory</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 07 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>(Mixed) Logistic regression in JAGS</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-05-16-mixed-logistic-regression/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-05-16-mixed-logistic-regression/</guid>
+      <description>Here is a quick post showing how to do a fixed effect logistic regression in jags, extend it to a mixed effects logistic regression and show how it can be fitted using two contrasting specifications, each giving the same result (within stochastic error).
+Perhaps these models will work in *BUGS variants but I tend to prefer jags because it is platform-independent, more similar to R, actively developed and with excellent support (thanks, Martin!</description>
+    </item>
+    
+    <item>
+      <title>New paper: scale-dependent drivers of Atlantic salmon parr lengths</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-04-17-parr-lengths-paper-published/</link>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-04-17-parr-lengths-paper-published/</guid>
+      <description>New paper: scale-dependent drivers of Atlantic salmon parr lengths
+Our paper “Patterns on a parr: drivers of long-term salmon parr length in UK and French rivers depends on geographical scale” is out today in Freshwater Biology!
+Gregory SD, Nevoux M, Riley WD, Beaumont WRC, Jeannot N, Lauridsen RB, Marchand F, Scott LJ, and Roussel J-M. (2017) Patterns on a parr: drivers of long-term salmon parr length in UK and French rivers depends on geographical scale.</description>
+    </item>
+    
+    <item>
+      <title>Running JAGS in parallel</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-04-16-jags-in-parallel/</link>
+      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-04-16-jags-in-parallel/</guid>
+      <description>Sometimes, I run some pretty heavy duty models, including several latent variables and large datasets. I am also a perfectionist and so I insist on simulating and testing these models extensively.
+To improve my efficiency, I can run Jags in parallel using a variety of tools, thereby saving considerable time.
+Running Jags in parallelHere is a quick script I wrote to show a few different methods and how their timing compares on my (new and very fast) laptop.</description>
+    </item>
+    
+    <item>
+      <title>Get ready... set... go! Frome salmon smolt run 2017</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-04-01-smolt-run-2017/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-04-01-smolt-run-2017/</guid>
+      <description>Every year, the GWCT monitors migrating juvenile Atlantic salmon (Salmo salar L.) smolts leaving the river Frome, Dorset, on their way to their marine feeding grounds, where they go to grow and mature before returning to the Frome to reproduce.
+For more info, read the GWCT webpage.
+Here, I want to explain why we collect data on salmon smolts, how we collect it, and briefly outline how we process the data.</description>
+    </item>
+    
+    <item>
+      <title>Ordered factors and their analysis</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/</link>
+      <pubDate>Fri, 17 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/</guid>
+      <description>What is an ordered factor?
+Why might we use them?
+And what are the implications of using ordered factors in statistical analysis?
+If you’d like my views on these questions, then read on…
+BackgroundWhat is an ordered factor?
+An ordered factor is a categorical variable whose levels have a meaningful order. In the oven knob picture above, there are 4 levels: ‘OFF’, ‘LOW’, ‘MED’ and ‘HIGH’ and these should be ordered as ‘OFF &amp;lt; LOW &amp;lt; MED &amp;lt; HIGH’.</description>
+    </item>
+    
+    <item>
+      <title>Calculate distances along a river in R and GRASS</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</link>
+      <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</guid>
+      <description>Recently, I have been helping https://www.gwct.org.uk/research/staff/fisheries/jmarsh/ to develop a method of calculating distances along linear features. Specifically, we were measuring the distances between salmonid redd locations and juvenile survey locations on the river Frome, Dorset, UK.
+Together, we devise a generalisable method to calculate the least cost distance between points located on a complex river network.
+Our method includes the following steps:
+convert the river polygon dataset to a high resolution raster;thin that high resolution raster to represent the river as a network of single pixel width linear features;shift the sample site coordinates to the closest river pixel in the thinned raster; andcalculate the least cost distance between a set of coordinates.</description>
+    </item>
+    
+    <item>
+      <title>New paper: Flow and Atlantic salmon redd distribution</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-01-17-parry-published/</link>
+      <pubDate>Tue, 17 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-01-17-parry-published/</guid>
+      <description>Our paper “The effects of flow on Atlantic salmon (Salmo salar) redd distribution in a UK chalk stream between 1980 and 2015” is out today in Ecology of Freshwater Fish!
+Parry ES, Gregory SD, Lauridsen RB, and Griffiths SW. The effects of flow on Atlantic salmon (Salmo salar) redd distribution in a UK chalk stream between 1980 and 2015. Ecol Freshw Fish. 2017;00:1–10. doi:[10.1111/eff.12330](http://onlinelibrary.wiley.com/doi/10.1111/eff.12330/abstract)
+AbstractAtlantic salmon are an ecologically and economically important migratory fish in the UK, whose stocks have been declining over the past 30 years.</description>
+    </item>
+    
+    <item>
+      <title>Patterns on a parr: talk</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-01-17-pattern-on-a-parr/</link>
+      <pubDate>Tue, 17 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-01-17-pattern-on-a-parr/</guid>
+      <description>Here is a link to the Tuesday research seminar I gave to the Game and Wildlife Conservation Trust, at Fordingbridge on 24th January 2017.
+Slides at [coming soon!]</description>
+    </item>
+    
     <item>
       <title>Coordinate conversions in R</title>
       <link>https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/</link>

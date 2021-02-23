@@ -3,63 +3,193 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-05-16-mixed-logistic-regression/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://stephendavidgregory.github.io/categories/allee-effects/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/bayesian/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/blog/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/categories/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/education/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/environmental-change/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/invasive-species/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/mixed-effects-models/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemetry/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/</loc>
+    <lastmod>2017-05-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/atlantic-salmon/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/kuo-malick/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/lengths/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/mixed-effect-models/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-04-17-parr-lengths-paper-published/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/paper/</loc>
+    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-04-16-jags-in-parallel/</loc>
+    <lastmod>2017-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-04-01-smolt-run-2017/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/imperfect-detection/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/probability/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/notes/</loc>
+    <lastmod>2017-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-03-17-ordered-factors/</loc>
+    <lastmod>2017-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/grass/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/jess-marsh/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/r/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/redds/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/river/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/spatial/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/bayesian-variable-selection/</loc>
+    <lastmod>2017-01-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/length/</loc>
+    <lastmod>2017-01-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-01-17-parry-published/</loc>
+    <lastmod>2017-01-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/blog/2017-01-17-pattern-on-a-parr/</loc>
+    <lastmod>2017-01-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stephendavidgregory.github.io/tags/salmon-parr/</loc>
+    <lastmod>2017-01-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/</loc>
     <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/environmental-change/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/invasive-species/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/r/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/spatial/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemtry/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/</loc>
-    <lastmod>2017-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/bayesian/</loc>
-    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -69,11 +199,6 @@
   
   <url>
     <loc>https://stephendavidgregory.github.io/blog/2016-12-21-quadratic-interaction-jags/</loc>
-    <lastmod>2016-12-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/statistics/</loc>
     <lastmod>2016-12-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -99,11 +224,6 @@
   
   <url>
     <loc>https://stephendavidgregory.github.io/tags/samarch/</loc>
-    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/categories/tagging-and-telemetry/</loc>
     <lastmod>2016-11-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -153,16 +273,6 @@
   </url>
   
   <url>
-    <loc>https://stephendavidgregory.github.io/tags/imperfect-detection/</loc>
-    <lastmod>2016-10-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/probability/</loc>
-    <lastmod>2016-10-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://stephendavidgregory.github.io/tags/sea-trout/</loc>
     <lastmod>2016-10-14T00:00:00+00:00</lastmod>
   </url>
@@ -170,16 +280,6 @@
   <url>
     <loc>https://stephendavidgregory.github.io/tags/transition-probability/</loc>
     <lastmod>2016-10-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/atlantic-salmon/</loc>
-    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stephendavidgregory.github.io/tags/mixed-effect-models/</loc>
-    <lastmod>2016-09-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>

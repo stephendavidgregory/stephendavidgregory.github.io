@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mixed effects models on Stephen D. Gregory</title>
+    <link>https://stephendavidgregory.github.io/tags/mixed-effects-models/</link>
+    <description>Recent content in Mixed effects models on Stephen D. Gregory</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 16 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://stephendavidgregory.github.io/tags/mixed-effects-models/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>(Mixed) Logistic regression in JAGS</title>
+      <link>https://stephendavidgregory.github.io/blog/2017-05-16-mixed-logistic-regression/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://stephendavidgregory.github.io/blog/2017-05-16-mixed-logistic-regression/</guid>
+      <description>Here is a quick post showing how to do a fixed effect logistic regression in jags, extend it to a mixed effects logistic regression and show how it can be fitted using two contrasting specifications, each giving the same result (within stochastic error).
+Perhaps these models will work in *BUGS variants but I tend to prefer jags because it is platform-independent, more similar to R, actively developed and with excellent support (thanks, Martin!</description>
+    </item>
+    
+  </channel>
+</rss>
