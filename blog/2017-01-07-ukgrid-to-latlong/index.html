@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Coordinate conversions in R - Stephen D. Gregory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="Stephen D. Gregory">
+  <meta property="og:title" content="Coordinate conversions in R">
+  <meta property="og:description" content="British National Grid to latitude and longitude conversion">
+  <meta property="description" content="British National Grid to latitude and longitude conversion">
+  <meta property="og:url" content="https://stephendavidgregory.github.io/blog/2017-01-07-ukgrid-to-latlong/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://stephendavidgregory.github.io/img/main/avatar.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/themes/" class="nav link"><i class='fas fa-tasks'></i> Themes</a>
+        
+      
+        
+          
+          <a href="/publications/" class="nav link"><i class='far fa-edit'></i> Publications</a>
+        
+      
+        
+          
+          <a href="/talks/" class="nav link"><i class='fas fa-bullhorn'></i> Talks</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+        
+          
+          <a href="/index.xml" class="nav link"><i class='fas fa-rss'></i> Subscribe</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Coordinate%20conversions%20in%20R&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;title=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;title=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;description=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://stephendavidgregory.github.io/img/main/avatar.png" class="circle" width="100" alt="Test" /></a>
+  <header>
+    <h1>Stephen D. Gregory</h1>
+  </header>
+  <main>
+    <p>Conservation Biologist - Statistician - Fisheries Scientist</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2017-01-07-ukgrid-to-latlong/">Coordinate conversions in R</a></h2>
+    
+    
+      <p>British National Grid to latitude and longitude conversion</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2017-01-07 00:00:00 &#43;0000 UTC">January 7, 2017</time>
+    <p>Stephen D. Gregory</p>
+    <p>2-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Coordinate%20conversions%20in%20R&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;title=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;title=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f&amp;description=Coordinate%20conversions%20in%20R" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2017-01-07-ukgrid-to-latlong%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p><a href="/blog/2017-01-07-ukgrid-to-latlong/" class="image" style="--bg-image: url('/blog/2017-01-07-ukgrid-to-latlong_files/bng.png');"><img class="stretchV" src="/blog/2017-01-07-ukgrid-to-latlong_files/bng.png" alt="Sea trout with tags"></a></p>
+<p>Here, I present a short procedure for converting British National Grid coordinates into latitude and longitude coordinates.</p>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>Many times, I have received data using the <a href="https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid">British National Grid coordinate system</a> (OSGB36 datum, EPSG code: 27700; also known as the Ordnance Survey National Grid). It is excellent that these spatial data are collected and I implore people to continue to record where observations are collected.</p>
+<p>Most spatial analyses are, however, written with more generic coordinate systems in mind. One such coordinate system is the <a href="https://en.wikipedia.org/wiki/World_Geodetic_System">World Geodetic System</a> (WGS84 datum, EPSG code: 4326), which is the reference coordinate system for <a href="https://en.wikipedia.org/wiki/Global_Positioning_System">Global Positioning System</a>.</p>
+<p>I often want to use the spatial data in analyses, or at least to verify visually that they look correct, and this is easiest when the spatial data is in WGS84. So, I convert the coordinates.</p>
+<p>Below is a generic version of the script that I use.</p>
+</div>
+<div id="r-script" class="section level1">
+<h1><a href="http://www.r-project.org">R</a> script</h1>
+<pre class="r"><code>
+# read in csv data; first column is assumed to be Easting and second Northing
+dat &lt;- read.csv(&#39;BNGpoints.csv&#39;)
+
+# rename columns
+colnames(dat)[c(1, 2)] &lt;- c(&#39;Easting&#39;, &#39;Northing&#39;)
+
+# libraries
+require(rgdal) # for spTransform
+require(stringr)
+
+## shortcuts
+ukgrid &lt;- &quot;+init=epsg:27700&quot;
+latlong &lt;- &quot;+init=epsg:4326&quot;
+
+## Create coordinates variable
+coords &lt;- cbind(Easting = as.numeric(as.character(dat$Easting)),
+                Northing = as.numeric(as.character(dat$Northing)))
+
+## Create the SpatialPointsDataFrame
+dat_SP &lt;- SpatialPointsDataFrame(coords,
+                                 data = dat,
+                                 proj4string = CRS(&quot;+init=epsg:27700&quot;))
+
+## Convert
+dat_SP_LL &lt;- spTransform(dat_SP, CRS(latlong))
+
+# replace Lat, Long
+dat_SP_LL@data$Long &lt;- coordinates(dat_SP_LL)[, 1]
+dat_SP_LL@data$Lat &lt;- coordinates(dat_SP_LL)[, 2]
+
+# optionally write out as shapefile
+writeOGR(obj = dat_SP_LL, dsn = &#39;.&#39;, layer = &#39;BNGpoints&#39;, driver = &#39;ESRI Shapefile&#39;)
+</code></pre>
+<p>Here is an example of salmon redd locations converted from BNG to WGS84 and plotted on a shapefile of the river Frome, Dorset, UK.</p>
+<figure>
+<img src="/blog/2017-01-07-ukgrid-to-latlong_files/uk-gridconv-figure1.jpg" alt="bng and longlat" style="width:100%">
+<figcaption>
+Figure 1. UK grid overlaid on latitude and longitude grid.
+</figcaption>
+</figure>
+<p>I hope this is useful to someone.</p>
+<!-- Remaining from: http://www.alex-singleton.com/R-Tutorial-Materials/7-converting-coordinates.pdf -->
+</div>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/environmental-change/">environmental-change</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/tagging-and-telemtry/">tagging-and-telemtry</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/allee-effects/">allee-effects</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/invasive-species/">invasive-species</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/r/">R</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/spatial/">Spatial</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stephendavidgregory" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/2016-12-21-quadratic-interaction-jags/" class="button right"><span>Quadratic interaction terms fitted by Bayesian Variable Selection</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-01-07-ukgrid-to-latlong/">Coordinate conversions in R</a></h2>
+          <time class="published" datetime="2017-01-07 00:00:00 &#43;0000 UTC">January 7, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-12-21-quadratic-interaction-jags/">Quadratic interaction terms fitted by Bayesian Variable Selection</a></h2>
+          <time class="published" datetime="2016-12-21 00:00:00 &#43;0000 UTC">December 21, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-11-22-tamar-visit/">Tamar visit</a></h2>
+          <time class="published" datetime="2016-11-22 00:00:00 &#43;0000 UTC">November 22, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-11-14-grayling-society-symposium/">Grayling Society 40th Annual Symmposium: talk</a></h2>
+          <time class="published" datetime="2016-11-14 00:00:00 &#43;0000 UTC">November 14, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-10-14-holbrookiii/">Estimating sea trout smolt migration risks: talk</a></h2>
+          <time class="published" datetime="2016-10-14 00:00:00 &#43;0000 UTC">October 14, 2016</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/environmental-change/">environmental-change<span class="count">5</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemetry/">tagging-and-telemetry<span class="count">4</span></a>
+          
+          <li>
+              <a href="/categories/allee-effects/">allee-effects<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/invasive-species/">invasive-species<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemtry/">tagging-and-telemtry<span class="count">2</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>This is my personal website and dumping ground for my learnings.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2017 Stephen D. Gregory
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.79.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/r.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/stan.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/julia.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b4e669fa428a81defb8af0916c53f39cd1b8e0bbab22199c06f0b182907ba474.js" integrity="sha256-tOZp&#43;kKKgd77ivCRbFPznNG44LurIhmcBvCxgpB7pHQ="></script>
+    <script src="/js/add-on.js"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90881803-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    </div>
+  </body>
+</html>

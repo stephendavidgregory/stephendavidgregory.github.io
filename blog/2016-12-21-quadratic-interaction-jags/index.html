@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Quadratic interaction terms fitted by Bayesian Variable Selection - Stephen D. Gregory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.79.0" /><meta property="og:site_name" content="Stephen D. Gregory">
+  <meta property="og:title" content="Quadratic interaction terms fitted by Bayesian Variable Selection">
+  <meta property="og:description" content="Fitting quadratic interactions in jags under Kuo &amp; Mallik variable selection">
+  <meta property="description" content="Fitting quadratic interactions in jags under Kuo &amp; Mallik variable selection">
+  <meta property="og:url" content="https://stephendavidgregory.github.io/blog/2016-12-21-quadratic-interaction-jags/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://stephendavidgregory.github.io/img/main/avatar.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/themes/" class="nav link"><i class='fas fa-tasks'></i> Themes</a>
+        
+      
+        
+          
+          <a href="/publications/" class="nav link"><i class='far fa-edit'></i> Publications</a>
+        
+      
+        
+          
+          <a href="/talks/" class="nav link"><i class='fas fa-bullhorn'></i> Talks</a>
+        
+      
+        
+          
+          <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+        
+      
+        
+          
+          <a href="/index.xml" class="nav link"><i class='fas fa-rss'></i> Subscribe</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;title=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;title=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;description=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://stephendavidgregory.github.io/img/main/avatar.png" class="circle" width="100" alt="Test" /></a>
+  <header>
+    <h1>Stephen D. Gregory</h1>
+  </header>
+  <main>
+    <p>Conservation Biologist - Statistician - Fisheries Scientist</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/2016-12-21-quadratic-interaction-jags/">Quadratic interaction terms fitted by Bayesian Variable Selection</a></h2>
+    
+    
+      <p>Fitting quadratic interactions in jags under Kuo &amp; Mallik variable selection</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2016-12-21 00:00:00 &#43;0000 UTC">December 21, 2016</time>
+    <p>Stephen D. Gregory</p>
+    <p>7-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection&amp;url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;title=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;title=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f&amp;description=Quadratic%20interaction%20terms%20fitted%20by%20Bayesian%20Variable%20Selection" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20byStephen%20D.%20Gregory&amp;body=https%3a%2f%2fstephendavidgregory.github.io%2fblog%2f2016-12-21-quadratic-interaction-jags%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p><a href="/blog/2016-12-21-quadratic-interaction-jags/" class="image" style="--bg-image: url('/blog/2016-12-21-quadratic-interaction-jags_files/sig_b1Mb1Qb2Mb2Q.jpeg');"><img class="stretchV" src="/blog/2016-12-21-quadratic-interaction-jags_files/sig_b1Mb1Qb2Mb2Q.jpeg" alt="A successful quadratic fit"></a></p>
+<p>I was recently faced with the challenge of testing the importance of non-linear effects in a linear mixed model with fixed effect interaction terms. This was an extension of previous work in which I fitted a linear mixed model and tested the importance of interacion terms using Bayesian Variable Selection.</p>
+<div id="bayesian-variable-selection" class="section level1">
+<h1>Bayesian Variable Selection</h1>
+<p>Here, I present a short and non-technical summary of Bayesian Variable Selection (BVS) as I am using it, and direct the interested reader to the excellent review by <a href="dx.doi.org/10.1890/14-0661.1">Hooten &amp; Hobbs (2015)</a>, featuring the method attributed to <a href="http://www.jstor.org/stable/25053023">Kuo &amp; Mallick (1998)</a> and extended by <a href="dx.doi.org/10.18637/jss.v007.i07">Ntzoufras (2002)</a>. In essence, Kuo &amp; Mallick propose multiplying the coefficent for the <span class="math inline">\(k\)</span>th explanatory variable <span class="math inline">\(\beta_k\)</span> by a stochastic Bernoulli indicator variable <span class="math inline">\(I_k\)</span> that evaluates to <span class="math inline">\(I_k \in {0, 1}\)</span> so that <span class="math inline">\(I_{k=1}\beta_k \sim \beta_k\)</span> and <span class="math inline">\(I_{k=0}\beta_k = 0\)</span>. Ntzoufras (2002) extends this to interaction terms by multiplying the coefficient for the <span class="math inline">\(k\)</span>th explanatory variable measured in the <span class="math inline">\(j\)</span>th group <span class="math inline">\(\beta_{k,j}\)</span> by an independent stochastic Bernoulli indicator variable <span class="math inline">\(I_{k,j}\)</span>, the mean of which is used as the probability of including an indicator variable representing the importance of the whole interaction term, <span class="math inline">\(I_k^{int}\)</span>. If the interaction term is judged to be “important”, then the main effect for the <span class="math inline">\(k\)</span>th explanatory variable should also be retained. This is acheived by specifying the inclusion probability of the main effect <span class="math inline">\(p_k\)</span> as conditional on the probability of inclusion of the interaction term according to <span class="math inline">\(p_k=I_k^{int} + (1 - I_k^{int})p_{k,r}\)</span>, where <span class="math inline">\(p_{k,r}\)</span> is the mean probability of including the whole interaction term.</p>
+</div>
+<div id="what-is-importance" class="section level1">
+<h1>What is “importance”?</h1>
+<p>In this procedure, the easiest way to describe “importance” is when a coefficient is estimated to be substantially more or less than zero, i.e., the 95% credible intervals do not intercept 0. This is particularly elegant when the data set is large such that the chance of coefficient representing a small effect size is “statistically significant” due simply to the large number of cases.</p>
+</div>
+<div id="what-is-meant-by-a-quadratic-effect" class="section level1">
+<h1>What is meant by a quadratic effect?</h1>
+<p>I am using a quadratic function to represent a non-linear term. To estimate a quadratic function, one usually specifies it as function with two terms, <span class="math inline">\(\beta_1x\)</span> and <span class="math inline">\(\beta_2x^2\)</span>. In what follows, the model I have designed treats a quadratic effect as a single term. In other words, if <span class="math inline">\(\beta_2\)</span> is “important”, then <span class="math inline">\(\beta_1\)</span> should also be included. The rationale behind this “dependency” is that <span class="math inline">\(\beta_2\)</span> is a coefficient that “modifies” <span class="math inline">\(\beta_1\)</span>, i.e., <span class="math inline">\(\beta_2\)</span> should not be estimated unless <span class="math inline">\(\beta_1\)</span> is also estimated.</p>
+<p>In the model below, I specify this dependency by specifying the probability of inclusion of <span class="math inline">\(\beta_1\)</span> as a function of the probability of inclusion of <span class="math inline">\(\beta_2\)</span>, as described above. I then use this and similar dependencies to test the importance of a main quadratic effect (<span class="math inline">\(\beta_1x\)</span> and <span class="math inline">\(\beta_2x^2\)</span>) and a quadratic effect in interaction with group (<span class="math inline">\(\beta_{1,j}x_j\)</span> and <span class="math inline">\(\beta_{2,j}x_j^2\)</span>).</p>
+</div>
+<div id="the-model" class="section level1">
+<h1>The model</h1>
+<p>This is the model written in <a href="http://mcmc-jags.sourceforge.net">JAGS</a>. The annotations (e.g., # note 1) are explained below.</p>
+<pre class="r"><code>
+# model
+md &lt;- function(){
+  
+  a ~ dnorm(0, 0.001)
+  ag[1] &lt;- 0
+  for(g in 2:ngroups){
+    ag[g] ~ dnorm(0, 0.001)
+  }
+  
+  b1MT ~ dnorm(0, 0.001)
+  iLM_tmp &lt;- iLI + ((1 - iLI) * 0.5) # note 1
+  iLM ~ dbern(iLM_tmp)
+  b1M &lt;- iLM * b1MT
+  
+  b2MT ~ dnorm(0, 0.001)
+  iQM_tmp &lt;- iLM * 0.5 # note 2
+  iQM ~ dbern(iQM_tmp)
+  b2M &lt;- iQM * b2MT
+  
+  pLI ~ dbeta(1, 1) # uniform probability between 0 and 1
+  for(g in 1:ngroups){
+    igLI[g] ~ dbern(pLI)
+  }
+  iLI ~ dbern(sum(igLI) / ngroups) # note 3
+  b1QT[1] &lt;- 0 # contrast
+  for(g in 2:ngroups){
+    b1QT[g] ~ dnorm(0, taub1)
+  }
+  taub1 ~ dgamma(1, 0.001) # hierarchical variance for shrinkage
+  for(g in 1:ngroups){
+    b1Q[g] &lt;- iLI * b1QT[g]
+  }
+  
+  pQI &lt;- iLI * 0.5 # note 4
+  for(g in 1:ngroups){
+    igQI[g] ~ dbern(pQI)
+  }
+  iQI ~ dbern(sum(igQI) / ngroups)
+  b2QT[1] &lt;- 0 # contrast
+  for(g in 2:ngroups){
+    b2QT[g] ~ dnorm(0, taub2)
+  }
+  taub2 ~ dgamma(1, 0.001) # hierarchical variance for shrinkage
+  for(g in 1:ngroups){
+    b2Q[g] &lt;- iQI * b2QT[g]
+  }
+  
+  for(i in 1:n){
+    y[i] ~ dnorm(mu[i], tau)
+    mu[i] &lt;- a + ag[groups[i]] + (b1M * x[i]) + (b2M * x2[i]) + (b1Q[groups[i]] * x[i]) + (b2Q[groups[i]] * x2[i])
+  }
+  
+  tau ~ dgamma(0.001, 0.001)
+  sigma &lt;- 1 / sqrt(tau)
+  
+}
+</code></pre>
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<ol style="list-style-type: decimal">
+<li>this is dependent on iLI: “if not interaction, then try linear” (not “if linear, then try interaction”)</li>
+<li>this is dependent on iLM: “if linear, then try quadratic” (not “if quadratic, then keep linear”)</li>
+<li>this is independent of all other terms: “try linear interaction”</li>
+<li>this is dependent on iLM: “if linear interaction, then try quadratic interaction” (not “if quadratic interaction, then keep linear interaction”)</li>
+</ol>
+</div>
+</div>
+<div id="an-example-in-r-with-jags" class="section level1">
+<h1>An example in R with JAGS</h1>
+<p>I have written a small R function to generate data for with optional non-zero coefficients for a linear main effect, quadratic main effect, linear interaction effect and quadratic interaction effect. The response variable <code>y</code> is normally distributed with <span class="math inline">\(\bar{x} = 0\)</span> and <span class="math inline">\(\sigma = 0.5\)</span>.</p>
+<pre class="r"><code>
+# simulate quadratic data function ----------------------------------------
+
+quad.f &lt;- function(ngroups, nsamples, a, b1, b2, sigma, 
+                   std.x = TRUE, incl.Xmat = FALSE){
+
+  ## coefs
+  if(length(a) == 1) stop(&#39;length(a) != ngroups&#39;)
+  if(length(b1) == 1) stop(&#39;length(b1) != ngroups&#39;)
+  if(length(b2) == 1) stop(&#39;length(b2) != ngroups&#39;)
+  
+  ## sample sizes
+  n &lt;- ngroups * nsamples
+
+  ## simulation params
+  groups &lt;- gl(ngroups, nsamples)
+  x &lt;- lapply(1:ngroups, function(v) seq(1, 100, length.out = nsamples))
+  if(std.x) x &lt;- lapply(x, function(v) (v - mean(v)) / sd(v))
+  x &lt;- unlist(x)
+  x2 &lt;- x^2
+  epsilon &lt;- rnorm(n, 0, sigma)
+
+  ## simulate data
+  Xmat &lt;- model.matrix(~ groups + x + x2 + groups : x + groups : x2)
+  ab1b2 &lt;- c(a, b1[1], b2[1], b1[-1], b2[-1])
+  lin.pred &lt;- Xmat %*% ab1b2
+  y &lt;- as.numeric(lin.pred + epsilon)
+  
+  # result list
+  res &lt;- list(&#39;y&#39; = y, &#39;groups&#39; = groups, &#39;x&#39; = x, &#39;x2&#39; = x2, 
+              &#39;n&#39; = n, &#39;ngroups&#39; = ngroups)
+  if(incl.Xmat) res$Xmat &lt;- Xmat
+  
+  ## return
+  return(res)
+
+}
+
+
+# setup jags fit ----------------------------------------------------------
+
+## monitors
+ps &lt;- c(&#39;a&#39;, &#39;ag&#39;, &#39;b1M&#39;, &#39;iLM&#39;, &#39;b2M&#39;, &#39;iQM&#39;, &#39;b1Q&#39;, &#39;b2Q&#39;, &#39;iLI&#39;, &#39;iQI&#39;, &#39;sigma&#39;, &#39;mu&#39;)
+
+## iters
+it &lt;- list(&#39;a&#39; = 1000, &#39;b&#39; = 1000, &#39;i&#39; = 10000, &#39;t&#39; = 20)
+
+
+# significant b1M, b1Q, b2M and b2Q fit -----------------------------------
+
+if(sig.b1Mb1Qb2Mb2Q){
+  
+  ## simulate data
+  ng &lt;- 3
+  a &lt;- rnorm(ng, 0.5, 0.01)
+  b1 &lt;- rnorm(ng, 1.5, 0.01)
+  b2 &lt;- rnorm(ng, -1.5, 0.01)
+  sigma &lt;- 0.5
+  foo &lt;- quad.f(ngroups = ng, nsamples = 100, 
+                a = a, b1 = b1, b2 = b2, sigma = sigma)
+
+}
+
+
+# fitting -----------------------------------------------------------------
+
+## fit
+cl &lt;- makePSOCKcluster(3)
+parLoadModule(cl, &#39;lecuyer&#39;)
+parLoadModule(cl, &#39;dic&#39;)
+parLoadModule(cl, &#39;glm&#39;)
+parJagsModel(cl = cl, name = &#39;out&#39;, 
+             file = md, data = foo, n.chains = 3, n.adapt = it$a)
+parUpdate(cl = cl, object = &#39;out&#39;, n.iter = it$b)
+s &lt;- parCodaSamples(cl = cl, model = &#39;out&#39;,
+                    variable.names = ps,
+                    n.iter = it$i,
+                    thin = it$t)
+parUnloadModule(cl, &#39;glm&#39;)
+parUnloadModule(cl, &#39;dic&#39;)
+parUnloadModule(cl, &#39;lecuyer&#39;)
+stopCluster(cl)
+</code></pre>
+<p>After extensive testing, it seems that the BVS model with backward (for the linear terms) and forward (for the quadratic terms) dependencies returns estimates similar to <code>R</code>’s <code>lm()</code> function, often with better results.</p>
+<pre class="r"><code>
+jags estimates:
+         a      ag[2]      ag[3]        b1M        b2M     b1Q[2]     b1Q[3]     b2Q[2] 
+ 0.4388473  0.4937112  0.6182427  1.6335965 -1.5419742  1.3599954  1.3835574 -1.3888898 
+    b2Q[3]      sigma 
+-1.5621374  0.4846993 
+
+lm estimates:
+         a      ag[2]      ag[3]        b1M        b2M     b1Q[2]     b1Q[3]     b2Q[2] 
+ 0.4324800  0.5042679  0.6289886  1.6268507 -1.5351445  1.3692690  1.3927054 -1.4003605 
+    b2Q[3]      sigma 
+-1.5749945  0.4826420 
+
+simulation parameters:
+         a      ag[2]      ag[3]        b1M        b2M     b1Q[2]     b1Q[3]     b2Q[2] 
+ 0.4903288  0.5032463  0.4908905  1.5120682 -1.4975522  1.5014423  1.5124471 -1.5010414 
+    b2Q[3]      sigma 
+-1.4994300  0.5000000 
+</code></pre>
+<p>And the <code>statistical significance</code> of the main effect and interaction terms are:</p>
+<pre class="r"><code>
+jags &quot;1 - statistical significance&quot;:
+iLM iLI iQM iQI
+  1   1   1   1 
+</code></pre>
+</div>
+<div id="a-few-more-examples" class="section level1">
+<h1>A few more examples</h1>
+<p>Here are a few typical example fits:</p>
+<p>
+
+
+
+  
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.css" integrity="sha256-sCl5PUOGMLfFYctzDW3MtRib0ctyUvI9Qsmq2wXOeBY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/default-skin/default-skin.min.css" integrity="sha256-BFeI1V+Vh1Rk37wswuOYn5lsTcaU96hGaI7OUVCLjPc=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js" integrity="sha256-UplRCs9v4KXVJvVY+p+RSo5Q4ilAUXh7kpjyIP5odyc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js" integrity="sha256-PWHOlUzc96pMc8ThwRIXPn8yH4NOLu42RQ0b9SpnpFk=" crossorigin="anonymous"></script>
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
+
+<div class="gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition" itemscope itemtype="http://schema.org/ImageGallery">
+				<div class="box">
+				  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" style="width:240px"> 
+				    <div class="img" style="background-image: url('https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1M.jpeg');" >
+				      <img itemprop="thumbnail" src="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1M.jpeg" alt="Sig b1 m" />
+				    </div>
+			      <figcaption>
+		          <p>Sig b1 m</p>
+			      </figcaption>
+				    <a href="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1M.jpeg" itemprop="contentUrl"></a>
+				  </figure>
+				</div>
+				<div class="box">
+				  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" style="width:240px"> 
+				    <div class="img" style="background-image: url('https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Q.jpeg');" >
+				      <img itemprop="thumbnail" src="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Q.jpeg" alt="Sig b1 mb1 q" />
+				    </div>
+			      <figcaption>
+		          <p>Sig b1 mb1 q</p>
+			      </figcaption>
+				    <a href="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Q.jpeg" itemprop="contentUrl"></a>
+				  </figure>
+				</div>
+				<div class="box">
+				  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" style="width:240px"> 
+				    <div class="img" style="background-image: url('https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Qb2Mb2Q.jpeg');" >
+				      <img itemprop="thumbnail" src="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Qb2Mb2Q.jpeg" alt="Sig b1 mb1 qb2 mb2 q" />
+				    </div>
+			      <figcaption>
+		          <p>Sig b1 mb1 qb2 mb2 q</p>
+			      </figcaption>
+				    <a href="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb1Qb2Mb2Q.jpeg" itemprop="contentUrl"></a>
+				  </figure>
+				</div>
+				<div class="box">
+				  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" style="width:240px"> 
+				    <div class="img" style="background-image: url('https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb2M.jpeg');" >
+				      <img itemprop="thumbnail" src="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb2M.jpeg" alt="Sig b1 mb2 m" />
+				    </div>
+			      <figcaption>
+		          <p>Sig b1 mb2 m</p>
+			      </figcaption>
+				    <a href="https://stephendavidgregory.github.io//blog/2016-12-21-quadratic-interaction-jags_files//sig_b1Mb2M.jpeg" itemprop="contentUrl"></a>
+				  </figure>
+				</div>
+</div>
+</p>
+<p>I hope this is helpful to someone.</p>
+<p>Please contact me (<a href="mailto:stephendavidgregory@gmail.com">stephendavidgregory@gmail.com</a>) for more details.</p>
+</div>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/environmental-change/">environmental-change</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/tagging-and-telemtry/">tagging-and-telemtry</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/allee-effects/">allee-effects</a></li>
+        
+          <li><a class="article-terms-link" href="/categories/invasive-species/">invasive-species</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/statistics/">Statistics</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/bayesian/">Bayesian</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/non-linear/">Non-linear</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "stephendavidgregory" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/2017-01-07-ukgrid-to-latlong/" class="button left"><span>Coordinate conversions in R</span></a>
+    
+    
+      <a href="/blog/2016-11-22-tamar-visit/" class="button right"><span>Tamar visit</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2017-01-07-ukgrid-to-latlong/">Coordinate conversions in R</a></h2>
+          <time class="published" datetime="2017-01-07 00:00:00 &#43;0000 UTC">January 7, 2017</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-12-21-quadratic-interaction-jags/">Quadratic interaction terms fitted by Bayesian Variable Selection</a></h2>
+          <time class="published" datetime="2016-12-21 00:00:00 &#43;0000 UTC">December 21, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-11-22-tamar-visit/">Tamar visit</a></h2>
+          <time class="published" datetime="2016-11-22 00:00:00 &#43;0000 UTC">November 22, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-11-14-grayling-society-symposium/">Grayling Society 40th Annual Symmposium: talk</a></h2>
+          <time class="published" datetime="2016-11-14 00:00:00 &#43;0000 UTC">November 14, 2016</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/2016-10-14-holbrookiii/">Estimating sea trout smolt migration risks: talk</a></h2>
+          <time class="published" datetime="2016-10-14 00:00:00 &#43;0000 UTC">October 14, 2016</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/environmental-change/">environmental-change<span class="count">5</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemetry/">tagging-and-telemetry<span class="count">4</span></a>
+          
+          <li>
+              <a href="/categories/allee-effects/">allee-effects<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/invasive-species/">invasive-species<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/tagging-and-telemtry/">tagging-and-telemtry<span class="count">2</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>This is my personal website and dumping ground for my learnings.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/stephendavidgregory/" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/stephendgregory" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+<li><a href="skype:stephen.d.gregory?userinfo" target="_blank" rel="noopener" title="Skype" class="fab fa-skype"></a></li>
+
+
+
+
+<li><a href="//scholar.google.com/citations?user=UAYCYvQAAAAJ" target="_blank" rel="noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+<li><a href="//orcid.org/0000-0002-8230-0191" target="_blank" rel="noopener" title="ORCID"><i class="ai ai-orcid"></i></a></li>
+<li><a href="//researchgate.net/profile/Stephen_Gregory2" target="_blank" rel="noopener" title="Research Gate"><i class="ai ai-researchgate"></i></a></li>
+
+
+<li><a href="mailto:stephendavidgregory@gmail.com" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2017 Stephen D. Gregory
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.79.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/r.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/stan.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/languages/julia.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b4e669fa428a81defb8af0916c53f39cd1b8e0bbab22199c06f0b182907ba474.js" integrity="sha256-tOZp&#43;kKKgd77ivCRbFPznNG44LurIhmcBvCxgpB7pHQ="></script>
+    <script src="/js/add-on.js"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90881803-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    </div>
+  </body>
+</html>
