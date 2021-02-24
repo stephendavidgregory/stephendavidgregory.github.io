@@ -69,7 +69,7 @@ BackgroundWhat is an ordered factor?
       <pubDate>Tue, 31 Jan 2017 00:00:00 +0000</pubDate>
       
       <guid>https://stephendavidgregory.github.io/blog/2017-01-31-least-cost-dist-along-river/</guid>
-      <description>Recently, I have been helping https://www.gwct.org.uk/research/staff/fisheries/jmarsh/ to develop a method of calculating distances along linear features. Specifically, we were measuring the distances between salmonid redd locations and juvenile survey locations on the river Frome, Dorset, UK.
+      <description>Recently, I have been helping Jessica E. Marsh to develop a method of calculating distances along linear features. Specifically, we were measuring the distances between salmonid redd locations and juvenile survey locations on the river Frome, Dorset, UK.
 Together, we devise a generalisable method to calculate the least cost distance between points located on a complex river network.
 Our method includes the following steps:
 convert the river polygon dataset to a high resolution raster;thin that high resolution raster to represent the river as a network of single pixel width linear features;shift the sample site coordinates to the closest river pixel in the thinned raster; andcalculate the least cost distance between a set of coordinates.</description>
