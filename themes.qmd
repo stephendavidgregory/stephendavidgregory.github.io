@@ -22,7 +22,7 @@ I believe that environmental change is among the greatest threats to the persist
 :::
 :::
 
-> You can find my blogs in this theme, including summaries of papers, [here](../#category=environmental-change).
+> You can find my blogs in this theme, including summaries of papers, [here](/blog.html#category=environmental-change).
 
 ## Tagging and telemetry
 
@@ -39,7 +39,7 @@ Tagging and telemetry and associated capture-mark-recapture (CMR) studies are an
 :::
 :::
 
-> You can find my blogs in this theme, including summaries of papers, [here](../#category=tagging-and-telemetry).
+> You can find my blogs in this theme, including summaries of papers, [here](/blog.html#category=tagging-and-telemetry).
 
 ## Allee effects
 
@@ -56,7 +56,7 @@ Allee effects were the subject of my PhD and I have published a few papers on th
 :::
 :::
 
-> You can find my blogs in this theme, including summaries of papers, [here](../#category=allee-effects).
+> You can find my blogs in this theme, including summaries of papers, [here](/blog.html#category=allee-effects).
 
 ## Invasive species
 
@@ -73,4 +73,4 @@ Invasive species threaten populations of native species throughout the world, bu
 :::
 :::
 
-> You can find my blogs in this theme, including summaries of papers, [here](../#category=invasive-species).
+> You can find my blogs in this theme, including summaries of papers, [here](/blog.html#category=invasive-species).

@@ -38,10 +38,10 @@ You can find me on [Mastodon](https://julialang.social/@stephendavidgregory) or 
 
 My research themes include:
 
--   [Environmental change](/#category=environmental-change)
--   [Tagging and telemetry](/#category=tagging-and-telemetry)
--   [Allee effects](/#category=allee-effects)
--   [Invasive species](/#category=invasive-species)
+-   [Environmental change](/blog.html#category=environmental-change)
+-   [Tagging and telemetry](/blog.html#category=tagging-and-telemetry)
+-   [Allee effects](/blog.html#category=allee-effects)
+-   [Invasive species](/blog.html#category=invasive-species)
 :::
 
 ::: {.g-col-12 .g-col-md-5}
@@ -50,8 +50,8 @@ My research themes include:
 Statistics underpin my research and can be found at:
 
 -   [Github](https://github.com/stephendavidgregory)
--   [Blogs with statistic](/#category=statistics)
--   [Blogs with code](/#category=code)
+-   [Blogs with statistic](/blog.html#category=statistics)
+-   [Blogs with code](/blog.html#category=code)
 -   And in supplementary materials of my [publications](/publications)
 :::
 :::
