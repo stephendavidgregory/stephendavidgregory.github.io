@@ -1,0 +1,70 @@
+---
+title: "Coordinate conversions in R"
+subtitle: "British National Grid to latitude and longitude conversion"
+date: "2017-01-07"
+categories: ["environmental-change", "tagging-and-telemetry", "allee-effects", "invasive-species"]
+# tags: ["R", "Spatial"]
+image: "bng.png"
+image-alt: "British National Grid"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Here, I present a short procedure for converting British National Grid coordinates into latitude and longitude coordinates.
+
+# Background
+
+Many times, I have received data using the [British National Grid coordinate system](https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid) (OSGB36 datum, EPSG code: 27700; also known as the Ordnance Survey National Grid). It is excellent that these spatial data are collected and I implore people to continue to record where observations are collected.
+
+Most spatial analyses are, however, written with more generic coordinate systems in mind. One such coordinate system is the [World Geodetic System](https://en.wikipedia.org/wiki/World_Geodetic_System) (WGS84 datum, EPSG code: 4326), which is the reference coordinate system for [Global Positioning System](https://en.wikipedia.org/wiki/Global_Positioning_System).
+
+I often want to use the spatial data in analyses, or at least to verify visually that they look correct, and this is easiest when the spatial data is in WGS84. So, I convert the coordinates.
+
+Below is a generic version of the script that I use.
+
+# [R](http://www.r-project.org) script
+
+``` r
+
+# read in csv data; first column is assumed to be Easting and second Northing
+dat <- read.csv('BNGpoints.csv')
+
+# rename columns
+colnames(dat)[c(1, 2)] <- c('Easting', 'Northing')
+
+# libraries
+require(rgdal) # for spTransform
+require(stringr)
+
+## shortcuts
+ukgrid <- "+init=epsg:27700"
+latlong <- "+init=epsg:4326"
+
+## Create coordinates variable
+coords <- cbind(Easting = as.numeric(as.character(dat$Easting)),
+                Northing = as.numeric(as.character(dat$Northing)))
+
+## Create the SpatialPointsDataFrame
+dat_SP <- SpatialPointsDataFrame(coords,
+                                 data = dat,
+                                 proj4string = CRS("+init=epsg:27700"))
+
+## Convert
+dat_SP_LL <- spTransform(dat_SP, CRS(latlong))
+
+# replace Lat, Long
+dat_SP_LL@data$Long <- coordinates(dat_SP_LL)[, 1]
+dat_SP_LL@data$Lat <- coordinates(dat_SP_LL)[, 2]
+
+# optionally write out as shapefile
+writeOGR(obj = dat_SP_LL, dsn = '.', layer = 'BNGpoints', driver = 'ESRI Shapefile')
+```
+
+Here is an example of salmon redd locations converted from BNG to WGS84 and plotted on a shapefile of the river Frome, Dorset, UK.
+
+![Atlantic salmon redds on the River Frome](uk-gridconv-figure1.jpg)
+
+I hope this is useful to someone.
+
+<!-- Remaining from: http://www.alex-singleton.com/R-Tutorial-Materials/7-converting-coordinates.pdf -->

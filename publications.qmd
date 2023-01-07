@@ -1,0 +1,126 @@
+---
+title: "Publications"
+author: ""
+date: ""
+categories: ""
+---
+
+```{r}
+#| echo: false
+
+# libraries
+library(RefManageR)
+library(bibtex)
+library(DT)
+library(knitr)
+
+# bib options
+BibOptions(check.entries = FALSE, bib.style = 'authoryear', cite.style = 'authoryear', style = 'text', sorting = 'ynt')
+
+# read in biblio
+bib <- ReadBib('C:/Users/SG14/CV/Gregory.bib')
+
+# remove entries without "Gregory"
+a <- lapply(bib, function(v) v$author)
+idx <- grep('Gregory', a)
+bib <- bib[idx]
+
+# get citations
+o <- unlist(lapply(bib, function(v) paste0(capture.output(v), collapse = ' ')))
+
+# ensure acsii
+o <- iconv(o, 'utf-8', 'ascii', sub = '')
+
+# rid of a few things
+o <- gsub('In: |pp. ', '', o)
+
+# get authors
+foo <- lapply(bib, function(v) v$author)
+a <- vector('list', length = length(foo))
+for (i in 1:length(foo)) {
+  fii <- as.character(foo[[i]])
+  if (length(fii) != 1) {
+    if (length(foo[[i]]) > 4) {
+      fii <- paste0(c(fii[1:3], 'et al.'), collapse = ', ')
+    } else {
+      fee <- paste0(fii[1:(length(fii) - 1)], collapse = ', ')
+      fii <- paste0(fee, ' & ', rev(fii)[1])
+    }
+  }
+  a[[i]] <- fii 
+}
+
+# replace authors in o
+o_ <- sapply(o, function(v) gsub('^(.*) (\\([0-9]{4}\\)\\. .*$)', '\\2', v))
+o <- paste(a, o_)
+
+# get year
+y <- as.numeric(unlist(lapply(bib, function(v) v$year)))
+ 
+# get DOI
+## extract them
+d <- unlist(lapply(strsplit(o, 'DOI: '), '[', 2))
+## add doi.org
+d <- ifelse(is.na(d), '', paste0('https://doi.org/', d))
+## clean them
+d <- gsub('\\.$', '', d)
+## convert to html link
+d <- ifelse(d == '', 
+            '', 
+            paste0("<a href='", d, "' target = '_blank'>link</a>"))
+
+# get pdfs
+## get file names from bib
+p <- lapply(bib, function(v) gsub('.*([A-Z][A-Z,a-z]*[0-9]{4}[a-z]*.pdf).*', '\\1', v$file))
+## get full file names from Literature
+p_fls <- list.files('C:/Users/SG14/Documents/Literature/',
+                    paste0(unlist(p), collapse = '|'),
+                    full.names = TRUE)
+## copy them to pubs_static
+pubs_static <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/static/publications/'
+invisible(file.copy(p_fls, pubs_static, overwrite = TRUE))
+
+# pdf links
+## find entries with pdf
+p_l <- vector('character', length = length(p))
+for (i in 1:length(p)) {
+  if (length(p[[i]]) != 0) {
+    p_l[i] <- paste0('<a href="/reprints/', p[[i]], '" target="_blank">pdf</a>')
+  } else {
+    p[i] <- ''
+  }
+}
+
+# replace _ with <i> tags in citations
+o <- lapply(strsplit(o, '_'), function(v) paste0(v[1], '<i>', v[2], '</i>', v[3]))
+o <- unlist(o)
+
+# make publications data.frame
+pubs_df <- data.frame('citation' = o,
+                      'year' = y,
+                      'doi' = d,
+                      'pdf' = p_l)
+
+# order it
+pubs_df <- pubs_df[with(pubs_df, order(-year, citation)), ]
+
+# reset row names
+rownames(pubs_df) <- 1:nrow(pubs_df)
+
+# make datatable
+pubs_dt <- datatable(pubs_df, 
+                     width = "100%",
+                     height = "auto",
+                     escape = FALSE, 
+                     extensions = list(Scroller = NULL, FixedColumns = list(leftColumns = 2)),
+                     options = list(pageLength = 10,
+                                    lengthMenu = c(5, 10, 15, 20, nrow(pubs_df)),
+                                    dom = 'T<"clear">lfrtip',
+                                    autoWidth = FALSE,
+                                    columnDefs = list(list(width = '10%', targets = c(2, 3, 4))),
+                                    scrollX = FALSE, scrollY = FALSE, scrollCollapse = TRUE))
+
+# print it
+knit_print(x = pubs_dt) 
+
+```

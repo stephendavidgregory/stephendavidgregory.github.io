@@ -1,0 +1,16 @@
+---
+title: "Patterns on a parr: talk"
+subtitle: "GWCT Tuesday Research Seminar on environmental drivers of salmon parr length changes, January 2017"
+date: "2017-01-17"
+categories: ["environmental-change"]
+# tags: ["Bayesian", "Bayesian Variable Selection", "Probability", "Atlantic salmon", "Salmon parr", "Statistics", "Length"]
+image: "sleepy.gif"
+image-alt: "Time for some Zzzzs"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Here is a link to the Tuesday research seminar I gave to the [Game and Wildlife Conservation Trust](http://www.gwct.org.uk/), at Fordingbridge on 24th January 2017.
+
+Slides at \[coming soon!\]

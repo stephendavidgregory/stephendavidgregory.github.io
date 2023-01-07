@@ -1,0 +1,76 @@
+---
+title: "Themes"
+author: ""
+date: ""
+categories: ""
+---
+
+My research can be classified into the following themes:
+
+## Environmental change
+
+::: columns
+::: {.column width="65%"}
+I believe that environmental change is among the greatest threats to the persistence of wild animal and plant populations. As a conservation biologist, environmental change, including climate and land-use change and their interaction, is a theme that runs through much of my work, from Malaysian orangutan to Atlantic salmon. Of particular note, is the role of environmental change on different life-stages of individuals from the same population(s), which can be seen in my work on Atlantic salmon smolt sizes and the River Wylye Grayling population dynamics.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+![Environmental change](images/theme_environmental_change.jpg)
+:::
+:::
+
+> You can find my blogs in this theme, including summaries of papers, [here](../#category=environmental-change).
+
+## Tagging and telemetry
+
+::: columns
+::: {.column width="65%"}
+Tagging and telemetry and associated capture-mark-recapture (CMR) studies are an increasing important part of my everyday work, whether it's estimating the survival of salmon smolts returning from sea, or loss rates of acoustically tagged sea trout smolts. I tend to specify my CMR analyses in Bayseian languages, including [stan](https://mc-stan.org/), [JAGS](http://mcmc-jags.sourceforge.net/) or [greta](https://greta-stats.org/), among others. I find these analyses intuitive and so am able to specify statistical models that are well-adapted to the data collection protocol and data, including using state-space models that separate the ecological and observation processes.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+![Tagging and telemetry](images/theme_tagging_telemetry.jpg)
+:::
+:::
+
+> You can find my blogs in this theme, including summaries of papers, [here](../#category=tagging-and-telemetry).
+
+## Allee effects
+
+::: columns
+::: {.column width="65%"}
+Allee effects were the subject of my PhD and I have published a few papers on the topic. I keep abreast of the topic through reading and reviewing and it is always on my mind as to how I can revisit the topic. I have plans (although not particularly well-formed) to study Allee effects in several contexts, from empirical studies of shoaling in migratory fish to simulation studies of interactions among (sub-)group- and population-level component and demographic Allee effects.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+![Allee effects](images/theme_allee_effects.png)
+:::
+:::
+
+> You can find my blogs in this theme, including summaries of papers, [here](../#category=allee-effects).
+
+## Invasive species
+
+::: columns
+::: {.column width="65%"}
+Invasive species threaten populations of native species throughout the world, but particularly on islands. I have studied invasive species at various points in my career, including how invasive species affect native populations, such as my MRes study on invasive black rats in the Galapagos Islands, and how those invasive species can be managed, such as my works on prioritising invasive species eradication strategies on islands. It is a topic that I hope to keep involved with.
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+![Invasive species](images/theme_invasive_species.png)
+:::
+:::
+
+> You can find my blogs in this theme, including summaries of papers, [here](../#category=invasive-species).

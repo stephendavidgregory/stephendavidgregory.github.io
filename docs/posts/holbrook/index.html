@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Stephen D. Gregory">
+<meta name="dcterms.date" content="2016-01-28">
+
+<title>Stephen D. Gregory - Estimating sea trout smolt migration risks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-90881803-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="twitter:title" content="Stephen D. Gregory - Estimating sea trout smolt migration risks">
+<meta name="twitter:description" content="Analysis code for a simple state-space model to estimate acoustically tagged sea trout migration risks">
+<meta name="twitter:image" content="https://stephendavidgregory.github.io/posts\holbrook\tracking_sea_trout.jpg">
+<meta name="twitter:creator" content="@stephendgregory">
+<meta name="twitter:image:alt" content="Sea trout with tags">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text"><img src="../../images/favicon.ico" width="auto" height="20px"> Stephen D. Gregory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text"><i class="fa-solid fa-address-card" aria-label="address-card"></i> About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text"><i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i> Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../themes.html">
+ <span class="menu-text"><i class="fa-solid fa-list-check" aria-label="list-check"></i> Themes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html">
+ <span class="menu-text"><i class="fa-solid fa-file-pen" aria-label="file-pen"></i> Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html">
+ <span class="menu-text"><i class="fa-solid fa-chalkboard-user" aria-label="chalkboard-user"></i> Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contact.html">
+ <span class="menu-text"><i class="fa-solid fa-paper-plane" aria-label="paper-plane"></i> Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stephendavidgregory"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://julialang.social/@stephendavidgregory"><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Estimating sea trout smolt migration risks</h1>
+            <p class="subtitle lead">Analysis code for a simple state-space model to estimate acoustically tagged sea trout migration risks</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">tagging-and-telemetry</div>
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">code</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <a href="https://stephendavidgregory.github.io">Stephen D. Gregory</a> <a href="https://orcid.org/0000-0002-8230-0191" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://www.cefas.co.uk/">
+              Centre for Environment, Fisheries and Aquaculture Science
+              </a>
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 28, 2016</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#analysis-methods" id="toc-analysis-methods" class="nav-link" data-scroll-target="#analysis-methods">Analysis methods</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/stephendavidgregory/stephendavidgregory.github.io/edit/main/posts/holbrook/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/stephendavidgregory/stephendavidgregory.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>I’m involved with a project aiming to understand brown trout (<em>Salmo trutta</em> L.) movements in freshwater and estuarine environments.</p>
+<p>Here, I want to share the methods we used to estimate the risks to brown trout when they migrate as sea trout smolts.</p>
+<p>But first a little background.</p>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Brown trout are funny fish.</p>
+<p>Some spend their entire lives in freshwater, e.g., a river, and are known as <em>brown trout</em>. Others migrate to marine waters, e.g., an estuary or sea, and are known as <em>sea trout</em>.</p>
+<p>Sea trout return to freshwater a lot larger than brown trout, after feasting on the abundant food available in marine waters, and are able to produce more eggs. Brown trout might be smaller but they don’t run the risk of being eaten by any of the abundant marine predators.</p>
+<p>Clearly, there is a fitness trade-off between getting big &amp; producing more eggs (maximise your potential reproduction) and avoiding being eaten by any one of the abundant marine predators (maximise your potential survival to reproduction).</p>
+<p>The decision to migrate is not, however, black and white. <em>Finnock</em> are brown trout that use estuaries and transitional waters for only short periods, e.g., a couple of months, presumably to feed.</p>
+<p>So which strategy is best: brown trout, finnock or sea trout?</p>
+<p>To study this question, we estimated the risk to sea trout of migrating through fresh, transitional and estuarine waters.</p>
+<p>To estimate these risks, we acoustically tagged a sample of migrating sea trout smolts who’s migration pathways were recorded at listening receivers located in the different zones (Figure 1).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="map1.png" class="lightbox" title="Location of listening receivers in Poole Harbour. Red dots represent approximate detection range of the receivers." data-gallery="quarto-lightbox-gallery-1"><img src="map1.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Location of listening receivers in Poole Harbour. Red dots represent approximate detection range of the receivers.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="analysis-methods" class="level1">
+<h1>Analysis methods</h1>
+<p>Acoustic tracking data has the problem that <em>detection is imperfect</em>; we do not always detect a passing tag and so we don’t know if (i) the tag didn’t pass or (ii) whether it passed but was not detected.</p>
+<p>This problem can and <em>should</em> be addressed statistically.</p>
+<p>To estimate the risks to sea trout smolt of migrating through different zones, we used Bayesian State Space models (<a href="https://en.wikipedia.org/wiki/State-space_representation">wikipedia: State-space representation</a>).</p>
+<p>I was reassured that others have used BSSMs in this context: Oliviez Gimenez’s <a href="http://dx.doi.org/10.1016/j.ecolmodel.2007.03.040">paper</a> explains clearly the theory of BSSMs for marked individuals and Chris Holbrook’s <a href="http://dx.doi.org/10.1139/cjfas-2013-0581">paper</a> was an illustrative example of BSSM implementation for acoustically tagged lamprey.</p>
+<p>In essence, BSSM estimates jointly the probability that a tag is detected at a particular location and the probability that it made the transition to that location successfully.</p>
+<p>In our study, we assumed that all individuals shared the same detection and transition probabilities, i.e., that physical or behavioural differences between individuals were unimportant, and that individuals travelled independently.</p>
+<p>We could therefore use the simple Cormack, Jolly &amp; Seber (CJS) model given by:</p>
+<p><span class="math display">\[
+Y_t|X_t \sim Binomial(X_t − u_t, p_t)
+\]</span></p>
+<p><span class="math display">\[
+X_{t+1}|X_t \sim Binomial(X_t, \phi_t) + u_{t+1}
+\]</span></p>
+<p>where <span class="math inline">\(X_t\)</span> is the total number of survivors from time <span class="math inline">\(t\)</span>, which includes <span class="math inline">\(u_t\)</span> that is the number of newly marked individuals at time <span class="math inline">\(t\)</span>, <span class="math inline">\(Y_t\)</span> is the total number of previously marked individuals encountered at time <span class="math inline">\(t\)</span>, <span class="math inline">\(p_t\)</span> is the probability of detecting a tagged individual at time <span class="math inline">\(t\)</span> (<span class="math inline">\(t = 2, ..., T\)</span>) and <span class="math inline">\(\phi_t\)</span> is the probability that a tagged individual transitions to time <span class="math inline">\(t + 1\)</span> given that it is alive at time <span class="math inline">\(t\)</span> (<span class="math inline">\(t = 1, ..., T − 1\)</span>).</p>
+<p>This formulation separates the nuisance parameters (the detection probabilities, <span class="math inline">\(p_t\)</span>) from the parameters of interest (the transition probabilities, <span class="math inline">\(\phi_t\)</span>) because the latter are found only in the second or “state” equation.</p>
+<p>Using this model, we estimated values of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> using the Monte Carlo Markov Chain (MCMC) method in <a href="http://mcmc-jags.sourceforge.net">JAGS</a>. <a href="http://mcmc-jags.sourceforge.net">JAGS</a> uses Gibbs sampling to explore the joint probability distribution of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span>. Through an iterative process, weakly informative <span class="math inline">\(Beta(1, 1)\)</span> prior distributions on <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> were updated with increasingly credible values until, after sufficient iterations, the best estimated values of <span class="math inline">\(p_t\)</span> and <span class="math inline">\(\phi_t\)</span> were taken to be the median of their posterior distributions.</p>
+<p>We ran <a href="http://mcmc-jags.sourceforge.net">JAGS</a> from within <a href="http://www.r-project.org">R</a> using functions from package <a href="https://cran.r-project.org/package=dclone">dclone</a>. We ran three MCMC chains for 30,000 iterations, of which we discarded the first 10,000 as burnin.</p>
+<p><a href="http://r-project.org">R</a> code to run an example BSSM is as follows:</p>
+<p>The <a href="http://mcmc-jags.sourceforge.net">JAGS</a> model file for the example might be <code>BSSM.jags</code>:</p>
+<div class="cell" data-messages="false" data-warnings="false" data-hash="index_cache/html/unnamed-chunk-1_91610d366e77cac81758e9449df664ce">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>receivor_efficiencies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'r1'</span> <span class="ot">=</span> <span class="fl">0.8</span>, <span class="st">'r2'</span> <span class="ot">=</span> <span class="fl">0.9</span>, <span class="st">'r3'</span> <span class="ot">=</span> <span class="fl">0.6</span>, <span class="st">'r4'</span> <span class="ot">=</span> <span class="fl">0.7</span>, <span class="st">'r5'</span> <span class="ot">=</span> <span class="fl">0.7</span>, <span class="st">'r6'</span> <span class="ot">=</span> <span class="fl">0.7</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n_fish <span class="ot">&lt;-</span> <span class="dv">77</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ch_m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="fu">length</span>(receivor_efficiencies), <span class="at">nrow =</span> n_fish)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(receivor_efficiencies)){</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    ch_m[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), n_fish, <span class="cn">TRUE</span>, <span class="fu">c</span>((<span class="dv">1</span> <span class="sc">-</span> receivor_efficiencies[i]), receivor_efficiencies[i]))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ch_m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">'release'</span> <span class="ot">=</span> <span class="dv">1</span>, ch_m)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ch_m)[<span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">names</span>(receivor_efficiencies)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># create state and observation matrices</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> ch_m</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sm[sm <span class="sc">==</span> <span class="st">'0'</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>om <span class="ot">&lt;-</span> ch_m</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># prep data</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">'sm'</span> <span class="ot">=</span> sm,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>          <span class="st">'om'</span> <span class="ot">=</span> om,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          <span class="st">'N'</span> <span class="ot">=</span> n_fish,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          <span class="st">'T'</span> <span class="ot">=</span> <span class="fu">ncol</span>(ch_m))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dclone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: coda</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: parallel</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>dclone 2.3-0     2019-03-21</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linked to JAGS 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded modules: basemod,bugs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># name of model file</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define likelihoods</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>T){</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># state model</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      sm[i, t] <span class="sc">~</span> <span class="fu">dcat</span>(phi[t <span class="sc">-</span> <span class="dv">1</span>, sm[i, t <span class="sc">-</span> <span class="dv">1</span>], ])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># observation model</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      om[i, t] <span class="sc">~</span> <span class="fu">dbern</span>(p[t, sm[i, t]])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># detection probability priors and constraints</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># release</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">1</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># always observed at release</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r1</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r2</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">3</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">3</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r3</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">4</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">4</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r4</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">5</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">5</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r5</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">6</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">6</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r6</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">7</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>) <span class="co"># flat prior</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  p[<span class="dv">7</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># transition probability priors and constraints</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1st transition</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2nd transition</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3rd transition</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4th transition</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5th transition</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 6th transition</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">~</span> <span class="fu">dbeta</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phi[<span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>  phi[<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters to monitor</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'p'</span>, <span class="st">'phi'</span>)</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co"># initialise model</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">jagsModel</span>(mf, <span class="at">data =</span> d, <span class="at">n.chains =</span> <span class="dv">1</span>, <span class="at">n.adapt =</span> <span class="dv">1000</span>, <span class="at">quiet =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'R2WinBUGS':
+  method            from  
+  as.mcmc.list.bugs dclone</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 800
+   Unobserved stochastic nodes: 136
+   Total graph size: 1331
+
+Initializing model</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update</span>(m, <span class="at">n.iter =</span> <span class="dv">10000</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># coda samples</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">codaSamples</span>(m, p, <span class="at">n.iter =</span> <span class="dv">20000</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot traces</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">trace =</span> <span class="cn">TRUE</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot densities</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">trace =</span> <span class="cn">FALSE</span>, <span class="at">density =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/unnamed-chunk-1-6.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/unnamed-chunk-1-7.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="index_files/figure-html/unnamed-chunk-1-8.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="index_files/figure-html/unnamed-chunk-1-9.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="index_files/figure-html/unnamed-chunk-1-10.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summary</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>s.tab <span class="ot">&lt;-</span> <span class="fu">summary</span>(s)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s.tab<span class="sc">$</span>statistics, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Mean     SD Naive SE Time-series SE
+p[1,1]     1.0000 0.0000 0.00e+00       0.000000
+p[2,1]     0.8226 0.0424 3.00e-04       0.000295
+p[3,1]     0.8989 0.0336 2.37e-04       0.000237
+p[4,1]     0.5384 0.0571 4.04e-04       0.000404
+p[5,1]     0.7078 0.0523 3.70e-04       0.000403
+p[6,1]     0.8134 0.0488 3.45e-04       0.000550
+p[7,1]     0.8130 0.1059 7.49e-04       0.003669
+p[1,2]     0.0000 0.0000 0.00e+00       0.000000
+p[2,2]     0.0000 0.0000 0.00e+00       0.000000
+p[3,2]     0.0000 0.0000 0.00e+00       0.000000
+p[4,2]     0.0000 0.0000 0.00e+00       0.000000
+p[5,2]     0.0000 0.0000 0.00e+00       0.000000
+p[6,2]     0.0000 0.0000 0.00e+00       0.000000
+p[7,2]     0.0000 0.0000 0.00e+00       0.000000
+phi[1,1,1] 0.9872 0.0126 8.93e-05       0.000211
+phi[2,1,1] 0.9872 0.0125 8.87e-05       0.000211
+phi[3,1,1] 0.9749 0.0201 1.42e-04       0.000332
+phi[4,1,1] 0.9829 0.0162 1.14e-04       0.000273
+phi[5,1,1] 0.9525 0.0340 2.40e-04       0.000671
+phi[6,1,1] 0.8180 0.1051 7.44e-04       0.003848
+phi[1,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[2,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[3,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[4,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[5,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[6,2,1] 0.0000 0.0000 0.00e+00       0.000000
+phi[1,1,2] 0.0128 0.0126 8.93e-05       0.000211
+phi[2,1,2] 0.0128 0.0125 8.87e-05       0.000211
+phi[3,1,2] 0.0251 0.0201 1.42e-04       0.000332
+phi[4,1,2] 0.0171 0.0162 1.14e-04       0.000273
+phi[5,1,2] 0.0475 0.0340 2.40e-04       0.000671
+phi[6,1,2] 0.1820 0.1051 7.44e-04       0.003848
+phi[1,2,2] 1.0000 0.0000 0.00e+00       0.000000
+phi[2,2,2] 1.0000 0.0000 0.00e+00       0.000000
+phi[3,2,2] 1.0000 0.0000 0.00e+00       0.000000
+phi[4,2,2] 1.0000 0.0000 0.00e+00       0.000000
+phi[5,2,2] 1.0000 0.0000 0.00e+00       0.000000
+phi[6,2,2] 1.0000 0.0000 0.00e+00       0.000000</code></pre>
+</div>
+</div>
+<p>where <code>d</code> is a list of data passed to <a href="http://mcmc-jags.sourceforge.net">JAGS</a> that includes:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> = number of individuals</li>
+<li><span class="math inline">\(T\)</span> = number of occasions</li>
+<li><span class="math inline">\(sm[i, t]\)</span> = true state matrix</li>
+<li><span class="math inline">\(om[i, t]\)</span> = observation matrix</li>
+</ul>
+<p>where <span class="math inline">\(i\)</span> is individual and <span class="math inline">\(t\)</span> is occasion.</p>
+<p>Our model ran without problems and the results were intuitive and as expected. We feel that this procedure worked well for us.</p>
+<p>You will be able to read about the results in a future post.</p>
+<p>In the meantime, use the code above to run an example BSSM and contact me if you have any problems.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div quarto-reuse="quarto-reuse" class="quarto-appendix-contents"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{d.gregory2016,
+  author = {Stephen D. Gregory},
+  title = {Estimating Sea Trout Smolt Migration Risks},
+  date = {2016-01-28},
+  url = {https://stephendavidgregory.github.io/posts/holbrook},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-d.gregory2016" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Stephen D. Gregory. 2016. <span>“Estimating Sea Trout Smolt Migration
+Risks.”</span> January 28, 2016. <a href="https://stephendavidgregory.github.io/posts/holbrook">https://stephendavidgregory.github.io/posts/holbrook</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-solid fa-copyright" aria-label="copyright"></i> 2022, Stephen D. Gregory</div>   
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <img src="../../images/favicon.ico" width="auto" height="30px">
+  </li>  
+</ul>
+      </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/stephendavidgregory">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://julialang.social/@stephendavidgregory">
+      <i class="bi bi-mastodon" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/stephendgregory">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
+
+
+
+</body></html>

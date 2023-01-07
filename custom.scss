@@ -1,0 +1,41 @@
+/*-- scss:defaults --*/
+$h2-font-size:          1.6rem !default;
+$headings-font-weight:  500 !default;
+$body-color:            black !default;
+$body-bg:               #FDFEFE !default; 
+
+/*-- scss:rules --*/
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
+}
+
+.navbar {
+  # font-size: 0.5rem;
+  box-shadow: 0 1rem 1rem rgba(black, 0.5);
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 0;
+}
+
+.quarto-title-banner {
+  padding-top: 3em;
+  padding-bottom: 0em;
+  margin-bottom: 0;
+}
+
+body {
+  letter-spacing: 0px;
+}
+
+div.csl-entry {
+    clear: both;
+    margin-top: 1rem;
+}
+
+div.quarto-about-solana .about-entity {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: left;
+}

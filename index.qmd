@@ -1,0 +1,57 @@
+---
+title: "<img src='/images/android-chrome-192x192.png' align='center' width='auto' height='100px'> &nbsp; Stephen D. Gregory"
+listing:
+  id: sample-listings
+  contents: posts
+  sort: "date desc"
+  type: grid
+  max-items: 3
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+title-block-style: default
+---
+
+::: grid
+::: {#about-me-text .g-col-12 .g-col-md-6}
+# Welcome
+
+I'm an ecologist, conservationist, fisheries scientists, and statistician. I have been fortunate to work in many wonderful places, with many wonderful people. In this blog I hope to share some of the knowledge that they nurtured in me...
+
+You can find me on [Mastodon](https://julialang.social/@stephendavidgregory) or [GitHub](https://github.com/stephendavidgregory). Feel free to [email](mailto:stephendavidgregory@gmail.com) me.
+:::
+
+::: {#profile-piccy .g-col-12 .g-col-md-6}
+![Credit: the great <a href="http://www.xkcd.com" target="_blank">xkcd</a>](https://imgs.xkcd.com/comics/linear_regression.png)
+:::
+
+::: {.g-col-12 .g-col-md-10 .g-start-md-2}
+# Latest blogs
+
+::: {#sample-listings}
+:::
+:::
+
+::: {.g-col-12 .g-col-md-5 .g-start-md-2}
+# Research Themes
+
+My research themes include:
+
+-   [Environmental change](/#category=environmental-change)
+-   [Tagging and telemetry](/#category=tagging-and-telemetry)
+-   [Allee effects](/#category=allee-effects)
+-   [Invasive species](/#category=invasive-species)
+:::
+
+::: {.g-col-12 .g-col-md-5}
+# Statistics & code
+
+Statistics underpin my research and can be found at:
+
+-   [Github](https://github.com/stephendavidgregory)
+-   [Blogs with statistic](/#category=statistics)
+-   [Blogs with code](/#category=code)
+-   And in supplementary materials of my [publications](/publications)
+:::
+:::

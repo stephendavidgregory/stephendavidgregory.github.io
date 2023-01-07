@@ -1,0 +1,12 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+coda
+parallel
+Matrix
+dclone
+rjags

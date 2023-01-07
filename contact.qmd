@@ -1,0 +1,31 @@
+---
+title: "Contact"
+author: ""
+date: ""
+description: ""
+categories: ""
+---
+
+## Get in touch
+
+[{{< fa envelope >}} stephendavidgregory\@gmail.com](mailto:stephendavidgregory@gmail.com)
+
+{{< fa phone >}} +44 (0) 1305 206703
+
+[{{< fa map-marker >}} Dorset, UK](https://www.google.com/maps/place/Dorset/@50.7970288,-2.6018046,10z)
+
+{{< fa clock >}} 08h00 - 16h00 on Mon, Weds Thurs & 08h00 - 14h30 on Tues and Fri
+
+[{{< fa brands github >}} stephendavidgregory](http://github.com/stephendavidgregory/){target="_blank"}
+
+[{{< fa brands twitter >}} stephendgregory](https://twitter.com/stephendgregory){target="_blank"}
+
+## My profile elsewhere
+
+[{{< ai orcid >}} ORCID: 0000-0002-8230-0191](http://orcid.org/0000-0002-8230-0191){target="_blank"}
+
+[{{< ai researchgate >}} ResearchGate: Stephen_Gregory2](https://www.researchgate.net/profile/Stephen_Gregory2/){target="_blank"}
+
+[{{< ai google-scholar >}} Google Scholar: UAYCYvQAAAAJ](http://scholar.google.com/citations?user=UAYCYvQAAAAJ&hl=en){target="_blank"}
+
+[{{< ai osf >}} Open Science Foundation: wtacd](https://osf.io/wtacd/){target="_blank"}

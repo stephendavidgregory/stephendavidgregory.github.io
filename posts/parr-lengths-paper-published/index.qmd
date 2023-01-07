@@ -1,0 +1,32 @@
+---
+title: "New paper: scale-dependent drivers of Atlantic salmon parr lengths"
+subtitle: "Paper published in Freshwater Biology"
+date: "2017-04-17"
+categories: ["environmental-change", "tagging-and-telemetry"]
+# tags: ["Paper", "Atlantic salmon", "Bayesian", "Kuo & Malick", "Lengths", "Mixed effect models", "Statistics"]
+image: "announcer.png"
+image-alt: "Paper published"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+New paper: scale-dependent drivers of Atlantic salmon parr lengths
+
+Our paper "Patterns on a parr: drivers of long-term salmon parr length in UK and French rivers depends on geographical scale" is out today in [Freshwater Biology](https://onlinelibrary.wiley.com/journal/13652427)!
+
+Gregory SD, Nevoux M, Riley WD, Beaumont WRC, Jeannot N, Lauridsen RB, Marchand F, Scott LJ, and Roussel J-M. (2017) Patterns on a parr: drivers of long-term salmon parr length in UK and French rivers depends on geographical scale. Freshw Biol. <https://doi.org/10.1111/eff.12929>
+
+# Abstract
+
+1.  Understanding the geographical scales at which environmental variables affect an individual's body size, and thus their mortality risk, can inform management strategies to help conserve wild populations under climate change. Yet, our current understanding of these relationships is based on studies done at different scales that report inconsistent findings. We predicted that temperature-related variables (e.g. winter temperature) influence body size at a "regional" scale, that is, affecting individuals in geographically independent catchments similarly, whereas non-temperature-related variables (e.g. conspecific competitor density) exert a "local" influence, that is, affecting individuals in geographically independent catchments differently.
+
+2.  We developed statistical models to test our predictions using body length measures of a large and long-term sample of juvenile Atlantic salmon (Salmo salar) from three rivers in the U.K. and France. We developed mixture models to predict the individual juvenile salmon ages objectively from their body length. We then developed linear mixed models to describe inter-annual changes in mean length of the youngest (age 0) cohort of juvenile salmon from river-specific seasonal variables, and tested whether they exerted their influence at a "local" or "regional" scale. All models accounted for spatio-temporal differences in sampling protocols and individual reproductive strategy. We estimated and interpreted coefficients using Bayesian theory.
+
+3.  Our findings supported our predictions. Juvenile salmon were longer in years of higher overwinter water temperature and this effect was best parameterised as a single "regional" coefficient applicable to all three rivers. Similarly, spring mean temperature was best parameterised with a single "regional" nonlinear coefficient. In contrast, juvenile salmon were shorter in years of high densities of competing conspecifics and their interaction with total mean discharge and these effects were represented by local river-specific coefficients. Summer droughts had a negative effect on juvenile salmon length but was best parameterised as a single "regional" coefficient, contrary to our expectations.
+
+4.  We show that environmental variables affect biological processes at different but predictable geographical scales. Temperature-related variables affect body sizes of exothermic animals at a regional scale, whereas non-temperature variables, such as the density of conspecific competitors and water abstraction, exert their influence at a local scale. These findings highlight the importance of integrating local and regional management plans to mitigate the impacts of climate change on the body size, and ultimately the conservation, of exothermic species.
+
+The citation is: Gregory, S. D, Nevoux, M., Riley, W. D., et al. (2017). Patterns on a parr: Drivers of long-term salmon parr length in U.K. and French rivers depend on geographical scale. Freshwater Biology, 62, 1117-1129. https://doi.org/10.1111/fwb.12929
+
+A pdf reprint is available here: [Gregory2017.pdf](/publications/Gregory2017.pdf)

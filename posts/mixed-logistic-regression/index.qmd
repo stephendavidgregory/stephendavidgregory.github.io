@@ -1,0 +1,318 @@
+---
+title: '(Mixed) Logistic regression in JAGS'
+subtitle: 'Fitting fixed and contrasting specifications of mixed effects logistic regression in jags using dclone'
+date: '2017-05-16'
+categories: ['environmental-change', 'tagging-and-telemetry', 'allee-effects', 'invasive-species']
+# tags: ['Bayesian', 'Mixed effects models', 'Education', 'Statistics']
+image: "logit-regression.jpg"
+image-alt: "Mix that logit!"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Here is a quick post showing how to do a fixed effect logistic regression in [jags](http://mcmc-jags.sourceforge.net/), extend it to a mixed effects logistic regression and show how it can be fitted using two contrasting specifications, each giving the same result (within stochastic error).
+
+Perhaps these models will work in \*BUGS variants but I tend to prefer jags because it is platform-independent, more similar to R, actively developed and with excellent support (thanks, Martin!) and it works nicely with a number of R packages, including [dclone](https://cran.r-project.org/web/packages/dclone/index.html). dclone facilitates running jags, particularly in parallel, and is also under continued development (thanks, Peter!).
+
+I will soon write a blog post presenting a template I use to run analyses in jags using dclone, in case it is useful.
+
+# A simple fixed effect logistic regression
+
+Before delving into mixed effects logistic regression, I thought it would be a good idea (and reassuring) to fit a simple fixed effect logistic regression in R and jags.
+
+Here is the script:
+
+``` r
+require(dclone)
+require(lme4)
+
+# model
+m <- function(){
+  for (i in 1:N){
+    y[i] ~ dbern(p[i])
+    logit(p[i]) <- a + b * x[i]
+  }
+  a ~ dnorm(0, 0.01)
+  b ~ dnorm(0, 0.01)
+}
+
+# data
+N <- 1000
+x <- rnorm(N)
+a <- 1
+b <- 2
+z <- a + b * x
+pr <- 1 / (1 + exp(-z))
+y <- rbinom(N, 1, pr)
+df <- data.frame(y = y, x = x)
+
+# glm fit
+m0 <- glm(y ~ x, data = df, family = 'binomial')
+print(m0)
+```
+
+``` r
+## 
+## Call:  glm(formula = y ~ x, family = "binomial", data = df)
+## 
+## Coefficients:
+## (Intercept)            x  
+##       1.056        2.093  
+## 
+## Degrees of Freedom: 999 Total (i.e. Null);  998 Residual
+## Null Deviance:       1278 
+## Residual Deviance: 838.9     AIC: 842.9
+```
+
+``` r
+# jags data
+dat <- as.list(df)
+dat$N <- N
+
+# monitors
+params <- c('a', 'b')
+
+# run it
+out <- jagsModel(file = m, data = dat, n.chains = 3, n.adapt = 1e3)
+```
+
+``` r
+## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+## Graph information:
+##    Observed stochastic nodes: 1000
+##    Unobserved stochastic nodes: 2
+##    Total graph size: 5007
+## 
+## Initializing model
+```
+
+``` r
+update(out, n.iter = 1e3)
+s <- codaSamples(out, variable.names = params, n.iter = 1e4, n.thin = 1e2)
+s_sum <- summary(s)
+
+# print medians
+print(s_sum$statistics)
+```
+
+``` r
+##       Mean        SD     Naive SE Time-series SE
+## a 1.058522 0.0940543 0.0005430228   0.0008407071
+## b 2.101140 0.1404204 0.0008107177   0.0012805193
+```
+
+``` r
+print(s_sum$quantiles)
+```
+
+``` r
+##        2.5%       25%      50%      75%    97.5%
+## a 0.8778516 0.9944358 1.057302 1.121390 1.245571
+## b 1.8307969 2.0055994 2.098017 2.193111 2.388057
+```
+
+Comparing the glm and jags results shows that the estimates are very similar, suggesting that the jags model is well-specified.
+
+So, let's move on to the mixed effects logistic regression...
+
+# A mixed effect logistic regression
+
+I fit a mixed effect logistic regression with a random effect of group specified as a error term or as an intercept term.
+
+``` r
+require(dclone)
+require(lme4)
+
+# models
+m_epsilon <- function(){
+  for (i in 1:N){
+    y[i] ~ dbern(p[i])
+    logit(p[i]) <- a + (b * x[i]) + epsilon[g[i]]
+  }
+  for(j in 1:G){
+    epsilon[j] ~ dnorm(0, tau)
+  }
+  tau ~ dgamma(0.1, 0.1)
+  std_dev <- tau^-0.5
+  variance <- std_dev^2
+  a ~ dnorm(0, 0.01)
+  mean_phi <- 1 / (1 + exp(-a))
+  b ~ dnorm(0, 0.01)
+}
+
+m_intercept <- function(){
+  for (i in 1:N){
+    y[i] ~ dbern(p[i])
+    logit(p[i]) <- a_[g[i]] + b * x[i]
+  }
+  for(j in 1:G){
+    a_[j] ~ dnorm(a, tau)
+  }
+  tau ~ dgamma(0.1, 0.1)
+  std_dev <- tau^-0.5
+  variance <- std_dev^2
+  a ~ dnorm(0, 0.01)
+  mean_phi <- 1 / (1 + exp(-a))
+  b ~ dnorm(0, 0.01)
+}
+
+# data
+n <- 100
+G <- 10
+g <- gl(G, n)
+N <- n * G
+x <- rnorm(N)
+Xmat <- model.matrix(~ g + x - 1)
+mu <- 1
+mean_phi <- 1 / (1 + exp(-mu))
+sd <- 0.5
+a <- rnorm(G, mu, sd)
+b <- 2
+ab <- c(a, b)
+z <- Xmat %*% ab
+pr <- 1 / (1 + exp(-z))
+y <- rbinom(N, 1, pr)
+df <- data.frame(y = y, g = g, x = x)
+
+# glmer fit
+m0 <- glmer(y ~ x + (1|g), data = df, family = 'binomial')
+print(m0)
+```
+
+``` r
+## Generalized linear mixed model fit by maximum likelihood (Laplace
+##   Approximation) [glmerMod]
+##  Family: binomial  ( logit )
+## Formula: y ~ x + (1 | g)
+##    Data: df
+##       AIC       BIC    logLik  deviance  df.resid 
+##  834.0712  848.7945 -414.0356  828.0712       997 
+## Random effects:
+##  Groups Name        Std.Dev.
+##  g      (Intercept) 0.586   
+## Number of obs: 1000, groups:  g, 10
+## Fixed Effects:
+## (Intercept)            x  
+##       1.095        2.118
+```
+
+``` r
+print(exp(round(ranef(m0)$g, 3)))
+```
+
+``` r
+##    (Intercept)
+## 1    1.3391030
+## 2    0.5347264
+## 3    1.2788996
+## 4    2.6090861
+## 5    0.6250023
+## 6    0.4073836
+## 7    1.2226248
+## 8    0.9617507
+## 9    0.8411376
+## 10   1.6015950
+```
+
+``` r
+# jags data
+dat <- as.list(df)
+dat$N <- N
+dat$G <- G
+
+# monitors
+params <- c('a', 'b', 'mean_phi')
+
+# run it
+out <- jagsModel(file = m_epsilon, data = dat, n.chains = 3, n.adapt = 1e3)
+```
+
+``` r
+## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+## Graph information:
+##    Observed stochastic nodes: 1000
+##    Unobserved stochastic nodes: 13
+##    Total graph size: 6047
+## 
+## Initializing model
+```
+
+``` r
+update(out, n.iter = 1e3)
+s_epsilon <- codaSamples(out, variable.names = params, n.iter = 1e4, n.thin = 1e2)
+s_epsilon_sum <- summary(s_epsilon)
+
+# print medians
+print(s_epsilon_sum$statistics)
+```
+
+``` r
+##              Mean         SD     Naive SE Time-series SE
+## a        1.091157 0.24343847 0.0014054927    0.006733634
+## b        2.130777 0.14122313 0.0008153521    0.001298608
+## mean_phi 0.745888 0.04591976 0.0002651179    0.001266695
+```
+
+``` r
+print(s_epsilon_sum$quantiles)
+```
+
+``` r
+##               2.5%       25%       50%       75%     97.5%
+## a        0.6043638 0.9365635 1.0935534 1.2476852 1.5835063
+## b        1.8630997 2.0346300 2.1280164 2.2235364 2.4152579
+## mean_phi 0.6466540 0.7184050 0.7490503 0.7768989 0.8297005
+```
+
+``` r
+# run it
+out <- jagsModel(file = m_intercept, data = dat, n.chains = 3, n.adapt = 1e3)
+```
+
+``` r
+## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+## Graph information:
+##    Observed stochastic nodes: 1000
+##    Unobserved stochastic nodes: 13
+##    Total graph size: 6037
+## 
+## Initializing model
+```
+
+``` r
+update(out, n.iter = 1e3)
+s_intercept <- codaSamples(out, variable.names = params, n.iter = 1e4, n.thin = 1e2)
+s_intercept_sum <- summary(s_intercept)
+
+# print medians
+print(s_intercept_sum$statistics)
+```
+
+``` r
+##               Mean         SD     Naive SE Time-series SE
+## a        1.0996923 0.24700895 0.0014261068    0.001824264
+## b        2.1323963 0.13937092 0.0008046584    0.001362175
+## mean_phi 0.7474055 0.04612672 0.0002663127    0.000340099
+```
+
+``` r
+print(s_intercept_sum$quantiles)
+```
+
+``` r
+##               2.5%       25%       50%       75%     97.5%
+## a        0.6111628 0.9446477 1.0958199 1.2533071 1.5996372
+## b        1.8698045 2.0363684 2.1291373 2.2254063 2.4140774
+## mean_phi 0.6482060 0.7200375 0.7494761 0.7778718 0.8319677
+```
+
+Based on the statistics and quantiles of the MCMC samples, I hope you can see that both the `lme4` and Bayesian fits are similar, and that the Bayesian results with group random effect specified as a error term or as an intercept term also produce similar results.
+
+I hope this is useful to someone.

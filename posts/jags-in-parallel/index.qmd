@@ -1,0 +1,210 @@
+---
+title: "Running JAGS in parallel"
+subtitle: "Examples using dclone, foreach, snow and snowfall"
+date: "2017-04-16"
+categories: ["environmental-change", "tagging-and-telemetry", "allee-effects", "invasive-species"]
+# tags: ["Bayesian", "Education", "Statistics"]
+image: "jags-parallel.jpg"
+image-alt: "Speeding things up a bit..."
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Sometimes, I run some pretty heavy duty models, including several latent variables and large datasets. I am also a perfectionist and so I insist on simulating and testing these models extensively.
+
+To improve my efficiency, I can run [Jags](http://mcmc-jags.sourceforge.net/) in parallel using a variety of tools, thereby saving considerable time.
+
+# Running Jags in parallel
+
+Here is a quick script I wrote to show a few different methods and how their timing compares on my (new and very fast) laptop.
+
+``` r
+
+# startup
+rm(list = ls())
+require(dclone)
+require(rjags)
+require(foreach)
+require(doParallel)
+require(snow)
+require(snowfall)
+n.cores <- 3
+timings <- vector('numeric', 6)
+
+# for easy plotting
+require(ggplot2)
+
+# MCMC settings
+setts <- list('n.iter' = 100, 'n.thin' = 1, 'n.burn' = 50)
+setts.m <- 1000
+mSetts <- 1
+if(mSetts) setts <- lapply(setts, function(v) v * setts.m)
+setts$n.chains <- 3
+
+# data
+n <- 20
+x <- runif(n, -1, 1)
+X <- model.matrix(~ x)
+beta <- c(2, -1)
+mu <- crossprod(t(X), beta)
+Y <- rpois(n, exp(mu))
+dat <- list(Y = Y, X = X, n = n, np = ncol(X))
+
+# model
+glm.model <- function() {
+  for (i in 1:n) {
+    Y[i] ~ dpois(lambda[i])
+    log(lambda[i]) <- inprod(X[i,], beta[1, ])
+  }
+  for (j in 1:np) {
+    beta[1, j] ~ dnorm(0, 0.001)
+  }
+}
+
+# monitors; can add 'deviance' but left out here for easy plotting
+params <- c('beta')
+
+# fit with jags.fit
+timer <- proc.time()
+load.module('glm')
+load.module('lecuyer')
+load.module('dic')
+m0 <- jags.fit(data = dat, params = params, model = glm.model,
+               n.chains = setts$n.chains, 
+               n.adapt = 100, 
+               n.update = setts$n.burn,
+               n.iter = setts$n.iter, 
+               thin = setts$n.thin)
+time.taken <- proc.time() - timer
+timings[1] <- time.taken[3]
+
+# fit with jags.parfit
+timer <- proc.time()
+cl <- makePSOCKcluster(n.cores)
+tmp <- clusterEvalQ(cl, library(dclone))
+parLoadModule(cl, 'glm')
+parLoadModule(cl, 'lecuyer')
+parLoadModule(cl, 'dic')
+m1 <- jags.parfit(cl = cl, data = dat, params = params, model = glm.model, 
+                  n.chains = setts$n.chains, 
+                  n.adapt = 100, 
+                  n.update = setts$n.burn,
+                  n.iter = setts$n.iter, 
+                  thin = setts$n.thin)
+stopCluster(cl)
+time.taken <- proc.time() - timer
+timings[2] <- time.taken[3]
+
+# fit with parJagsModel
+timer <- proc.time()
+cl <- makePSOCKcluster(n.cores)
+parLoadModule(cl, 'glm')
+parLoadModule(cl, 'lecuyer')
+parLoadModule(cl, 'dic')
+parJagsModel(cl = cl, name = 'res', file = glm.model, data = dat,
+             n.chains = setts$n.chains, n.adapt = 100)
+parUpdate(cl = cl, object = 'res', n.iter = setts$n.burn)
+m2 <- parCodaSamples(cl = cl, model = 'res', variable.names = params, 
+                     n.iter = setts$n.iter, thin = setts$n.thin)
+stopCluster(cl)
+time.taken <- proc.time() - timer
+timings[3] <- time.taken[3]
+
+# fit with foreach
+timer <- proc.time()
+cl <- makePSOCKcluster(n.cores)
+clusterSetRNGStream(cl)
+registerDoParallel(cl)
+m3 <- foreach(i = 1:setts$n.chains, .packages = c('dclone', 'rjags'),
+              .combine = 'c', .final = mcmc.list) %dopar% {
+                load.module('glm')
+                load.module('lecuyer')
+                load.module('dic')
+                m <- jags.fit(data = dat, params = params, model = glm.model,
+                              n.chains = 1, 
+                              n.adapt = 100, 
+                              n.update = setts$n.burn,
+                              n.iter = setts$n.iter, 
+                              thin = setts$n.thin, 
+                              inits = list(.RNG.name = 'lecuyer::RngStream',
+                                           .RNG.seed = sample(1:1e6, 1)))
+              }
+stopCluster(cl)
+time.taken <- proc.time() - timer
+timings[4] <- time.taken[3]
+
+# fit with snow
+timer <- proc.time()
+coda.samples.wrapper <- function(i){ 
+  load.module('glm')
+  load.module('lecuyer')
+  load.module('dic')
+  m <- jags.fit(data = dat, params = params, model = glm.model,
+                n.chains = 1, 
+                n.adapt = 100, 
+                n.update = setts$n.burn,
+                n.iter = setts$n.iter, 
+                thin = setts$n.thin, 
+                inits = list(.RNG.name = 'lecuyer::RngStream',
+                             .RNG.seed = sample(1:1e6, 1)))
+}
+cl <- makeCluster(n.cores, "SOCK")
+clusterEvalQ(cl, library('dclone'))
+clusterEvalQ(cl, library('rjags'))
+clusterExport(cl, list('dat', 'params', 'glm.model', 'setts'))
+m4 <- clusterApply(cl, 1:setts$n.chains, coda.samples.wrapper)
+for(i in 1:length(m4)){ # reorganize 'm4' as an 'mcmc.list' object
+  m4[[i]] <- m4[[i]][[1]]
+}
+class(m4) <- "mcmc.list"
+stopCluster(cl)
+time.taken <- proc.time() - timer
+timings[5] <- time.taken[3]
+
+# fit with snowfall
+timer <- proc.time()
+sfInit(parallel = TRUE, cpus = n.cores)
+sfLibrary(rjags)
+sfLibrary(dclone)
+sfExportAll()
+m5 <- sfLapply(1:setts$n.chains, function(i) {
+  load.module('glm')
+  load.module('lecuyer')
+  load.module('dic')
+  m <- jags.fit(data = dat, params = params, model = glm.model,
+                n.chains = 1, 
+                n.adapt = 100, 
+                n.update = setts$n.burn,
+                n.iter = setts$n.iter, 
+                thin = setts$n.thin, 
+                inits = list(.RNG.name = 'lecuyer::RngStream',
+                             .RNG.seed = sample(1:1e6, 1)))
+})
+sfStop()
+for(i in 1:length(m5)){ # reorganize 'm5' as an 'mcmc.list' object
+  m5[[i]] <- m5[[i]][[1]]
+}
+class(m5) <- "mcmc.list"
+time.taken <- proc.time() - timer
+timings[6] <- time.taken[3]
+```
+
+![](timingsandplots-1.png)
+
+![](timingsandplots-2.png)
+
+``` r
+##         jags.fit      jags.parfit par... functions          foreach 
+##            29.81            12.17            12.41            12.24 
+##             snow         snowfall 
+##            12.42            12.32
+```
+
+Of course, this would be better done using proper benchmarking procedures but I think it is interesting to note that there is no obvious differences in the timing of the different parallel procedures.
+
+# My preferences
+
+Personally, I like [`dclone::par...`](https://cran.r-project.org/web/packages/dclone/index.html) functions for single-run models because I have become accustomed to using them (including using them to update particular parameters at different stages by keeping the clusters open) and I like [`snowfall`](https://cran.r-project.org/web/packages/snowfall/index.html) for model testing when I want to run models many times over simulated datasets because it has fewer dependencies.
+
+I hope this is useful to someone.

@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Stephen D. Gregory"
+  description: "A personal blog"
+  favicon: "images/favicon.ico"
+  google-analytics: "UA-90881803-1"
+  twitter-card:
+    creator: "@stephendgregory"
+  site-url: "https://stephendavidgregory.github.io"
+  repo-url: "https://github.com/stephendavidgregory/stephendavidgregory.github.io"
+  repo-actions: [edit, issue]
+  navbar:
+    title: false
+    background: light
+    pinned: true
+    search: true
+    # logo: "images/favicon-32x32.png"
+    left: 
+      - text: "<img src='/images/favicon.ico' width='auto' height='20px'> Stephen D. Gregory"
+        href: index.qmd
+      - text: "{{< fa address-card >}} About"
+        href: about.qmd
+      - text: "{{< fa laptop-code >}} Blog"
+        href: blog.qmd
+      - text: "{{< fa list-check >}} Themes"
+        href: themes.qmd
+      - text: "{{< fa file-pen >}} Publications"
+        href: publications.qmd
+      - text: "{{< fa chalkboard-user >}} Talks"
+        href: talks.qmd
+      - text: "{{< fa paper-plane >}} Contact"
+        href: contact.qmd
+    right:
+      - icon: github
+        href: https://github.com/stephendavidgregory
+      - icon: mastodon
+        href: https://julialang.social/@stephendavidgregory
+      - icon: rss
+        href: index.xml
+  page-footer:
+    background: "white" # change to sccs colour...
+    left: "{{< fa copyright >}} 2022, Stephen D. Gregory"
+    center:
+      - text: "<img src='/images/favicon.ico' width='auto' height='30px'>"
+    right:
+      - icon: github
+        href: https://github.com/stephendavidgregory
+      - icon: mastodon
+        href: https://julialang.social/@stephendavidgregory
+      - icon: twitter
+        href: https://twitter.com/stephendgregory
+
+format:
+  html:
+    theme: 
+      - lux
+      - custom.scss
+
+editor: source
+

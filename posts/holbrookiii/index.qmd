@@ -1,0 +1,16 @@
+---
+title: "Estimating sea trout smolt migration risks: talk"
+subtitle: "Talk to the Second IFM Tagging and Telemetry Workshop, Edinburgh 2016"
+date: "2016-10-14"
+categories: ["tagging-and-telemetry"]
+# tags: ["Bayesian", "Bayesian State Space", "Imperfect detection", "Probability", "Sea trout", "Statistics", "Transition probability"]
+image: "tracking_sea_trout.jpg"
+image-alt: "Sea trout with tags"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+I gave a talk recently at the [Second IFM Tagging and Telemetry Workshop](https://ifm.org.uk/events/event/the-second-ifm-tagging-and-telemetry-workshop-the-state-of-the-art/), held in Edinburgh in June 2016.
+
+My slides are published here: [Institute_of_Fisheries_Management_2nd_Tagging_and_Telemetry_Conference_2016.pdf](/talks/Institute_of_Fisheries_Management_2nd_Tagging_and_Telemetry_Conference_2016.pdf).

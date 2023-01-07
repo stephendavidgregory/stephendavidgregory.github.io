@@ -1,0 +1,46 @@
+---
+title: "About"
+image: "images/android-chrome-192x192.png"
+about:
+  template: solana # jolla
+  links:
+    - icon: github
+      href: https://github.com/stephendavidgregory
+    - icon: mastodon
+      href: https://julialang.social/@stephendavidgregory
+    - icon: twitter
+      href: https://twitter.com/stephendgregory
+    - icon: rss
+      href: index.xml
+---
+
+## My Profile
+
+I am a conservation biologist and I use population modelling to better understand and propose management actions for a variety of animal populations, from native Galapagos rodents to Malaysian orangutans.
+
+Currently, my research focuses on the effects of environmental drivers of salmonid vital rates and consequences for their population dynamics.
+
+## My skills
+
+> <a href="https://www.r-project.org/" target="_blank"><img src="https://www.r-project.org/logo/Rlogo.png" alt="R" width="10%"/></img></a>     <a href="http://mcmc-jags.sourceforge.net/" target="_blank"><img src="images/jags_icon.png" alt="JAGS" width="10%"/></img></a>     <a href="https://mc-stan.org/" target="_blank"><img src="https://github.com/stan-dev/logos/raw/master/logo.png" alt="stan" width="10%"/></img></a>     <a href="https://julialang.org/" target="_blank"><img src="https://raw.githubusercontent.com/JuliaLang/julia/master/doc/src/assets/logo.svg" alt="julia" width="10%"/></img></a>
+
+## My professional memberships
+
+-   Member of the ICES Working Group on North Atlantic Salmon (2019-ongoing)
+-   Member of the ICES Workshop for North Atlantic Salmon At-Sea Mortality (2019-ongoing)
+-   Member of the National Centre for Statistical Ecology (2017-ongoing)
+-   Review Editor for Endangered Species Research
+
+## My profile elsewhere
+
+[{{< ai orcid >}} ORCID: 0000-0002-8230-0191](http://orcid.org/0000-0002-8230-0191){target="_blank"}
+
+[{{< ai researchgate >}} ResearchGate: Stephen_Gregory2](https://www.researchgate.net/profile/Stephen_Gregory2/){target="_blank"}
+
+[{{< ai google-scholar >}} Google Scholar: UAYCYvQAAAAJ](http://scholar.google.com/citations?user=UAYCYvQAAAAJ&hl=en){target="_blank"}
+
+[{{< ai osf >}} Open Science Foundation: wtacd](https://osf.io/wtacd/){target="_blank"}
+
+## My CV
+
+> <a href="StephenDavidGregory_pagedownCV.html" target="_blank"><i class="fas fa-file-code fa-5x"></i></a>   <a href="StephenDavidGregory_pagedownCV.pdf" target="_blank"><i class="fas fa-file-pdf fa-5x"></i></a>

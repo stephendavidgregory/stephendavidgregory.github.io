@@ -1,0 +1,55 @@
+---
+title: "Talks"
+author: ""
+date: ""
+categories: ""
+---
+
+```{r}
+#| echo: false
+
+# libraries
+library(readxl)
+library(DT)
+library(knitr)
+
+# get talks data
+talks <- read_xlsx('C:/Users/SG14/CV/cv_data.xlsx',
+                   skip = 1,
+                   sheet = 'selected_talks')
+
+# make talks data.frame
+talks_df <- data.frame('title' = talks$title,
+                       'event' = talks$loc,
+                       'year' = talks$end)
+
+# add slides
+s_nm <- paste0(talks$filename, '.pdf')
+s_l <- paste0('<a href="/talks/', 
+              s_nm, '" target="_blank">pdf</a>')
+d_nm <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/static/talks/'
+talks_df$slides <- ifelse(file.exists(paste0(d_nm, s_nm)), s_l, NA)
+
+# order it
+talks_df <- talks_df[with(talks_df, order(-year, event)), ]
+
+# reset row names
+rownames(talks_df) <- 1:nrow(talks_df)
+
+# make datatable
+talks_dt <- datatable(talks_df, 
+                      width = "100%",
+                      height = "auto",
+                      escape = FALSE, 
+                      extensions = list(Scroller = NULL, FixedColumns = list(leftColumns = 2)),
+                      options = list(pageLength = 10,
+                                     lengthMenu = c(5, 10, 15, nrow(talks_df)),
+                                     dom = 'T<"clear">lfrtip',
+                                     autoWidth = FALSE,
+                                     columnDefs = list(list(width = '10%', targets = c(3, 4))),
+                                     scrollX = FALSE, scrollY = FALSE, scrollCollapse = TRUE))
+
+# print it
+knit_print(x = talks_dt) 
+
+```

@@ -1,0 +1,20 @@
+---
+title: "Grayling Society 40th Annual Symmposium: talk"
+subtitle: "A talk given at the Grayling Society 40th Annual Symposium" 
+date: "2016-11-14"
+categories: ["environmental-change"]
+# tags: ["Grayling", "Wylye Grayling and Trout Study", "WGTS"]
+image: "grayling_underwater.jpg"
+image-alt: "Grayling underwater"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+I recently attended the [Grayling Society's](http://www.graylingsociety.net/) [40th Annual Symposium](https://www.facebook.com/media/set/?set=a.698005030352015.1073741831.275678785917977&type=3), held in Winchester in October 2016. I was invited to talk about the [Wylye Grayling Study (p. 14-15 of the GWCT Annual Fisheries report)](http://www.gwct.org.uk/media/658887/Fisheries-Research-Report-2015.pdf). (I acknowledge the continuing support of [Natural Resources Wales](http://naturalresources.wales/), the [Piscatorial Society](http://www.thepiscatorialsociety.net) and the [Grayling Research Trust](http://www.graylingresearch.org/).)
+
+My slides are published here: [Grayling_Society_Annual_Symposium_2016.pdf](/talks/Grayling_Society_Annual_Symposium_2016.pdf).
+
+The meeting was excellent. There were a few notable talks: Dr [Mark Everard](http://www.markeverard.uwclub.net/) (chaired by Steve Skuce) gave an very informative talk about grayling and their habitat requirements; Paul Knight [Salmon and Trout Conservation UK](http://www.salmon-trout.org/) (chaired by Alex Adams) gave an excellent and highly relevant talk about the state of UK chalkstreams; and Vanessa Huml (chaired by Bob Male) presented preliminary results from her [PhD study](http://www.graylingresearch.org/projects/phd-project), which were very promising. My talk (chaired by Robin Mulholland) was very well attended (it was the Grayling Society's best ever attended annual symposium) and I received many questions and compliments.
+
+A huge thanks to the Grayling Society for the invitation to talk at their annual symposium. I look forward to seeing you again next year!

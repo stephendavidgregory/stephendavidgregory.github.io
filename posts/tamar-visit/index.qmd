@@ -1,0 +1,22 @@
+---
+title: 'Tamar visit'
+subtitle: 'Visiting the river Tamar, Devon/Cornwall, with the Environment Agency'
+date: '2016-11-22'
+categories: ['tagging-and-telemetry']
+# tags: ['Tamar', 'Environment Agency', 'EA', 'Game and Wildlife Conservation Trust', 'GWCT', 'SAMARCH']
+image: "tamar_group.jpg"
+image-alt: "A visit to the Tamar"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+I, together with my GWCT colleagues, was lucky enough to visit the river Tamar, on the Devon / Cornwall border in Southwest England.
+
+The Tamar is an Atlantic salmon (*Salmo salar*) "Index River", i.e., a river on which the salmon population is monitored and used as an indication of the health of the total Atlantic salmon population in Europe. As part of the monitoring programme, the Environment Agency (EA) run a adult and juvenile salmon traps each year and used the records to estimate the adult and juvenile population size (using Capture-Mark-Recapture estimates).
+
+Below are a few photos that I took during my visit.
+
+A huge thanks to the Environment Agency for allowing us to visit :)
+
+![](Tamar_visit_pic1.jpg){group="Tamar-visit"} ![](Tamar_visit_pic2.jpg){group="Tamar-visit"} ![](Tamar_visit_pic3.jpg){group="Tamar-visit"} ![](Tamar_visit_pic4.jpg){group="Tamar-visit"} ![](Tamar_visit_pic5.jpg){group="Tamar-visit"} ![](Tamar_visit_pic6.jpg){group="Tamar-visit"}

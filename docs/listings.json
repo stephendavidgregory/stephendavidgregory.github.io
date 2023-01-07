@@ -1,0 +1,46 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/mixed-logistic-regression/index.html",
+      "/posts/parr-lengths-paper-published/index.html",
+      "/posts/jags-in-parallel/index.html",
+      "/posts/smolt-run-2017/index.html",
+      "/posts/ordered-factors/index.html",
+      "/posts/least-cost-dist-along-river/index.html",
+      "/posts/parry-published/index.html",
+      "/posts/pattern-on-a-parr/index.html",
+      "/posts/ukgrid-to-latlong/index.html",
+      "/posts/quadratic-interaction-jags/index.html",
+      "/posts/tamar-visit/index.html",
+      "/posts/grayling-society-symposium/index.html",
+      "/posts/holbrookii/index.html",
+      "/posts/holbrookiii/index.html",
+      "/posts/elinor/index.html",
+      "/posts/salmonids-in-floods/index.html",
+      "/posts/holbrook/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/mixed-logistic-regression/index.html",
+      "/posts/parr-lengths-paper-published/index.html",
+      "/posts/jags-in-parallel/index.html",
+      "/posts/smolt-run-2017/index.html",
+      "/posts/ordered-factors/index.html",
+      "/posts/least-cost-dist-along-river/index.html",
+      "/posts/parry-published/index.html",
+      "/posts/pattern-on-a-parr/index.html",
+      "/posts/ukgrid-to-latlong/index.html",
+      "/posts/quadratic-interaction-jags/index.html",
+      "/posts/tamar-visit/index.html",
+      "/posts/grayling-society-symposium/index.html",
+      "/posts/holbrookii/index.html",
+      "/posts/holbrookiii/index.html",
+      "/posts/elinor/index.html",
+      "/posts/salmonids-in-floods/index.html",
+      "/posts/holbrook/index.html"
+    ]
+  }
+]

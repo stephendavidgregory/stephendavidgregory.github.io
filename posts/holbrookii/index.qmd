@@ -1,0 +1,22 @@
+---
+title: "Estimating sea trout smolt migration risks: update"
+subtitle: "A chapter on our River Frome work in the 2nd International Sea Trout Symposium proceedings"
+date: "2016-10-14"
+categories: ["tagging-and-telemetry"]
+# tags: ["Bayesian", "Bayesian State Space", "Imperfect detection", "Probability", "Sea trout", "Statistics", "Transition probability"]
+image: "tracking_sea_trout.jpg"
+image-alt: "Sea trout with tags"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+We wrote a chapter for the [2^nd^ International Sea Trout Symposium](http://seatroutsymposium.org/) proceedings.
+
+# Abstract
+
+Migration between freshwater nursery grounds and saltwater feeding areas is a critical event in sea trout life history. During their seaward migration, smolts encounter both natural and man-made obstructions as well as increased exposure to predators. This is particularly true in the transition zone between freshwater and saltwater where smolts enter a new environment, change their behaviour and encounter new predators. Over two years (2013-14), 81 trout smolts were trapped and acoustically tagged 17 km upstream of the tidal limit in the River Frome in Dorset, UK. Smolt migrations were then tracked by acoustic receivers deployed throughout the lower river and its estuary and the detected movements were used to estimate loss rate and migration behaviour. A Bayesian State Space model was applied to separate detection and transition probabilities. More than 90% of the in-river detections occurred at night whereas detections at the saline limit and throughout the estuary were spread evenly between day and night. Median migration speed in the river was 65-70 km day-1 in both years, whereas the migration speed was slower through the estuary with median speeds of less than 10 km day-1. No zone displayed particularly high loss rates (range 0.5-1.1 % km-1), hence there was no pronounced increase in mortality in the transition zone as reported by a number of similar studies from other systems. The cumulative loss of trout smolts through the 33 km section that the smolts were tracked was 24%, demonstrating a significant cost in terms of loss associated with smolt migration.
+
+The citation is: Lauridsen, R.B., Moore, A., Gregory, S.D., Beaumont, W.R.C., et al. (2017) Migration behaviour and loss rate of trout smolts in the transitional zone between freshwater and saltwater. Proceedings of the Second International Sea Trout Symposium, October 2015, Dundalk, Ireland.
+
+And a pdf reprint is available here: [Lauridsen2017.pdf](/publications/Lauridsen2017.pdf)

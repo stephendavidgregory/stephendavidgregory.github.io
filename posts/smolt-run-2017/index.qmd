@@ -1,0 +1,127 @@
+---
+title: 'Get ready... set... go! Frome salmon smolt run 2017'
+subtitle: 'Quantifying the number of migrating juvenile Atlantic salmon smolts leaving the river Frome, Dorset'
+date: '2017-04-01'
+categories: ['environmental-change', 'tagging-and-telemetry']
+# tags: ['Bayesian', 'Imperfect detection', 'Probability', 'Atlantic salmon', 'Statistics']
+image: "fluvarium.jpg"
+image-alt: "The fluvarium - where it all happens!"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Every year, the [GWCT](http://www.gwct.org.uk) monitors migrating juvenile Atlantic salmon (*Salmo salar* L.) smolts leaving the river Frome, Dorset, on their way to their marine feeding grounds, where they go to grow and mature before returning to the Frome to reproduce.
+
+For more info, read the [GWCT webpage](https://www.gwct.org.uk/fishing/research/salmon/salmon-smolt-counting/).
+
+Here, I want to explain why we collect data on salmon smolts, how we collect it, and briefly outline how we process the data.
+
+# Background
+
+Atlantic salmon populations are in trouble: the large majority of European populations are in decline (Parrish, Behnke, Gephard, McCormick, and Reeves, 1998). An overview by Gerald Chaput highlights that landed salmon (catch statistics) have declined dramatically in recent decades, notably from the late 1980's as more efficient capture methods took their toll (Chaput, 2012).
+
+Exactly why they are in decline is hotly debated, in part because there are not a lot of high quality data available to assess the evidence for different hypotheses (Parrish, Behnke, Gephard, et al., 1998).
+
+[GWCT](http://www.gwct.org.uk) has been monitoring the Atlantic salmon population of the river Frome, Dorset, for over 40 years. As part of their monitoring programme, they have been [PIT tag](http://en.wikipedia.org/wiki/Microchip_implant_(animal)) marking individual juvenile salmon since 2002 and monitoring their migration to and from freshwater and sea.
+
+Spring is a busy time. Juvenile salmon that have survived the ([increasingly less](http://onlinelibrary.wiley.com/doi/10.1111/fwb.12929/abstract)) harsh winter conditions and are readying themselves to migrate to sea to feed.
+
+Making the transition from freshwater to saltwater is thought to be energetically demanding and highly risky: sea-bound migrating juvenile salmon, known as salmon *smolts*, encounter new and (presumably) abundant predators. For a review on the topic, see Thorstad, Whoriskey, Uglem, Moore, Rikardsen, and Finstad (2012).
+
+Accordingly, a prevalent hypothesis to explain declines in European salmon populations is that fewer smolts are being produced and they are leaving their rivers in worse condition, and more vulnerable to predation and exhaustion (Russell, Aprahamian, Barry, Davidson, Fiske, Ibbotson, Kennedy, Maclean, Moore, and Otero, 2012).
+
+To better understand the evidence for this hypothesis, a number of [*index*](http://www.nasco.int/asd/summary.asp) rivers collect data on salmon populations, including counts of salmon smolts and adults.
+
+[River Frome is an index river](http://www.nasco.int/asd/riverView.asp?riverID=3262) and we are one of only a handful of rivers that reports both adult and smolt numbers to [ICES](http://http://ices.dk/), who work with [NASCO](http://www.nasco.int/) to set quotas and give advice to help maintain and even reverse the decline in European salmon stocks.
+
+# Frome smolt run
+
+Between April Fools Day (1st) and mid-May every year since 2006, we have been running a programme to estimate the number of salmon smolts leaving the Frome, Dorset, migrating to their marine feeding grounds. For more information, see the [GWCT Salmon and Fisheries reports](https://www.gwct.org.uk/fishing/research/fisheries-research-reports/).
+
+Estimating the total number of migrating salmon smolts involves two fundamental bits of information:
+
+1.  An estimate of the total number of marked salmon smolts; and
+2.  A measure of the ratio of marked (PIT-tagged) to unmarked salmon smolts.
+
+Collecting data to obtain these two bits of information requires two different methods.
+
+## Estimated number of marked smolts
+
+[GWCT](http://www.gwct.org.uk) have installed PIT tag readers, hereafter known as <em>antennae</em>, at several strategic locations throughout the river Frome, Dorset.
+
+![Schematic showing the locations of PIT tag antennae at East Stoke, Dorset.](EastStokePITReaderScheme.jpg)
+
+As PIT-tagged salmon smolts migrate past an antenna, the antenna transmits power to the PIT tag, which then transmits its unique code to the antenna, informing us that the smolt has moved past that antenna.
+
+If the antennae were 100% efficient at detecting migrating PIT-tagged salmon smolts, then the total number of unique codes recorded by an antenna would be the estimate of smolts moving past that antenna.
+
+The antennae are not, however, 100% efficient; i.e., *detection is imperfect* (for a similar problem, see my post about [acoustic tagging sea trout smolts](http://stephendavidgregory.github.io/tracking/Holbrook)).
+
+To overcome this, we can use a [*capture-mark-recapture*](http://en.wikipedia.org/wiki/Mark_and_recapture) experiment in which one antennae is used to calculate the "efficiency" of the other.
+
+![The first PIT tag antenna installed in an artificial channel the Fluvarium.](InChannelAntenna.jpg)
+
+![The second antenna installed on a weir downstream of the Fluvarium. This antenna is used to calculate the efficiency of the first antenna.](MSWeirAntenna.jpg)
+
+In our CMR experiment, antennae are used to "sight" and "resight" individuals. In classical CMR lingo, the number of unique codes seen on the "first" antenna in the Fluvarium, i.e., the location where PIT-tagged salmon smolts are first sighted, is $M$ and the number of unique codes seen on the "second" Flatbed antenna on the weir, i.e., the location where PIT-tagged salmon smolts are resighted, is $C$. The Lincoln-Petersen (Lincoln, 1930; Petersen, 1896) method for estimating population size $\hat{N}$ is then
+
+$$\hat{N} = MC / R$$
+
+where $R$ is the number of PIT-tagged resightings in the second capture.
+
+Using these simple equations, we are able to estimate the population of PIT-tag marked salmon smolts.
+
+## Ratio of marked:unmarked salmon smolts
+
+Our CMR experiment gives us an estimate of the population of PIT-tag marked salmon smolts. This, however, is only a small part of the popultion: we PIT tag only a fraction of the population of salmon (and trout) juveniles in August and September each year (see the [GWCT webpage](http://www.gwct.org.uk/fishing/research/salmon/electro-fishing-and-parr-tagging-on-the-river-frome/) for more details).
+
+But, we are interested in estimating the total salmon smolt population size, i.e., the PIT-tag marked and the unmarked populations combined.
+
+To do this, we can divide the estimate of PIT-tag marked salmon smolt population by the proportion of salmon smolts that are PIT-tag marked by
+
+$$\hat{N}_{total} = \hat{N}_{marked} / Q$$
+
+$$Q = n_{marked} / n_{total}$$
+
+where $Q$ is the proportion of salmon smolts that are PIT-tag marked and $n$ is a sample of smolts.
+
+But how do we get a sample of smolts from which to measure $n_{marked}$ and $n_{total}$?
+
+We use a Rotary Screw Trap (RST) to capture a sample of migrating salmon smolts.
+
+![Our Rotary Screw Trap (RST) on the river Frome, Dorset.](RST.jpg)
+
+Running the RST is not an easy job. When conceiving the sampling protocol, we wanted to ensure that:
+
+1.  Our effect on these sensitive migrating salmon smolts was minimised;
+2.  We took an adequate sample of the smolts throughout the duration of their migration; and
+3.  We sampled smolts migrating at different times during the dirunal cycle.
+
+To meet these (and other) requirements, we decided to run the RST during the day and during the night for the entire duration of the smolt migration and to check the RST every 30 minutes. By checking the RST every 30 minutes, it was hoped that we would minimise our effect on migrating smolts, returning them back to the river no more than 1 hour after they first entered the RST, i.e., night-time migrating smolts could continue their migration under the cover of night and vice versa.
+
+Over the course of the smolt migration, we capture $n_{total}$ smolts and record $n_{marked}$ marked smolts. Using these numbers, we can calculate $Q$ and then estimate the total smolt population size $N$.
+
+While we examine the smolts for PIT tags, we also collect some biometric data on their condition. For this, they make a visit to the "smolt table".
+
+![Our smolt table where we take biometric measurements of all the smolts that we capture in the RST.](SmoltTable.jpg)
+
+Our procedures are designed to minimise disturbance to the smolts and they are all returned to the river carefully and quickly to continue their epic journey to their feeding grounds.
+
+![Our release point on the river Frome, where processed smolts return to their migration (usually, much) less than 1 hour since they were captured in the RST.](RiverReleasePoint.jpg)
+
+# Volunteering opportunities
+
+If you've enjoyed what you've read and would like to know more, please contact me at [stephendavidgregory\@gmail.com](stephendavidgregory@gmail.com).
+
+If you would like to get involved with the GWCT smolt monitoring programme, please read the relevant [GWCT webpage](http://www.gwct.org.uk/fishing/research/salmon/salmon-smolt-counting/) and contact Luke Scott.
+
+# References
+
+Chaput, G. (2012). Overview of the status of Atlantic salmon (*Salmo salar*) in the North Atlantic and trends in marine mortality. *ICES Journal of Marine Science* 69, 1538-1548. https://doi.org/10.1093/icesjms/fss013.
+
+Parrish, D. L, R. J. Behnke, S. R. Gephard, et al. (1998). Why aren't there more Atlantic salmon (*Salmo salar*)?" *Canadian Journal of Fisheries and Aquatic Sciences* 55, 281-287. https://doi.org/10.1139/d98-012.
+
+Russell, I, M. Aprahamian, J. Barry, et al. (2012). The influence of the freshwater environment and the biological characteristics of Atlantic salmon smolts on their subsequent marine survival. *ICES Journal of Marine Science* 69, 1563-1573. https://doi.org/10.1093/icesjms/fsr208.
+
+Thorstad, E. B, F. Whoriskey, I. Uglem, et al. (2012). A critical life stage of the Atlantic salmon *Salmo salar*: behaviour and survival during the smolt and initial post-smolt migration. *Journal of Fish Biology* 81.2, 500-542. https://doi.org/10.1111/j.1095-8649.2012.03370.x.

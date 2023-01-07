@@ -1,0 +1,105 @@
+---
+title: "Calculate distances along a river in R and GRASS"
+subtitle: "Least cost distances between points on a river"
+date: "2017-01-31"
+categories: ["environmental-change", "tagging-and-telemetry", "invasive-species", "allee-effects"]
+# tags: ["R", "Spatial", "Jess Marsh", "Redds", "River", "Grass"]
+image: "least-cost-path.jpg"
+image-alt: "Least cost path to the local shop"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+Recently, I have been helping [Jessica E. Marsh](https://scholar.google.co.uk/citations?user=6VHvhjwAAAAJ&hl=en) to develop a method of calculating distances along linear features. Specifically, we were measuring the distances between salmonid redd locations and juvenile survey locations on the river Frome, Dorset, UK.
+
+Together, we devise a generalisable method to calculate the least cost distance between points located on a complex river network.
+
+Our method includes the following steps:
+
+1.  convert the river polygon dataset to a high resolution raster;
+2.  thin that high resolution raster to represent the river as a network of single pixel width linear features;
+3.  shift the sample site coordinates to the closest river pixel in the thinned raster; and
+4.  calculate the least cost distance between a set of coordinates.
+
+Our analysis is quite Frome-specific and so rather than outline the whole procedure Jess and I decided to present a contrived example to illustrate the last and most important step of the analysis: step 4.
+
+For the remainder of the steps, we used a combination of [R](https://www.r-project.org) and [GRASS GIS](https://grass.osgeo.org/grass7/)
+
+# An example
+
+We provide a small example script with reproducible data (see downloads below) to run step 4.
+
+It calculates distances along the local roads from the [FBA River Laboratory](https://www.fba.org.uk/the-river-laboratory) (our address) to the local shop and pub.
+
+# [R](http://www.r-project.org) script
+
+``` r
+
+# start clean
+rm(list = ls())
+
+# start the clock
+timer <- proc.time()
+
+# libraries
+require(rgdal)
+require(raster)
+require(rasterVis)
+require(gdistance)
+
+# read in EastStoke to Wool road network; in your current path
+v <- readOGR('EastStoke_to_Wool_roads.shp', 'EastStoke_to_Wool_roads')
+
+# add "val" field as 1 everywhere
+v@data$val <- 1
+
+# get extent
+ex <- extent(v)
+
+# make empty raster at 1m resolution
+r <- raster(ex, res = 0.0001, crs = proj4string(v))
+
+# rasterize road network
+rp <- rasterize(v, r, 'val')
+
+# read in stops
+stops <- readOGR('esw.shp')
+
+# find least cost distances for stops
+tr <- transition(rp, function(x) 1 / mean(x), 8)
+tr1 <- geoCorrection(tr)
+sl <- shortestPath(tr1, origin = stops[1, ], goal = stops[-1, ], output = 'SpatialLines')
+
+# prepare plot
+# x11(width = 16, height = 10)
+par(mfrow = c(1, length(sl)))
+
+# plot path loop
+for(i in 1:length(sl)){
+
+  ## plot raster
+  plot(rp, legend = FALSE)
+  
+  ## add road network
+  plot(v, add = TRUE)
+
+  ## add stops to plot
+  points(stops[c(1, i + 1), ], pch = 16, col = 'red')
+
+  ## add shortest path
+  plot(sl[i], col = 'blue', add = TRUE)
+}
+
+# get path lengths
+l <- SpatialLinesLengths(sl)
+print(l)
+```
+
+Download the data [here](/blog/least-cost-dist-along-river_files/lcp_riverlab_example.zip).
+
+The final result is shown on a map at the start of this post.
+
+You can check the calculations against those given by Google Maps [here](https://www.google.co.uk/maps/dir/50.6800659,-2.1829714/Gillett's-Spar+Wool,+High+Street,+Wool/The+Ship+Inn,+Dorchester+Road,+Wool/@50.6780803,-2.2219113,14z/am=t/data=!4m20!4m19!1m5!3m4!1m2!1d-2.1965855!2d50.6756755!3s0x4873aa8d80854e1f:0xabcc27be9e1e7e91!1m5!1m1!1s0x4873aac0b926a1e5:0x304d41ecc829933c!2m2!1d-2.218897!2d50.6797032!1m5!1m1!1s0x4873aab62cfdfb03:0xe99e69bda047e675!2m2!1d-2.226622!2d50.680458!3e0)
+
+We hope this is of interest to someone. If you have any questions, then contact [Jess Marsh](https://scholar.google.co.uk/citations?user=6VHvhjwAAAAJ&hl=en) or I by email.
