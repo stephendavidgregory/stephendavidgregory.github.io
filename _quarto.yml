@@ -1,7 +1,10 @@
 project:
   type: website
   output-dir: docs
-
+  resources: 
+    - reprints
+    - talks
+  
 website:
   title: "Stephen D. Gregory"
   description: "A personal blog"

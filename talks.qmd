@@ -27,7 +27,7 @@ talks_df <- data.frame('title' = talks$title,
 s_nm <- paste0(talks$filename, '.pdf')
 s_l <- paste0('<a href="/talks/', 
               s_nm, '" target="_blank">pdf</a>')
-d_nm <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/static/talks/'
+d_nm <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/talks/'
 talks_df$slides <- ifelse(file.exists(paste0(d_nm, s_nm)), s_l, NA)
 
 # order it

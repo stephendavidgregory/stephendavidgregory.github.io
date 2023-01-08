@@ -7,23 +7,15 @@ categories: ""
 
 ```{r}
 #| echo: false
+#| warning: false
 
 # libraries
-library(RefManageR)
 library(bibtex)
 library(DT)
 library(knitr)
 
-# bib options
-BibOptions(check.entries = FALSE, bib.style = 'authoryear', cite.style = 'authoryear', style = 'text', sorting = 'ynt')
-
 # read in biblio
-bib <- ReadBib('C:/Users/SG14/CV/Gregory.bib')
-
-# remove entries without "Gregory"
-a <- lapply(bib, function(v) v$author)
-idx <- grep('Gregory', a)
-bib <- bib[idx]
+bib <- read.bib('C:/Users/SG14/CV/Gregory.bib')
 
 # get citations
 o <- unlist(lapply(bib, function(v) paste0(capture.output(v), collapse = ' ')))
@@ -59,9 +51,9 @@ y <- as.numeric(unlist(lapply(bib, function(v) v$year)))
  
 # get DOI
 ## extract them
-d <- unlist(lapply(strsplit(o, 'DOI: '), '[', 2))
+d <- lapply(bib, function(v) v$doi)
 ## add doi.org
-d <- ifelse(is.na(d), '', paste0('https://doi.org/', d))
+d <- unlist(lapply(d, function(v) ifelse(is.null(v), '', paste0('https://doi.org/', v))))
 ## clean them
 d <- gsub('\\.$', '', d)
 ## convert to html link
@@ -71,35 +63,48 @@ d <- ifelse(d == '',
 
 # get pdfs
 ## get file names from bib
-p <- lapply(bib, function(v) gsub('.*([A-Z][A-Z,a-z]*[0-9]{4}[a-z]*.pdf).*', '\\1', v$file))
+p <- paste0(names(bib), ".pdf")
 ## get full file names from Literature
-p_fls <- list.files('C:/Users/SG14/Documents/Literature/',
-                    paste0(unlist(p), collapse = '|'),
+p_fls <- list.files(path = 'C:/Users/SG14/Literature/',
+                    pattern = paste0(unlist(p), collapse = '|'),
                     full.names = TRUE)
 ## copy them to pubs_static
-pubs_static <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/static/publications/'
+pubs_static <- 'C:/Users/SG14/Website/stephendavidgregory.github.io/reprints/'
 invisible(file.copy(p_fls, pubs_static, overwrite = TRUE))
 
 # pdf links
 ## find entries with pdf
 p_l <- vector('character', length = length(p))
+## index of files
+idx <- match(p, gsub("C:/Users/SG14/Literature/", "", p_fls))
+## add file locations
+p_locs <- ifelse(is.na(idx), '', p_fls[idx])
+## add links
 for (i in 1:length(p)) {
-  if (length(p[[i]]) != 0) {
-    p_l[i] <- paste0('<a href="/reprints/', p[[i]], '" target="_blank">pdf</a>')
+  if (p_locs[i] != "") {
+    p_l[i] <- paste0('<a href="/reprints/', p[i], '" target="_blank">pdf</a>')
   } else {
-    p[i] <- ''
+    p_l[i] <- ""
   }
 }
 
-# replace _ with <i> tags in citations
-o <- lapply(strsplit(o, '_'), function(v) paste0(v[1], '<i>', v[2], '</i>', v[3]))
-o <- unlist(o)
+# remove stuff from citations
+o <- gsub("\"", "", o)
+
+# md to html markup
+o <- sub("_", "<i>", o)
+o <- sub("_", "</i>", o)
+o <- sub("\\*", "<b>", o)
+o <- sub("\\*", "</b>", o)
 
 # make publications data.frame
 pubs_df <- data.frame('citation' = o,
                       'year' = y,
                       'doi' = d,
                       'pdf' = p_l)
+
+# remove an entries without year, e.g., in prep
+pubs_df <- subset(pubs_df, !is.na(year))
 
 # order it
 pubs_df <- pubs_df[with(pubs_df, order(-year, citation)), ]
