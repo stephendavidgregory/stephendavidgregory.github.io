@@ -50,7 +50,7 @@ My research themes include:
 Statistics underpin my research and can be found at:
 
 -   [Github](https://github.com/stephendavidgregory)
--   [Blogs with statistic](/blog.html#category=statistics)
+-   [Blogs with statistics](/blog.html#category=statistics)
 -   [Blogs with code](/blog.html#category=code)
 -   And in supplementary materials of my [publications](/publications)
 :::

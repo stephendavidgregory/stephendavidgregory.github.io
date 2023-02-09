@@ -10,7 +10,7 @@ filters:
 lightbox: auto
 ---
 
-> Here, I simulate a species co-occurrence problem using only [`base` R](https://www.r-project.org/) and R package [`data.table`](https://cran.r-project.org/package=data.table).
+Here, I simulate a species co-occurrence problem using only [`base` R](https://www.r-project.org/) and R package [`data.table`](https://cran.r-project.org/package=data.table).
 
 # Simulation
 
