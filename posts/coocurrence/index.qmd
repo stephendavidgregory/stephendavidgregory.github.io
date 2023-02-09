@@ -1,0 +1,123 @@
+---
+title: "Understanding co-occurrence"
+subtitle: "A randomisation approach"
+date: "2023-02-09"
+categories: ["statistics", "code"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
+image: "site-species-matrix.png"
+image-alt: "A site by species matrix representing co-occurrences"
+filters:
+   - lightbox
+lightbox: auto
+---
+
+> Here, I simulate a species co-occurrence problem using only [`base` R](https://www.r-project.org/) and R package [`data.table`](https://cran.r-project.org/package=data.table).
+
+# Simulation
+
+```{r setup}
+
+# libraries
+library(data.table)
+
+```
+
+Observed co-occurrence can be compared to the expected co-occurrence where the latter is the product of the two species' probability of occurrence multiplied by the number of sampling sites: $E(N_{1,2}) = P(1) \times P(2) \times N$.
+
+```{r}
+
+# number of sampling sites (N)
+N <- 100
+
+# probability of encountering species 1
+P1 <- 0.3
+
+# probability of encountering species 1
+P2 <- 0.1
+
+# expected number of sites where they co-occur
+N_12 <- P1 * P2 * N
+
+# print result
+print(N_12)
+
+```
+
+It can be easier to understand this using a simulation:
+
+```{r}
+
+# repeat simulation n times
+n <- 10000
+
+# sites & simulation number
+s <- data.table("site" = rep(1:N, n),
+                "simulation" = rep(1:n, each = N))
+
+# add species 1 occurrences
+s[, `species 1` := sample(c(0, 1), size = N * n, replace = TRUE, prob = c(1 - P1, P1))]
+
+# add species 2 occurrences
+s[, `species 2` := sample(c(0, 1), size = N * n, replace = TRUE, prob = c(1 - P2, P2))]
+
+# add coocurrence
+s[, `expct cooccur` := as.numeric((`species 1` + `species 2`) == 2)]
+print(s)
+
+# number of times the cooccur on average, i.e., expectation
+expct <- s[, .(c = sum(`expct cooccur`)), 
+           by = simulation][, .(Expectation = mean(c))]
+
+# print result
+print(expct)
+
+```
+
+Let us assume that we observe these species co-occurring at `r (l = 10)` sites. How likely is it that this is more often than expected by chance?
+
+```{r}
+
+# observed coocurrences
+o <- do.call("rbind",
+             list(matrix(rep(c(1, 1), l), 
+                         ncol = 2, byrow = TRUE),
+                  matrix(rep(c(1, 0), (N * P1) - l), 
+                         ncol = 2, byrow = TRUE),
+                  matrix(rep(c(0, 1), (N * P2) - l), 
+                         ncol = 2, byrow = TRUE),
+                  matrix(rep(c(0, 0), N - (l + ((N * P1) - l) + ((N * P2) - l))), 
+                         ncol = 2, byrow = TRUE)))
+
+# add to simulations
+s[, `obsrv cooccur` := rep(as.numeric(rowSums(o) == 2), n)]
+
+# how often is expct <= obsrv?
+p <- s[, sum(`obsrv cooccur`) <= sum(`expct cooccur`), 
+       by = simulation][, .(n = sum(V1), p = mean(V1))]
+
+# print result
+print(p)
+
+```
+
+We can show this on a histogram of the number of co-occurrences in the simulations with the actual number of co-occurrences shown in red.
+
+```{r}
+
+# plot histogram
+hist(s[, .(c = sum(`expct cooccur`)), 
+       by = simulation]$c,
+     main = "Histogram of simulated number of co-occurrences",
+     xlab = "Number of co-occurrences")
+abline(v = l, col = "red", lwd = 3)
+mtext(paste0("p = ", p$p), 
+      side = 3, line = 0, at = 10, col = "red")
+
+```
+
+# Reading
+
+-   This can be done more efficiently using a [combinatorial](https://en.wikipedia.org/wiki/Combinatorics) approach: see <https://thatdarndata.com/understanding-species-co-occurrence/>
+
+-   R package [`cooccur`](https://cran.r-project.org/package=cooccur) uses a probabilistic approximation to the combinatorial approach and is still faster
+
+
