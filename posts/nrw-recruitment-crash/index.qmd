@@ -2,7 +2,7 @@
 title: "New paper: Environmental conditions modify density‐dependent salmonid recruitment: Insights into the 2016 recruitment crash in Wales"
 subtitle: "Paper published in Freshwater Biology"
 date: "2020-09-04"
-categories: ["statistics", "code"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
+categories: ["statistics", "code", "environmental-change"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
 image: "announcer.png"
 image-alt: "Paper published"
 filters:
