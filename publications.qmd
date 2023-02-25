@@ -15,7 +15,7 @@ library(DT)
 library(knitr)
 
 # read in biblio
-bib <- read.bib('C:/Users/SG14/CV/Gregory.bib')
+bib <- read.bib('~/CV/Gregory.bib')
 
 # get citations
 o <- unlist(lapply(bib, function(v) paste0(capture.output(v), collapse = ' ')))

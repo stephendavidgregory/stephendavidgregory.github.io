@@ -26,6 +26,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/coocurrence/index.html",
+      "/posts/nrw-recruitment-crash/index.html",
       "/posts/mixed-logistic-regression/index.html",
       "/posts/parr-lengths-paper-published/index.html",
       "/posts/jags-in-parallel/index.html",

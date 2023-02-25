@@ -1,5 +1,5 @@
 ---
-title: "New paper: scale-dependent drivers of Atlantic salmon parr lengths"
+title: "New paper: Scale-dependent drivers of Atlantic salmon parr lengths"
 subtitle: "Paper published in Freshwater Biology"
 date: "2017-04-17"
 categories: ["environmental-change", "tagging-and-telemetry"]
@@ -27,6 +27,4 @@ Gregory SD, Nevoux M, Riley WD, Beaumont WRC, Jeannot N, Lauridsen RB, Marchand 
 
 4.  We show that environmental variables affect biological processes at different but predictable geographical scales. Temperature-related variables affect body sizes of exothermic animals at a regional scale, whereas non-temperature variables, such as the density of conspecific competitors and water abstraction, exert their influence at a local scale. These findings highlight the importance of integrating local and regional management plans to mitigate the impacts of climate change on the body size, and ultimately the conservation, of exothermic species.
 
-The citation is: Gregory, S. D, Nevoux, M., Riley, W. D., et al. (2017). Patterns on a parr: Drivers of long-term salmon parr length in U.K. and French rivers depend on geographical scale. Freshwater Biology, 62, 1117-1129. https://doi.org/10.1111/fwb.12929
-
-A pdf reprint is available here: [Gregory2017.pdf](/publications/Gregory2017.pdf)
+A pdf reprint is available here: [Gregory2017.pdf](/reprints/Gregory2017.pdf)

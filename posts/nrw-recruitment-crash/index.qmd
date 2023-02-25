@@ -1,0 +1,50 @@
+---
+title: "New paper: Environmental conditions modify density‐dependent salmonid recruitment: Insights into the 2016 recruitment crash in Wales"
+subtitle: "Paper published in Freshwater Biology"
+date: "2020-09-04"
+categories: ["statistics", "code"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
+image: "announcer.png"
+image-alt: "Paper published"
+filters:
+   - lightbox
+lightbox: auto
+authors: 
+  - name: Stephen D. Gregory$^{0,1,2,*}$
+    orcid: 0000-0002-8230-0191
+  - name: Victoria E. Bewes
+  - name: Andrew J.H. Davey
+  - name: Dylan E. Roberts
+  - name: Peter Gough
+  - name: Ian C. Davidson
+abstract: |
+
+  $^{0}$ *Formerly* Salmon & Trout Research Centre, Game and Wildlife Conservation Trust, East Stoke, Wareham, Dorset BH20 6BB, UK
+
+  $^{1}$ The Centre for Environment, Fisheries and Aquaculture Science, Barrack Road, Weymouth, Dorset DT4 8UB, UK
+
+  $^{2}$ Department of Life and Environmental Sciences, Faculty of Science and Technology, Bournemouth University, Poole BH12 5BB, UK
+---
+
+Our paper "Environmental conditions modify density‐dependent salmonid recruitment: Insights into the 2016 recruitment crash in Wales” is out today in [Freshwater Biology](https://doi.org/10.1111/fwb.13609)!
+
+Gregory, S.D., Bewes, V.E., Davey, A.J.H., Roberts, D.E., Gough, P., Davidson, I.C. (2020) Environmental conditions modify density-dependent salmonid recruitment: Insights into the 2016 recruitment crash in Wales. Freshwater Biology, 65: 2135–2153. <https://doi.org/10.1111/fwb.13609> 
+
+In it, we explore whether the apparent juvenile salmon recruitment crash of 2015 was indeed "a crash", i.e., unprecedented in recent times, and what might have caused it. We conclude that it was a recruitment crash for age 0+ juvenile salmon - but not trout - and that it seemed to be related to high over-winter temperatures, which likely interrupted spawning behaviour or affected egg survival - see figure below.
+
+
+![](figure1_sm.jpg)
+
+
+# Abstract
+
+1.   Understanding the effects of density-dependent and density-independent factors on recruitment is often inhibited by difficulties quantifying their relative contributions in highly variable recruitment data. Use of data-driven statistical methods with data that include one or more extreme recruitment events could help overcome these difficulties.
+
+2.   Juvenile Atlantic salmon and trout abundances in Wales have declined over the last 2 decades, and 2016 was a notably poor recruitment year in rivers around southern Europe, including England and Wales. The 2016 recruitment crash coincided with extreme winter weather conditions, leading to speculation that unusually warm temperatures and high flows adversely affect salmonid recruitment and caused the 2016 crash, although this remains untested.
+
+3.   We developed data-driven statistical models to: (1) describe juvenile salmonid recruitment from density-dependent and density-independent factors; and (2) assess whether the density-independent factors probably contributed to the 2016 salmon recruitment crash. We compiled salmon and trout young-of-year juvenile abundances from electrofishing surveys, egg deposition estimates and river flow and air temperature data from 2001–2017 for seven Welsh rivers, broadly representative of rivers around Wales. We used river flow and air temperature data to derive ecologically and behaviourally meaningful density-independent explanatory variables.
+
+4.   Salmonid recruitment in Wales was best described using density-dependent and density-independent factors, especially for salmon: after accounting for a concave relationship with egg deposition, salmon juvenile abundance was reduced under (1) warmer spawning temperatures that might inhibit spawning, and (2) higher flood frequencies during pre-emergence and emergence that might washout eggs or alevins. Results were less clear for trout, perhaps because they are behaviourally more plastic.
+
+5.   Our findings provide empirical support for general and predictable effects of temperature and flow during spawning and emergence on salmonid—especially salmon—recruitment in Wales. Furthermore, we suggest that the 2016 salmon recruitment crash was caused—in part—by particularly inclement spawning and emergence conditions, which could be more common under future climate change. Our findings suggest that future salmonid stock assessment models could include the effects of density-independent variables on recruitment to improve their predictive power.
+
+A pdf reprint is available here: [Gregory2020.pdf](/reprints/Gregory2020.pdf)

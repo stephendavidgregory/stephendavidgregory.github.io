@@ -15,6 +15,7 @@ title-block-style: default
 
 ::: grid
 ::: {#about-me-text .g-col-12 .g-col-md-6}
+
 # Welcome
 
 I'm an ecologist, conservationist, fisheries scientists, and statistician. I have been fortunate to work in many wonderful places, with many wonderful people. In this blog I hope to share some of the knowledge that they nurtured in me...
