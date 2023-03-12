@@ -1,0 +1,343 @@
+---
+title: "CJS is fast in TMB"
+subtitle: "A simple Cormack Jolly Seber model is fast in Template Model Builder"
+date: "2023-03-10"
+categories: ["statistics", "code"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
+image: "cjs.jpg"
+image-alt: "How many (over-weight) storks are there?"
+filters:
+   - lightbox
+lightbox: auto
+execute: 
+  freeze: true
+---
+
+A popular way to estimate life-history rates, such as survival, reproduction and movement rates, is using Cormack Jolly Seber (CJS) models cast in state-space equations. These models vary in complexity, but generally build on two fairly simple equations representing state and observation processes:
+
+$$
+z_{i,t} \sim \mbox{Bernoulli}(z_{i,t - 1}, \varphi)
+$$
+
+$$
+y_{i,t} \sim \mbox{Bernoulli}(z_{i,t}, p)
+$$
+
+The first equation is known as the *state* process and allows for the estimation of the transition rate, here survival $\varphi$, from the state $z$ of individual $i$ and time $t$ from their state at time $t-1$. The second equation is known as the *observation* process and allows for the estimation of the recapture or resighting rate $p$ of the individual in state $z$ at time $t$.
+
+I've used CJS models in a number of capacities (see ), and for each I've written my own model in [`OpenBUGS`](https://www.mrc-bsu.cam.ac.uk/software/bugs/openbugs/), [`JAGS`](https://mcmc-jags.sourceforge.io/),  [`Stan`](https://mc-stan.org/) or [`nimble`](https://r-nimble.org/), and used Bayesian inference. However, Bayesian inference relies on sampling the parameter space using Monte-Carlo Markov Chains (MCMC), which can be time-consuming (despite ever-efficient algorithms and computation).
+
+Recently, I attended fantastic [`Template Model Builder`](https://kaskr.github.io/adcomp/Introduction.html) training given by [Anders Nielsen](https://orbit.dtu.dk/en/persons/anders-nielsen). It is promoted as a fast and flexible language for inference, whether frequentist or Bayesian.
+
+I thought that it might be nice to write a simple CJS model in TMB, following the excellent examples by [Olivier Gimenez](https://www.cefe.cnrs.fr/fr/recherche/bc/bbp/843-c/253-olivier-gimenez), and in native [`R`](https://www.r-project.org/) too. 
+
+Here is my try...
+
+## Data simulation
+
+We first build a function to simulate data from a multi-event (juvenile and adult) capture-recapture (CJS) model:
+
+```{r}
+
+simul <- function(
+    n_individuals = 1000,
+    n_occasions = 3, # release, first sighting, second sighting
+    n.states = 3, # juvenile, adult, dead
+    phi = 0.7,
+    psi = 0.8,
+    p = 0.3) { 
+  
+  # state matrix
+  phi_state <- matrix(c(
+    
+    0, phi, 1 - phi,
+    0, psi, 1 - psi,
+    0, 0, 1
+    
+  ), nrow = n.states, byrow = TRUE)
+  
+  # observation matrix 
+  phi_obs <- matrix(c(
+    
+    0, 0, 1,
+    0, p, 1 - p,
+    0, 0, 1
+    
+  ), nrow = n.states, byrow = TRUE)
+  
+  # empty capture history list of matrices
+  ch <- ch_true <- matrix(NA, 
+                          nrow = n_individuals, 
+                          ncol = n_occasions)
+  
+  # always seen at release
+  ch[, 1] <- ch_true[, 1] <- 1
+  
+  # fill CH
+  for (i in 1:n_individuals) {
+    for (o in 2:n_occasions) {
+      # state transition
+      state_p <- rmultinom(n = 1, 
+                           size = 1, 
+                           prob = phi_state[ch_true[i, o - 1], ])
+      ch_true[i, o] <- which(state_p == 1)
+      # observation transition
+      event_p <- rmultinom(n = 1, 
+                           size = 1, 
+                           prob = phi_obs[ch_true[i, o], ])
+      ch[i, o] <- which(event_p == 1)
+    } # o
+  } # i
+  
+  # return
+  return(list("ch" = ch, "ch.true" = ch_true))
+  
+}
+
+```
+
+## Likelihood function in native [`R`](https://www.r-project.org/)
+
+First, we need a small function to protect the log from "exploding" (thanks, [Olivier Gimenez](https://www.cefe.cnrs.fr/fr/recherche/bc/bbp/843-c/253-olivier-gimenez)):
+
+```{r}
+
+logprot <- function(v) {
+  eps <- 2.2204e-016
+  u <- log(eps) * (1 + vector(length = length(v)))
+  index <- (v > eps)
+  u[index] <- log(v[index])
+  return(u)
+}
+
+```
+
+Then the likelihood (take the time to compare this function to the data simulation function - they're similar!):
+
+```{r}
+
+cjs <- function(b, ch) { 
+  
+  # R version of the TMB function below - not used here 
+  multvecmat <- function(A, B) {
+    nrowb <- nrow(B)
+    ncolb <- ncol(B)
+    C <- vector("numeric", length = ncolb)
+    for (i in 1:ncolb) {
+      C[i] <- 0
+      for (k in 1:nrowb) {
+        C[i] <- C[i] + A[k] * B[k, i]
+      }
+    }
+    return(C)
+  }
+  
+  # parameters
+  n_individuals <- nrow(ch)
+  n_occasions <- ncol(ch)
+  
+  # transforms
+  phi <- plogis(b[1])
+  psi <- plogis(b[2])
+  p <- plogis(b[3])
+  
+  # state matrix
+  A <- matrix(c(
+    0, phi, 1 - phi,
+    0, psi, 1 - psi,
+    0, 0, 1
+  ), nrow = 3, byrow = TRUE)
+  
+  # observation matrix
+  B <- matrix(c(
+    0, 0, 1,
+    0, p, 1 - p,
+    0, 0, 1
+  ), nrow = 3, byrow = TRUE)
+  
+  # log likelihood
+  l <- 0
+  for (i in 1:n_individuals) {
+    foo <- c(1, 0, 0)
+    for (j in 2:n_occasions) {
+      foo <- (foo %*% A) * B[, ch[i, j]]
+    }
+    l <- l + logprot(sum(foo))
+  }
+  
+  # negative loglikelihood
+  l <- -l
+  
+  # return
+  return(l)
+  
+}
+
+```
+
+## Likelihood function in [`TMB`](https://kaskr.github.io/adcomp/Introduction.html)
+
+Now, let me try and write the same thing in TMB:
+
+```{r}
+
+tmb_model <- "
+
+// capture-recapture model
+#include <TMB.hpp>
+
+/* implement the vector - matrix product */
+template<class Type>
+vector<Type> multvecmat(vector<Type> A, matrix<Type> B) {
+  int nrowb = B.rows();
+  int ncolb = B.cols(); 
+  vector<Type> C(ncolb);
+  for (int i = 0; i < ncolb; i++) {
+    C(i) = Type(0);
+    for (int k = 0; k < nrowb; k++) {
+      C(i) += A(k) * B(k, i);
+    }
+  }
+  return C;
+}
+
+template<class Type>
+Type objective_function<Type>::operator() () {
+
+  // data
+  DATA_IMATRIX(ch);
+  int n_individuals = ch.rows();  
+  int n_occasions = ch.cols();
+  // DATA_VECTOR(fii);
+  
+  // parameters
+  PARAMETER_VECTOR(b);
+  
+  // transformations
+  int npar = b.size();
+  vector<Type> par(npar);
+  for (int i = 0; i < npar; i++) {
+    par(i) = Type(1.0) / (Type(1.0) + exp(-b(i)));
+  }
+  Type phi = par(0);
+  Type psi = par(1);
+  Type p = par(2);
+  
+  // observation matrix
+  matrix<Type> A(3, 3);
+  A(0, 0) = Type(0.0);
+  A(0, 1) = phi;
+  A(0, 2) = Type(1.0) - phi;
+  A(1, 0) = Type(0.0);
+  A(1, 1) = psi;
+  A(1, 2) = Type(1.0) - psi;
+  A(2, 0) = Type(0.0);
+  A(2, 1) = Type(0.0);
+  A(2, 2) = Type(1.0);
+  
+  // observation matrix
+  matrix<Type> B(3, 3);
+  B(0, 0) = Type(0.0);
+  B(0, 1) = Type(0.0);
+  B(0, 2) = Type(1.0);
+  B(1, 0) = Type(0.0);
+  B(1, 1) = p;
+  B(1, 2) = Type(1.0) - p;
+  B(2, 0) = Type(0.0);
+  B(2, 1) = Type(0.0);
+  B(2, 2) = Type(1.0);
+  
+  // likelihood
+  Type ll;
+  Type nll;
+  for (int i = 0; i < n_individuals; i++) {
+    vector<Type> foo(3);
+    foo(0) = Type(1.0);
+    foo(1) = Type(0.0);
+    foo(2) = Type(0.0);
+    for (int j = 1; j < n_occasions; j++) {
+      foo = multvecmat(foo, A) * vector<Type> (B.col(ch(i, j)));
+    }
+    ll += log(sum(foo));
+  }
+  
+  // negative loglikelihood
+  nll = -ll;
+  
+  // return
+  return nll;
+  
+}"
+
+```
+
+Then, we write the code to disk, compile and load it, which requires the [`R`](https://www.r-project.org/) package [`TMB`](https://cran.r-project.org/web/packages/TMB/index.html):
+
+```{r}
+
+write(tmb_model, file = "cjs_tmb.cpp")
+
+library(TMB)
+if (!file.exists("cjs_tmb.dll")) compile("cjs_tmb.cpp")
+dyn.load(dynlib("cjs_tmb"))
+
+```
+
+## Estimation
+
+With that done, let's see how estimates from the two approaches compare and their speed:
+
+```{r}
+
+# data simulation
+raw_data <- simul(
+  n_individuals = 10000,
+  phi = 0.6,
+  psi = 0.9,
+  p = 0.2
+)
+
+# initial parameter values
+b <- runif(3, -1, 1)
+
+# extract the data
+ch <- raw_data$ch
+
+# R - using optim
+tic <- Sys.time()
+faa <- optim(par = b, 
+             fn = cjs, 
+             gr = NULL, 
+             hessian = TRUE, 
+             ch, 
+             method = "BFGS")
+r_time <- (Sys.time() - tic)
+r_ests <- round(plogis(faa$par), digits = 3)
+names(r_ests) <- c("phi", "psi", "p")
+print(r_ests)
+
+# TMB - using optim
+tic <- Sys.time()
+obj <- MakeADFun(data = list(ch = ch - 1), # subtract 1 for indexing from 0
+                 parameters = list(b = b), 
+                 DLL = "cjs_tmb",
+                 silent = TRUE)
+opt <- do.call("optim", obj)
+tmb_time <- (Sys.time() - tic)
+tmb_ests <- round(plogis(opt$par), digits = 3)
+names(tmb_ests) <- c("phi", "psi", "p")
+print(tmb_ests)
+
+# clean up
+dyn.unload(dynlib("cjs_tmb"))
+unlink("cjs_tmp.*")
+
+# print times
+print(r_time)
+print(tmb_time)
+
+```
+
+## Conclusion
+
+It looks like it works and could be a useful tool for running sensitivity analyses...
+

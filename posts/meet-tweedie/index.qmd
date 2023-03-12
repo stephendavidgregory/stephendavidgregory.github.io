@@ -1,0 +1,109 @@
+---
+title: "Meet Tweedie"
+subtitle: "An exploration of the Tweedie family of distributions"
+date: "2023-03-07"
+categories: ["statistics", "code"] # environmental-change, tagging-and-telemetry, allee-effects, invasive-species, statistics, code
+image: "tweedie.png"
+image-alt: "Tweedie says 'hi'"
+filters:
+   - lightbox
+lightbox: auto
+draft: true
+---
+
+I'm working with some spatio-temporally patchy fisheries count data. To allow for their highly variable nature, I was recommended to look at the Tweedie family of distributions. I thought I'd write a post to introduce Tweedie and what I learnt.
+
+# Tweedie definition
+
+The Tweedie distributions are a subfamily of the Exponential distributions, but with a special mean-variance relationship with:
+
+- a mean of $E(Y) = \mu$;
+- a positive dispersion parameter $\sigma^2$; and
+- a variance of $Var(Y) = \sigma^2 \mu^p$.
+
+The $p$ in the variance function is often called the "Tweedie power" parameter and acts as an additional shape parameter for the distribution. It is sometimes written in terms of the shape parameter $\alpha$:
+
+$$
+p = \frac{(\alpha - 2)}{(\alpha - 1)}
+$$
+
+Some familiar distributions are special cases of the Tweedie distribution:
+
+-   $p = 0$: Normal distribution;
+-   $p = 1$: Poisson distribution;
+-   $1 < p < 2$: Compound Poisson/gamma distribution;
+-   $p = 2$: gamma distribution;
+-   $2 < p < 3$: Positive stable distributions;
+-   $p = 3$: Inverse Gaussian distribution / Wald distribution;
+-   $p > 3$: Positive stable distributions; and
+-   $p = \infty$: Extreme stable distributions.
+
+(Note that the distribution is not defined for $p$ values $0 < p < 1$.)
+
+# Poisson-like Tweedie cases
+
+Since I am working with counts, the Tweedie distributions related to the Poisson distribution were of particular interest to me. Specifically, I was interested to explore the Tweedie distributions with power parameter values from 1 to 2.
+
+With the help of the [`R`](https://www.r-project.org/) package [`tweedie`](https://cran.r-project.org/package=tweedie), we can plot histograms of those distributions as follows:
+
+```{r, results = 'hide'}
+
+# libraries
+library(tweedie)
+library(data.table)
+library(ggplot2)
+
+# xis (also known as powers)
+xis <- seq(1, 2, length.out = 12)
+
+# make wide
+d <- as.data.table(lapply(xis, 
+                          function(v) 
+                            rtweedie(n = 1000, mu = 1, phi = 1, xi = v)))
+
+# set names
+setnames(d, colnames(d), paste0("xi = ", sprintf("%.01f", xis)))
+
+# make long
+dl <- stack(d)
+
+# make plot
+p <- ggplot(dl, aes(x = values)) +
+  geom_histogram(binwidth = 0.1) +
+  facet_wrap(~ ind) +
+  labs(x = "value", y = "frequency") +
+  theme_minimal()
+
+# save plot
+jpeg("tweedie-histograms.jpg", res = 300, width = (480 * 5), height = (480 * 5))
+print(p)
+dev.off()
+
+```
+
+
+![](tweedie-histograms.jpg)
+
+
+It is interesting to note that as $p \to 1$ so the Tweedie distribution allows for greater mass of points at 0 (zero). This is a particularly useful feature of the Tweedie when dealing with highly variable and sometimes low counts that are frequently at or around 0.
+
+
+# Using the Tweedie
+
+I'm going to use the example from the `tweedie()` distribution:
+
+```{r}
+
+# response and explanatory variables
+y <- rgamma(n = 20, shape = 5)
+x <- 1:20
+
+# fit a poisson generalized linear model with identity link
+m1 <- glm(y ~ x, family = tweedie(var.power = 1, link.power = 1))
+print(summary(m1))
+
+# fit an inverse-Gaussion glm with log-link
+m0 <- glm(y ~ x, family = tweedie(var.power = 3, link.power = 0))
+print(summary(m0))
+
+```

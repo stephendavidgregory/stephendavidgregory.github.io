@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/cjs-tmb-is-fast/index.html",
       "/posts/coocurrence/index.html",
       "/posts/nrw-recruitment-crash/index.html",
       "/posts/mixed-logistic-regression/index.html",
@@ -26,6 +27,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/cjs-tmb-is-fast/index.html",
       "/posts/coocurrence/index.html",
       "/posts/nrw-recruitment-crash/index.html",
       "/posts/mixed-logistic-regression/index.html",

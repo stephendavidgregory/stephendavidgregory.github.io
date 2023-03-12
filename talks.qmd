@@ -14,7 +14,7 @@ library(DT)
 library(knitr)
 
 # get talks data
-talks <- read_xlsx('~/CV/cv_data.xlsx',
+talks <- read_xlsx('~/../CV/cv_data.xlsx',
                    skip = 1,
                    sheet = 'selected_talks')
 
