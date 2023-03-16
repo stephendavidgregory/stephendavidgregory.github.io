@@ -8,7 +8,6 @@ image-alt: "Tweedie says 'hi'"
 filters:
    - lightbox
 lightbox: auto
-draft: true
 ---
 
 I'm working with some spatio-temporally patchy fisheries count data. To allow for their highly variable nature, I was recommended to look at the Tweedie family of distributions. I thought I'd write a post to introduce Tweedie and what I learnt.
@@ -90,13 +89,21 @@ It is interesting to note that as $p \to 1$ so the Tweedie distribution allows f
 
 # Using the Tweedie
 
-I'm going to use the example from the `tweedie()` distribution:
+I'm going to adapt the example from the `tweedie()` distribution:
 
 ```{r}
 
+# library
+library(statmod)
+
 # response and explanatory variables
-y <- rgamma(n = 20, shape = 5)
-x <- 1:20
+y <- rgamma(n = 200, scale = 1, shape = 1)
+x <- rpois(200, lambda = 10)
+
+# tweedie profile
+out <- tweedie.profile(y ~ 1, p.vec = seq(1.5, 2.5, by=0.2))
+print(out$p.max)
+print(out$ci)
 
 # fit a poisson generalized linear model with identity link
 m1 <- glm(y ~ x, family = tweedie(var.power = 1, link.power = 1))
@@ -107,3 +114,5 @@ m0 <- glm(y ~ x, family = tweedie(var.power = 3, link.power = 0))
 print(summary(m0))
 
 ```
+
+I'm going to revisit Tweedie soon, so watch this space...

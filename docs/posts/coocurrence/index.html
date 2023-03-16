@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -268,6 +268,7 @@ ga('send', {
    
   <ul>
   <li><a href="#simulation" id="toc-simulation" class="nav-link active" data-scroll-target="#simulation">Simulation</a></li>
+  <li><a href="#what-if" id="toc-what-if" class="nav-link" data-scroll-target="#what-if">What if!???</a></li>
   <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/stephendavidgregory/stephendavidgregory.github.io/edit/main/posts/coocurrence/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/stephendavidgregory/stephendavidgregory.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -281,9 +282,7 @@ ga('send', {
 
 
 
-<blockquote class="blockquote">
 <p>Here, I simulate a species co-occurrence problem using only <a href="https://www.r-project.org/"><code>base</code> R</a> and R package <a href="https://cran.r-project.org/package=data.table"><code>data.table</code></a>.</p>
-</blockquote>
 <section id="simulation" class="level1">
 <h1>Simulation</h1>
 <div class="cell">
@@ -293,12 +292,12 @@ ga('send', {
 <p>Observed co-occurrence can be compared to the expected co-occurrence where the latter is the product of the two species’ probability of occurrence multiplied by the number of sampling sites: <span class="math inline">\(E(N_{1,2}) = P(1) \times P(2) \times N\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of sampling sites (N)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of encountering species 1</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of encountering species 1</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of encountering species 2</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># expected number of sites where they co-occur</span></span>
@@ -307,7 +306,7 @@ ga('send', {
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print result</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N_12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 30</code></pre>
 </div>
 </div>
 <p>It can be easier to understand this using a simulation:</p>
@@ -329,18 +328,18 @@ ga('send', {
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>s[, <span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span> <span class="sc">:</span><span class="er">=</span> <span class="fu">as.numeric</span>((<span class="st">`</span><span class="at">species 1</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">species 2</span><span class="st">`</span>) <span class="sc">==</span> <span class="dv">2</span>)]</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         site simulation species 1 species 2 expct cooccur
-      1:    1          1         1         0             0
-      2:    2          1         0         0             0
-      3:    3          1         0         0             0
-      4:    4          1         1         0             0
-      5:    5          1         0         0             0
-     ---                                                  
- 999996:   96      10000         0         0             0
- 999997:   97      10000         0         0             0
- 999998:   98      10000         0         0             0
- 999999:   99      10000         1         0             0
-1000000:  100      10000         0         1             0</code></pre>
+<pre><code>          site simulation species 1 species 2 expct cooccur
+       1:    1          1         0         0             0
+       2:    2          1         1         0             0
+       3:    3          1         0         0             0
+       4:    4          1         0         1             0
+       5:    5          1         0         0             0
+      ---                                                  
+ 9999996:  996      10000         1         0             0
+ 9999997:  997      10000         1         0             0
+ 9999998:  998      10000         1         0             0
+ 9999999:  999      10000         0         0             0
+10000000: 1000      10000         0         0             0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of times the cooccur on average, i.e., expectation</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>expct <span class="ot">&lt;-</span> s[, .(<span class="at">c =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span>)), </span>
@@ -350,52 +349,89 @@ ga('send', {
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expct)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Expectation
-1:       3.024</code></pre>
+1:     29.9796</code></pre>
 </div>
 </div>
-<p>Let us assume that we observe these species co-occurring at 10 sites. How likely is it that this is more often than expected by chance?</p>
+<p>Let us assume that we observe these species co-occurring at 35 sites. How likely is it that this is more often than expected by chance?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># observed coocurrences</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"rbind"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>             <span class="fu">list</span>(<span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), l), </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), (N <span class="sc">*</span> P1) <span class="sc">-</span> l), </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), (N <span class="sc">*</span> P2) <span class="sc">-</span> l), </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), N <span class="sc">-</span> (l <span class="sc">+</span> ((N <span class="sc">*</span> P1) <span class="sc">-</span> l) <span class="sc">+</span> ((N <span class="sc">*</span> P2) <span class="sc">-</span> l))), </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add to simulations</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>s[, <span class="st">`</span><span class="at">obsrv cooccur</span><span class="st">`</span> <span class="sc">:</span><span class="er">=</span> <span class="fu">rep</span>(<span class="fu">as.numeric</span>(<span class="fu">rowSums</span>(o) <span class="sc">==</span> <span class="dv">2</span>), n)]</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number cooccurrences</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># observed coocurrences</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"rbind"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">list</span>(<span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), l), </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), (N <span class="sc">*</span> P1) <span class="sc">-</span> l), </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), (N <span class="sc">*</span> P2) <span class="sc">-</span> l), </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), N <span class="sc">-</span> (l <span class="sc">+</span> ((N <span class="sc">*</span> P1) <span class="sc">-</span> l) <span class="sc">+</span> ((N <span class="sc">*</span> P2) <span class="sc">-</span> l))), </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)))</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># how often is expct &lt;= obsrv?</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> s[, <span class="fu">sum</span>(<span class="st">`</span><span class="at">obsrv cooccur</span><span class="st">`</span>) <span class="sc">&lt;=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span>), </span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>       by <span class="ot">=</span> simulation][, .(<span class="at">n =</span> <span class="fu">sum</span>(V1), <span class="at">p =</span> <span class="fu">mean</span>(V1))]</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># print result</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># add to simulations</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>s[, <span class="st">`</span><span class="at">obsrv cooccur</span><span class="st">`</span> <span class="sc">:</span><span class="er">=</span> <span class="fu">rep</span>(<span class="fu">as.numeric</span>(<span class="fu">rowSums</span>(o) <span class="sc">==</span> <span class="dv">2</span>), n)]</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># how often is expct &lt;= obsrv?</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> s[, <span class="fu">sum</span>(<span class="st">`</span><span class="at">obsrv cooccur</span><span class="st">`</span>) <span class="sc">&lt;=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span>), </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>       by <span class="ot">=</span> simulation][, .(<span class="at">n =</span> <span class="fu">sum</span>(V1), <span class="at">p =</span> <span class="fu">mean</span>(V1))]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># print result</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   n     p
-1: 4 4e-04</code></pre>
+<pre><code>      n      p
+1: 1941 0.1941</code></pre>
 </div>
 </div>
 <p>We can show this on a histogram of the number of co-occurrences in the simulations with the actual number of co-occurrences shown in red.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s[, .(<span class="at">c =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span>)), </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">by =</span> simulation]<span class="sc">$</span>c,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of simulated number of co-occurrences"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of co-occurrences"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> l, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="fu">paste0</span>(<span class="st">"p = "</span>, p<span class="sc">$</span>p), </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">side =</span> <span class="dv">3</span>, <span class="at">line =</span> <span class="dv">0</span>, <span class="at">at =</span> <span class="dv">10</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> s[, .(<span class="at">c =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">expct cooccur</span><span class="st">`</span>)), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       by <span class="ot">=</span> simulation]<span class="sc">$</span>c</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(foo,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of simulated number of co-occurrences"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Number of co-occurrences"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fu">min</span>(foo), <span class="fu">max</span>(<span class="fu">c</span>(<span class="fu">max</span>(foo, l)) <span class="sc">+</span> <span class="dv">10</span>)))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> l, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="fu">paste0</span>(<span class="st">"p = "</span>, p<span class="sc">$</span>p), </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">side =</span> <span class="dv">3</span>, <span class="at">line =</span> <span class="dv">0</span>, <span class="at">at =</span> l, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="index_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
+</div>
+</div>
+</section>
+<section id="what-if" class="level1">
+<h1>What if!???</h1>
+<p>Thanks to <a href="https://www.cefas.co.uk/about-us/people/robert-b-thorpe/">Robert Thorpe</a> for an interesting question:</p>
+<p>“If P1 and P2 both decreased by 50%, e.g., if there was an unproductive year in the ecosystem, the co-occurrence expected would go down by 75% other things being equal?”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of sampling sites (N) - same</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of encountering species 1 - 50% lower</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fl">0.3</span> <span class="sc">*</span> <span class="fl">0.5</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of encountering species 2 - 50% lower</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="sc">*</span> <span class="fl">0.5</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># expected number of sites where they co-occur</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>N_12 <span class="ot">&lt;-</span> P1 <span class="sc">*</span> P2 <span class="sc">*</span> N</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print result</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N_12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.5</code></pre>
+</div>
+</div>
+<p>which should be the same as 75% fewer coocurrences:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.5</code></pre>
 </div>
 </div>
 </section>
@@ -588,7 +624,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});</script>
 
 
 

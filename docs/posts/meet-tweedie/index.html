@@ -349,10 +349,91 @@ p = \frac{(\alpha - 2)}{(\alpha - 1)}
 <p><a href="tweedie-histograms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="tweedie-histograms.jpg" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
-<p>It is interesting to note that as <span class="math inline">\(p \to 1\)</span> so the Tweedie distribution does allow for greater mass of points at 0 (zero). This is a particularly useful feature of the Tweedie when dealing with highly variable and sometimes low counts that are frequently on or around 0.</p>
+<p>It is interesting to note that as <span class="math inline">\(p \to 1\)</span> so the Tweedie distribution allows for greater mass of points at 0 (zero). This is a particularly useful feature of the Tweedie when dealing with highly variable and sometimes low counts that are frequently at or around 0.</p>
 </section>
 <section id="using-the-tweedie" class="level1">
 <h1>Using the Tweedie</h1>
+<p>I’m going to adapt the example from the <code>tweedie()</code> distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># response and explanatory variables</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">scale =</span> <span class="dv">1</span>, <span class="at">shape =</span> <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">200</span>, <span class="at">lambda =</span> <span class="dv">10</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tweedie profile</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">tweedie.profile</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">p.vec =</span> <span class="fu">seq</span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="at">by=</span><span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in model.matrix.default(mt, mf, contrasts): non-list contrasts argument
+ignored</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.5 1.7 1.9 2.1 2.3 2.5 
+......Done.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out<span class="sc">$</span>p.max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.05102</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(out<span class="sc">$</span>ci)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.885009 2.230231</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit a poisson generalized linear model with identity link</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">tweedie</span>(<span class="at">var.power =</span> <span class="dv">1</span>, <span class="at">link.power =</span> <span class="dv">1</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(m1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ x, family = tweedie(var.power = 1, link.power = 1))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.4165  -0.9003  -0.3048   0.4581   2.8102  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.86376    0.25531   3.383 0.000864 ***
+x            0.01391    0.02423   0.574 0.566455    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Tweedie family taken to be 0.989408)
+
+    Null deviance: 178.02  on 199  degrees of freedom
+Residual deviance: 177.67  on 198  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit an inverse-Gaussion glm with log-link</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">family =</span> <span class="fu">tweedie</span>(<span class="at">var.power =</span> <span class="dv">3</span>, <span class="at">link.power =</span> <span class="dv">0</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(m0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ x, family = tweedie(var.power = 3, link.power = 0))
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-12.9320   -1.4851   -0.3246    0.3920    1.8081  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.12647    0.25390  -0.498    0.619
+x            0.01287    0.02408   0.534    0.594
+
+(Dispersion parameter for Tweedie family taken to be 0.9764311)
+
+    Null deviance: 1051.8  on 199  degrees of freedom
+Residual deviance: 1051.5  on 198  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 25</code></pre>
+</div>
+</div>
+<p>I’m going to revisit Tweedie soon, so watch this space…</p>
 
 
 </section>
@@ -535,7 +616,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox"});</script>
 
 
 

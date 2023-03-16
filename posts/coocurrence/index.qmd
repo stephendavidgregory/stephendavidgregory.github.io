@@ -26,12 +26,12 @@ Observed co-occurrence can be compared to the expected co-occurrence where the l
 ```{r}
 
 # number of sampling sites (N)
-N <- 100
+N <- 1000
 
 # probability of encountering species 1
 P1 <- 0.3
 
-# probability of encountering species 1
+# probability of encountering species 2
 P2 <- 0.1
 
 # expected number of sites where they co-occur
@@ -72,9 +72,12 @@ print(expct)
 
 ```
 
-Let us assume that we observe these species co-occurring at `r (l = 10)` sites. How likely is it that this is more often than expected by chance?
+Let us assume that we observe these species co-occurring at 35 sites. How likely is it that this is more often than expected by chance?
 
 ```{r}
+
+# number cooccurrences
+l <- 35
 
 # observed coocurrences
 o <- do.call("rbind",
@@ -104,13 +107,48 @@ We can show this on a histogram of the number of co-occurrences in the simulatio
 ```{r}
 
 # plot histogram
-hist(s[, .(c = sum(`expct cooccur`)), 
-       by = simulation]$c,
+foo <- s[, .(c = sum(`expct cooccur`)), 
+       by = simulation]$c
+hist(foo,
      main = "Histogram of simulated number of co-occurrences",
-     xlab = "Number of co-occurrences")
+     xlab = "Number of co-occurrences",
+     xlim = c(min(foo), max(c(max(foo, l)) + 10)))
 abline(v = l, col = "red", lwd = 3)
 mtext(paste0("p = ", p$p), 
-      side = 3, line = 0, at = 10, col = "red")
+      side = 3, line = 0, at = l, col = "red")
+
+```
+
+# What if!???
+
+Thanks to [Robert Thorpe](https://www.cefas.co.uk/about-us/people/robert-b-thorpe/) for an interesting question:
+
+"If P1 and P2 both decreased by 50%, e.g., if there was an unproductive year in the ecosystem, the co-occurrence expected would go down by 75% other things being equal?"
+
+```{r}
+
+# number of sampling sites (N) - same
+N <- 1000
+
+# probability of encountering species 1 - 50% lower
+P1 <- 0.3 * 0.5
+
+# probability of encountering species 2 - 50% lower
+P2 <- 0.1 * 0.5
+
+# expected number of sites where they co-occur
+N_12 <- P1 * P2 * N
+
+# print result
+print(N_12)
+
+```
+which should be the same as 75% fewer coocurrences:
+
+```{r}
+
+# check
+30 * (1 - 0.75)
 
 ```
 
